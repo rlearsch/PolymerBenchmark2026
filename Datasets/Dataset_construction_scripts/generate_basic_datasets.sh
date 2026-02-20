@@ -58,7 +58,7 @@ echo "✓ OMersBench data converted"
 echo ""
 
 echo "[3/3] Converting web-sourced datasets..."
-echo "  (Kuenneth_2021, OpenPoly_2025, PolyMetriX)"
+echo "  (Polymer_Genome, OpenPoly_2025, PolyMetriX)"
 python convert_web_datasets.py
 echo "✓ Web datasets converted"
 echo ""

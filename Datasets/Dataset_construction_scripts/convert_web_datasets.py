@@ -7,7 +7,7 @@ and are already in PSMILES format. It uses the PSMILES_to_wPSMILES.py script
 to generate corresponding wPSMILES versions.
 
 Source datasets (in PSMILES/, tracked in git):
-- Kuenneth_2021
+- Polymer_Genome
 - OpenPoly_2025
 - PolyMetriX
 """
@@ -28,7 +28,7 @@ def convert_web_datasets():
     
     # Directories to process
     datasets_to_convert = [
-        'Kuenneth_2021',
+        'Polymer_Genome',
         'OpenPoly_2025',
         'PolyMetriX',
     ]

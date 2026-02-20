@@ -161,7 +161,7 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 ## Datasets Included
 
 ### From Published Sources
-- **Kuenneth 2021**: DFT-computed properties (band gap, dielectric constant, etc.)
+- **Polymer Genome**: DFT-computed properties (band gap, dielectric constant, etc.)
 - **OpenPoly 2025**: Experimental/computational polymer properties
 - **PolyMetriX**: Glass transition temperature data
 - **Coley 2022**: Electron affinity and ionization potential (DFT)
@@ -216,7 +216,7 @@ This repository is provided to reproduce research results. For questions or issu
 ## Acknowledgments
 
 - polyBERT model: https://huggingface.co/kuelumbus/polyBERT
-- Data sources: Kuenneth et al., Coley et al., OMersBench, OpenPoly, PolyMetriX
+- Data sources: Polymer Genome, Coley et al., OMersBench, OpenPoly, PolyMetriX
 - RDKit: Open-source cheminformatics toolkit
 
 ## System Requirements
