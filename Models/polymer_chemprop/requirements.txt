@@ -1,0 +1,12 @@
+# Polymer-chemprop: Modified chemprop for polymer property prediction
+# Paper: Aldeghi & Coley, Chem. Sci. 2022, 13, 10486-10498
+# Repository: https://github.com/coleygroup/polymer-chemprop
+#
+# Pinned to specific commit for reproducibility
+git+https://github.com/coleygroup/polymer-chemprop.git@ae1ae1a86776cbf0860fde5d4823938acd0a794d
+
+# Additional dependencies (included in chemprop's install_requires, but listed for clarity)
+pandas>=1.0.3
+numpy>=1.18.1
+torch>=1.5.1
+scikit-learn>=0.22.2
