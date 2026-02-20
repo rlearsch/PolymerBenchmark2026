@@ -40,6 +40,7 @@ Models/polyBERT/pSMILES_pBERT_dict.pkl
 Models/polymer_chemprop/**/fold*/**
 Models/polymer_chemprop/.venv/
 Models/polymer_periodic_graph/**/fold*/**
+Models/polymer_periodic_graph/.venv/
 Models/RDKit_RF/**/fold*/**
 Models/RDKit_RF/.venv/
 Models/polyBERT/**/fold*/**
@@ -52,6 +53,4 @@ Models/polyBERT/.venv/
 # Python cache
 **/__pycache__/
 *.pyc
-
-#temp
-Models/polymer_periodic_graph/Polymer_Model/**
+/Models/polymer_periodic_graph/Polymer_Model/chemprop/web

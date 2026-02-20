@@ -20,7 +20,7 @@ OPoly26Benchmark/
 │   ├── polymer_chemprop/              # ✅ GNN for weighted polymer graphs
 │   ├── RDKit_RF/                      # ✅ Random Forest baseline
 │   ├── polyBERT/                      # ✅ Transfer learning with polyBERT
-│   └── polymer_periodic_graph/        # 🔒 Periodic GNN (private)
+│   └── polymer_periodic_graph/        # ✅ Periodic graph neural network
 └── README.md                          # This file
 ```
 
@@ -98,6 +98,11 @@ bash train_pcp.sh ../../Datasets/wPSMILES/MD_300/density/homopolymer_density.csv
 cd ../polyBERT
 bash setup_environment.sh  # one-time setup
 bash train_pBERT.sh ../../Datasets/polyBERT/MD_300/density/homopolymer_density.csv
+
+# Example: Train polymer_periodic_graph on PSMILES
+cd ../polymer_periodic_graph
+bash setup_environment.sh  # one-time setup
+bash train_ppg.sh ../../Datasets/PSMILES/MD_300/density/homopolymer_density.csv
 ```
 
 See [Models/README.md](Models/README.md) for detailed model documentation.
@@ -111,7 +116,7 @@ We provide polymer datasets in four complementary formats:
 - **Format**: Text-based polymer notation with attachment points (`*`)
 - **Best for**: Graph neural networks, SMILES-based transformers
 - **Example**: `*c1cc(F)c(c2c(O)cc(O)c(*)c2O)cc1F`
-- **Used by**: Future models
+- **Used by**: polymer_periodic_graph
 
 ### wPSMILES (Weighted Polymer SMILES)
 - **Size**: ~206MB

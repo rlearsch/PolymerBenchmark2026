@@ -9,7 +9,7 @@ This directory contains implementations of various machine learning models for p
 | **polymer_chemprop** | wPSMILES | GNN | ✅ Ready | Weighted directed MPNN for polymers |
 | **polyBERT** | polyBERT embeddings | Feed-forward NN | ✅ Ready | Transfer learning with polyBERT |
 | **RDKit_RF** | RDKit descriptors | Random Forest | ✅ Ready | Traditional ML baseline |
-| **polymer_periodic_graph** | wPSMILES | Periodic GNN | 🔒 Private | Periodic graph neural network |
+| **polymer_periodic_graph** | PSMILES | Periodic GNN | ✅ Ready | Periodic graph neural network |
 
 ## Quick Start
 
@@ -60,6 +60,13 @@ bash predict_pcp.sh ./MD_300/density/homopolymer_density/random_split test_data.
 - **Training time**: ~1-5 minutes per property
 - **Note**: Uses pre-computed descriptors from Datasets/
 
+### polymer_periodic_graph
+- **Input**: PSMILES (Polymer SMILES)
+- **Architecture**: Message passing neural network with periodic graph representation
+- **Best for**: Capturing repeating structure of homopolymers and alternating copolymers
+- **Training time**: ~10-30 minutes per property
+- **Dependency**: Uses a customized local version of chemprop
+
 ## Dataset Compatibility
 
 | Model | PSMILES | wPSMILES | RDKit Descriptors | polyBERT Embeddings |
@@ -67,6 +74,7 @@ bash predict_pcp.sh ./MD_300/density/homopolymer_density/random_split test_data.
 | polymer_chemprop | ❌ | ✅ | ❌ | ❌ |
 | polyBERT | ❌ | ❌ | ❌ | ✅ |
 | RDKit_RF | ❌ | ❌ | ✅ | ❌ |
+| polymer_periodic_graph | ✅ | ❌ | ❌ | ❌ |
 
 ## Cross-Validation and Random Seeds
 
@@ -78,6 +86,7 @@ For reproducibility, models use a base seed of **42**:
 - **RDKit_RF**: Uses seeds 42, 43, 44, 45, 46 for folds 0-4
 - **polyBERT**: Uses seeds 42, 43, 44, 45, 46 for folds 0-4
 - **polymer_chemprop**: Uses pytorch_seed=0 (chemprop internal)
+- **polymer_periodic_graph**: Uses pytorch_seed=0 (chemprop internal)
 
 **Important Notes:**
 - ✅ Each model's results are fully reproducible (same seed → same splits within that model)
