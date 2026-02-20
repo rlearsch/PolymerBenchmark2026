@@ -14,6 +14,9 @@ Datasets/PSMILES/MD_5000/
 Datasets/PSMILES/MD_DP/
 Datasets/PSMILES/Tg_combined/
 Datasets/PSMILES/PolyInfo/
+Datasets/PSMILES/OpenPoly_2025/experiment_polymer_data.csv
+Datasets/PSMILES/OpenPoly_2025/final_polymer_properties_fromliterature.csv
+Datasets/PSMILES/OpenPoly_2025/Tg/OpenPoly_Tg.csv
 
 # Exclude PolyInfo and Tg_combined in all formats (restricted/generated)
 Datasets/**/Tg_combined/
@@ -52,8 +55,3 @@ Models/polyBERT/.venv/
 
 #temp
 Models/polymer_periodic_graph/Polymer_Model/**
-Cleanup/**
-
-Datasets/PSMILES/OpenPoly_2025/experiment_polymer_data.csv
-Datasets/PSMILES/OpenPoly_2025/final_polymer_properties_fromliterature.csv
-Datasets/PSMILES/OpenPoly_2025/Tg/OpenPoly_Tg.csv
