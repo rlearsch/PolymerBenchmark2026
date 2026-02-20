@@ -2,12 +2,36 @@
 *.steady10
 model.pt
 
+# Generated datasets (exclude from git, will be generated via scripts)
 Datasets/polyBERT/
-Datasets/PSMILES/
-Datasets/**/Tg_combined/**
-Datasets/**/PolyInfo/**
-Datasets/**/MD_*/**
+Datasets/wPSMILES/
 
+# PSMILES: Exclude large/generated datasets, include small source datasets
+Datasets/PSMILES/Coley_2022/
+Datasets/PSMILES/MD_300/
+Datasets/PSMILES/MD_5000/
+Datasets/PSMILES/MD_DP/
+Datasets/PSMILES/Tg_combined/
+Datasets/PSMILES/PolyInfo/
+
+# Exclude PolyInfo and Tg_combined in all formats (restricted/generated)
+Datasets/**/Tg_combined/
+Datasets/**/PolyInfo/
+
+# Keep source data files
+!Datasets/Dataset_construction_scripts/files/
+
+# Exclude large embedding dictionary (224MB, will be generated or downloaded separately)
+Datasets/Dataset_construction_scripts/files/pSMILES_pBERT_dict.pkl
+
+# Intermediate files from dataset construction scripts
+Datasets/Dataset_construction_scripts/OMersBench_*.csv
+
+# Virtual environments for dataset construction
+Datasets/Dataset_construction_scripts/.venv/
+Datasets/Dataset_construction_scripts/polyBERT_env/
+
+# Model outputs and checkpoints
 Models/polyBERT/pSMILES_pBERT_dict.pkl
 Models/polychemprop_model/**/fold*/**
 Models/polymer_periodic_graph/**/fold*/**
@@ -18,8 +42,15 @@ Models/polyBERT/**/fold*/**
 *scores.csv
 **args.json
 
+# Python cache
+**/__pycache__/
+*.pyc
+
 #temp
 Models/polymer_periodic_graph/Polymer_Model/**
 Models/polychemprop_model/polymer-chemprop-master/**
 Cleanup/**
 
+Datasets/PSMILES/OpenPoly_2025/experiment_polymer_data.csv
+Datasets/PSMILES/OpenPoly_2025/final_polymer_properties_fromliterature.csv
+Datasets/PSMILES/OpenPoly_2025/Tg/OpenPoly_Tg.csv
