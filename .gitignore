@@ -5,6 +5,7 @@ model.pt
 # Generated datasets (exclude from git, will be generated via scripts)
 Datasets/polyBERT/
 Datasets/wPSMILES/
+Datasets/RDKit_descriptors/
 
 # PSMILES: Exclude large/generated datasets, include small source datasets
 Datasets/PSMILES/Coley_2022/
@@ -22,7 +23,7 @@ Datasets/**/PolyInfo/
 !Datasets/Dataset_construction_scripts/files/
 
 # Exclude large embedding dictionary (224MB, will be generated or downloaded separately)
-Datasets/Dataset_construction_scripts/files/pSMILES_pBERT_dict.pkl
+Datasets/Dataset_construction_scripts/files/PSMILES_pBERT_dict.pkl
 
 # Intermediate files from dataset construction scripts
 Datasets/Dataset_construction_scripts/OMersBench_*.csv
@@ -33,10 +34,12 @@ Datasets/Dataset_construction_scripts/polyBERT_env/
 
 # Model outputs and checkpoints
 Models/polyBERT/pSMILES_pBERT_dict.pkl
-Models/polychemprop_model/**/fold*/**
+Models/polymer_chemprop/**/fold*/**
+Models/polymer_chemprop/.venv/
 Models/polymer_periodic_graph/**/fold*/**
 Models/RDKit_RF/**/fold*/**
 Models/polyBERT/**/fold*/**
+Models/polyBERT/.venv/
 *.log
 /**/PolyInfo
 *scores.csv
@@ -48,7 +51,6 @@ Models/polyBERT/**/fold*/**
 
 #temp
 Models/polymer_periodic_graph/Polymer_Model/**
-Models/polychemprop_model/polymer-chemprop-master/**
 Cleanup/**
 
 Datasets/PSMILES/OpenPoly_2025/experiment_polymer_data.csv
