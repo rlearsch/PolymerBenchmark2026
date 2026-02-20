@@ -7,7 +7,7 @@ This directory contains implementations of various machine learning models for p
 | Model | Input Format | Type | Status | Description |
 |-------|--------------|------|--------|-------------|
 | **polymer_chemprop** | wPSMILES | GNN | ✅ Ready | Weighted directed MPNN for polymers |
-| **polyBERT** | polyBERT embeddings | Feed-forward NN | 🚧 In progress | Transfer learning with polyBERT |
+| **polyBERT** | polyBERT embeddings | Feed-forward NN | ✅ Ready | Transfer learning with polyBERT |
 | **RDKit_RF** | RDKit descriptors | Random Forest | ✅ Ready | Traditional ML baseline |
 | **polymer_periodic_graph** | wPSMILES | Periodic GNN | 🔒 Private | Periodic graph neural network |
 

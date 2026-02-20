@@ -1,0 +1,11 @@
+# polyBERT model: Feed-forward neural network on polyBERT embeddings
+# Paper: Kuenneth et al., 2023
+# Requires pre-computed polyBERT embeddings from Datasets/polyBERT/
+
+# Core dependencies
+torch>=1.5.1
+numpy>=1.18.1
+pandas>=1.0.3
+
+# For job persistence (if needed for prediction)
+# joblib>=0.16.0

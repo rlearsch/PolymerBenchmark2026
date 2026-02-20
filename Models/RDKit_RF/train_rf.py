@@ -151,8 +151,8 @@ def main():
     parser.add_argument(
         "--seed",
         type=int,
-        default=0,
-        help="Random seed for reproducibility (default: 42)"
+        default=42,
+        help="Base random seed for reproducibility (default: 42). Fold i uses seed+i"
     )
     parser.add_argument(
         "--quiet",
