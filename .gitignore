@@ -38,6 +38,7 @@ Models/polymer_chemprop/**/fold*/**
 Models/polymer_chemprop/.venv/
 Models/polymer_periodic_graph/**/fold*/**
 Models/RDKit_RF/**/fold*/**
+Models/RDKit_RF/.venv/
 Models/polyBERT/**/fold*/**
 Models/polyBERT/.venv/
 *.log

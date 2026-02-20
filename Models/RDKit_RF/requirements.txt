@@ -1,0 +1,14 @@
+# Random Forest baseline model using RDKit molecular descriptors
+# Simple, interpretable model for polymer property prediction
+
+# Core dependencies
+pandas>=1.0.3
+numpy>=1.18.1
+scikit-learn>=0.22.2
+
+# RDKit for descriptor calculation (if needed for new data)
+# Note: RDKit datasets are pre-computed, but RDKit is needed for predict_rf_ensemble.py
+rdkit>=2020.03.1
+
+# Model persistence
+joblib>=0.16.0
