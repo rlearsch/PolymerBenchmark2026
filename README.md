@@ -161,6 +161,12 @@ We provide polymer datasets in four complementary formats:
 - **Paper**: Kuenneth et al., 2023
 - **Best for**: Transfer learning, limited data scenarios
 
+### ✅ polymer_periodic_graph (Periodic Graph Neural Network)
+- **Type**: Message passing neural network with periodic graph representation
+- **Input**: PSMILES
+- **Training time**: ~10-30 minutes per property
+- **Best for**: Capturing repeating structure of polymers
+
 See [Models/README.md](Models/README.md) for detailed documentation on each model.
 
 ## Datasets Included
@@ -192,6 +198,7 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 - **[Models/polymer_chemprop/README.md](Models/polymer_chemprop/README.md)**: polymer_chemprop model details
 - **[Models/RDKit_RF/README.md](Models/RDKit_RF/README.md)**: RDKit_RF model details
 - **[Models/polyBERT/README.md](Models/polyBERT/README.md)**: polyBERT model details
+- **[Models/polymer_periodic_graph/README.md](Models/polymer_periodic_graph/README.md)**: polymer_periodic_graph model details
 
 ## Data Restrictions
 
@@ -237,7 +244,7 @@ This repository is provided to reproduce research results. For questions or issu
 - 16GB RAM (for polyBERT generation and training)
 - 25GB disk space
 - SSD for faster dataset generation and model training
-- GPU with CUDA support (optional, 2-5x speedup for polyBERT and polymer_chemprop)
+- GPU with CUDA support (optional, 2-5x speedup for polyBERT, polymer_chemprop, and polymer_periodic_graph)
 
 ## Troubleshooting
 
@@ -283,7 +290,7 @@ bash setup_environment.sh
 **Training is slow**
 
 - Use smaller datasets (MD_300 instead of MD_5000) for testing
-- For polyBERT/polymer_chemprop: Ensure GPU is available (if you have one)
+- For polyBERT/polymer_chemprop/polymer_periodic_graph: Ensure GPU is available (if you have one)
 - RDKit_RF is naturally the fastest model
 
 **Out of memory during training**
@@ -293,12 +300,13 @@ bash setup_environment.sh
 - Close other applications
 - For polyBERT: Edit `train_pBERT.sh` and change `--batch_size 50` to `--batch_size 32`
 - For polymer_chemprop: Add `--batch_size 32` to train_pcp.sh
+- For polymer_periodic_graph: Add `--batch_size 32` to train_ppg.sh
 
 ### General Issues
 
 **Different results across models**
 
-This is expected! While all models use consistent seeding (base seed 42 for RDKit_RF and polyBERT), the actual train/test splits differ due to different RNG libraries (sklearn vs PyTorch vs chemprop). This is normal and acceptable for benchmarking. See [Models/README.md](Models/README.md) for details on random seed strategy.
+This is expected! While all models use consistent seeding (base seed 42 for RDKit_RF and polyBERT, pytorch_seed=0 for polymer_chemprop and polymer_periodic_graph), the actual train/test splits differ due to different RNG libraries (sklearn vs PyTorch vs chemprop). This is normal and acceptable for benchmarking. See [Models/README.md](Models/README.md) for details on random seed strategy.
 
 ## Contact
 
