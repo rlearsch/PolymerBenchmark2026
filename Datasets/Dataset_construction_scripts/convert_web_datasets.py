@@ -23,8 +23,8 @@ def convert_web_datasets():
     """
     Convert web-sourced datasets from PSMILES to wPSMILES using PSMILES_to_wPSMILES.py
     """
-    psmiles_root = script_dir / '../../PSMILES'
-    wpsmiles_root = script_dir / '../../wPSMILES'
+    psmiles_root = script_dir / '../../Datasets/PSMILES'
+    wpsmiles_root = script_dir / '../../Datasets/wPSMILES'
     
     # Directories to process
     datasets_to_convert = [

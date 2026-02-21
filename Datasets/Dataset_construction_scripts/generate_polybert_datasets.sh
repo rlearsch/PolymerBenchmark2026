@@ -29,7 +29,7 @@ if [ ! -d "polyBERT_env" ]; then
 fi
 
 # Check if PSMILES datasets exist
-if [ ! -d "../../PSMILES" ]; then
+if [ ! -d "../../Datasets/PSMILES" ]; then
     echo "ERROR: PSMILES datasets not found."
     echo "Please run: bash generate_basic_datasets.sh first"
     exit 1
@@ -51,7 +51,7 @@ source polyBERT_env/bin/activate
 
 # Create output directory
 echo "Creating output directory..."
-mkdir -p ../../polyBERT
+mkdir -p ../../Datasets/polyBERT
 echo "✓ Directory created"
 echo ""
 
@@ -80,7 +80,7 @@ echo "Time taken: ${MINUTES}m ${SECONDS}s"
 echo "================================================"
 echo ""
 echo "Generated datasets:"
-echo "  - ../polyBERT/ (~7.3GB)"
+echo "  - ../../Datasets/polyBERT/ (~7.3GB)"
 echo ""
 
 deactivate

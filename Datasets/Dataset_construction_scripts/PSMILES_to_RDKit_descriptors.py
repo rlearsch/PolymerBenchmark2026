@@ -116,8 +116,8 @@ def generate_rdkit_descriptors():
     """
     Main function to recursively process all PSMILES datasets and generate RDKit descriptors.
     """
-    psmiles_root = script_dir / '../../PSMILES'
-    rdkit_root = script_dir / '../../RDKit_descriptors'
+    psmiles_root = script_dir / '../../Datasets/PSMILES'
+    rdkit_root = script_dir / '../../Datasets/RDKit_descriptors'
     
     print("=" * 70)
     print("Generating RDKit Molecular Descriptors from PSMILES Datasets")

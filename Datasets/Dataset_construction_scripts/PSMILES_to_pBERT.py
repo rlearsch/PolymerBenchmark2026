@@ -21,8 +21,8 @@ dictionary_path = script_dir / 'files/PSMILES_pBERT_dict.pkl'
 with open(dictionary_path,'rb') as dictionary:
     PSMILES_pBERT_dict = pickle.load(dictionary)
 
-in_root = script_dir / '../../PSMILES/'
-out_root = script_dir / '../../polyBERT/'
+in_root = script_dir / '../../Datasets/PSMILES/'
+out_root = script_dir / '../../Datasets/polyBERT/'
 dataset_list = [p for p in in_root.rglob("*") if p.is_file() and is_csv_like(p)]
 for dataset in dataset_list:
     data = pd.read_csv(dataset)

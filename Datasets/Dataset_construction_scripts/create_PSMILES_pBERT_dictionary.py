@@ -22,7 +22,7 @@ else:
     PSMILES_pBERT_dict = {}
     print('No existing dictionary found. Creating new dictionary from scratch.')
 
-in_root = script_dir / '../../PSMILES/'
+in_root = script_dir / '../../Datasets/PSMILES/'
 
 # NOTE: Requires local polyBERT model at ../../Models/polyBERT/
 # Download from: https://huggingface.co/kuelumbus/polyBERT

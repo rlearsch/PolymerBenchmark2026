@@ -29,7 +29,7 @@ if [ ! -d ".venv" ]; then
 fi
 
 # Check if PSMILES datasets exist
-if [ ! -d "../../PSMILES" ]; then
+if [ ! -d "../../Datasets/PSMILES" ]; then
     echo "ERROR: PSMILES datasets not found."
     echo "Please run: bash generate_basic_datasets.sh first"
     exit 1
@@ -43,7 +43,7 @@ source .venv/bin/activate
 
 # Create output directory
 echo "Creating output directory..."
-mkdir -p ../../RDKit_descriptors
+mkdir -p ../../Datasets/RDKit_descriptors
 echo "✓ Directory created"
 echo ""
 
@@ -67,7 +67,7 @@ echo "Time taken: ${MINUTES}m ${SECONDS}s"
 echo "================================================"
 echo ""
 echo "Generated datasets:"
-echo "  - ../RDKit_descriptors/"
+echo "  - ../../Datasets/RDKit_descriptors/"
 echo ""
 echo "These descriptors can be used with traditional ML models"
 echo "like Random Forests, SVMs, etc."

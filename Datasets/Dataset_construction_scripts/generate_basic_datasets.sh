@@ -34,12 +34,12 @@ source .venv/bin/activate
 
 # Create output directories
 echo "Creating output directories..."
-mkdir -p ../../PSMILES/Coley_2022/{EA,IP}
-mkdir -p ../../PSMILES/MD_300/{Cp,density,refractive_index,Rg}
-mkdir -p ../../PSMILES/MD_5000/{Cp,density,refractive_index,Rg}
-mkdir -p ../../wPSMILES/Coley_2022/{EA,IP}
-mkdir -p ../../wPSMILES/MD_300/{Cp,density,refractive_index,Rg}
-mkdir -p ../../wPSMILES/MD_5000/{Cp,density,refractive_index,Rg}
+mkdir -p ../../Datasets/PSMILES/Coley_2022/{EA,IP}
+mkdir -p ../../Datasets/PSMILES/MD_300/{Cp,density,refractive_index,Rg}
+mkdir -p ../../Datasets/PSMILES/MD_5000/{Cp,density,refractive_index,Rg}
+mkdir -p ../../Datasets/wPSMILES/Coley_2022/{EA,IP}
+mkdir -p ../../Datasets/wPSMILES/MD_300/{Cp,density,refractive_index,Rg}
+mkdir -p ../../Datasets/wPSMILES/MD_5000/{Cp,density,refractive_index,Rg}
 echo "✓ Directories created"
 echo ""
 
@@ -74,8 +74,8 @@ echo "Time taken: ${MINUTES}m ${SECONDS}s"
 echo "================================================"
 echo ""
 echo "Generated datasets:"
-echo "  - ../PSMILES/"
-echo "  - ../wPSMILES/"
+echo "  - ../../Datasets/PSMILES/"
+echo "  - ../../Datasets/wPSMILES/"
 echo ""
 echo "Optional next steps:"
 echo "  - Combine datasets: See README.md for combine_alternating_homopolymer.py usage"
