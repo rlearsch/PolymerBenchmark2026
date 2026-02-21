@@ -304,6 +304,17 @@ bash setup_environment.sh
 
 ### General Issues
 
+**"ModuleNotFoundError: No module named 'rdkit'"**
+
+For models that require RDKit (polymer_chemprop, polymer_periodic_graph, RDKit_RF):
+```bash
+# Remove the existing virtual environment
+cd Models/<model_name>
+rm -rf .venv
+# Create a fresh environment with all dependencies
+bash setup_environment.sh
+```
+
 **Different results across models**
 
 This is expected! While all models use consistent seeding (base seed 42 for RDKit_RF and polyBERT, pytorch_seed=0 for polymer_chemprop and polymer_periodic_graph), the actual train/test splits differ due to different RNG libraries (sklearn vs PyTorch vs chemprop). This is normal and acceptable for benchmarking. See [Models/README.md](Models/README.md) for details on random seed strategy.

@@ -54,7 +54,7 @@ echo "  cd $(pwd)"
 echo "  source .venv/bin/activate"
 echo ""
 echo "To train a model:"
-echo "  bash train_pcp.sh ../../Datasets/wPSMILES/MD_300/density/homopolymer_alternating_density.csv"
+echo "  bash train_pcp.sh ../../Datasets/wPSMILES/MD_300/density/homopolymer_density.csv"
 echo ""
 
 deactivate
