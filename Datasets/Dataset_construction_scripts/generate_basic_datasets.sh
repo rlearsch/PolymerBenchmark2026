@@ -34,10 +34,10 @@ source .venv/bin/activate
 
 # Create output directories
 echo "Creating output directories..."
-mkdir -p ../../Datasets/PSMILES/Coley_2022/{EA,IP}
+mkdir -p ../../Datasets/PSMILES/Vipea/{EA,IP}
 mkdir -p ../../Datasets/PSMILES/MD_300/{Cp,density,refractive_index,Rg}
 mkdir -p ../../Datasets/PSMILES/MD_5000/{Cp,density,refractive_index,Rg}
-mkdir -p ../../Datasets/wPSMILES/Coley_2022/{EA,IP}
+mkdir -p ../../Datasets/wPSMILES/Vipea/{EA,IP}
 mkdir -p ../../Datasets/wPSMILES/MD_300/{Cp,density,refractive_index,Rg}
 mkdir -p ../../Datasets/wPSMILES/MD_5000/{Cp,density,refractive_index,Rg}
 echo "✓ Directories created"
@@ -46,9 +46,9 @@ echo ""
 # Run scripts
 START_TIME=$(date +%s)
 
-echo "[1/3] Processing Coley 2022 data..."
-python process_Coley_data.py
-echo "✓ Coley 2022 data processed"
+echo "[1/3] Processing Vipea data..."
+python process_Vipea_data.py
+echo "✓ Vipea data processed"
 echo ""
 
 echo "[2/3] Converting OMersBench data..."
