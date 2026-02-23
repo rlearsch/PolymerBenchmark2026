@@ -54,3 +54,4 @@ Models/polyBERT/.venv/
 **/__pycache__/
 *.pyc
 /Models/polymer_periodic_graph/Polymer_Model/chemprop/web
+/Models/polymer_periodic_graph/Polymer_Model/chemprop.egg-info
