@@ -42,7 +42,7 @@ pip install --upgrade pip
 
 echo "Installing polymer_periodic_graph and dependencies..."
 echo "This may take several minutes..."
-pip install -r requirements.txt
+pip install -r ./Polymer_Model/requirements.txt
 
 echo ""
 echo "================================================"
