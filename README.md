@@ -164,10 +164,10 @@ We provide polymer datasets in four complementary formats:
 - **Training time**: ~1-5 minutes per property
 - **Best for**: Fast baseline, interpretable predictions
 
-### ✅ polyBERT (Transfer Learning)
+### ✅ polyBERT (FFN)
 - **Type**: Feed-forward neural network on pre-trained embeddings
 - **Input**: polyBERT embeddings
-- **Training time**: ~5-15 minutes per property
+- **Training time**: ~1-5 minutes per property
 - **Paper**: Kuenneth et al., 2023
 - **Best for**: Transfer learning, limited data scenarios
 
@@ -188,10 +188,9 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 ## Datasets Included
 
 ### From Published Sources
-- **Polymer Genome**: DFT-computed properties (band gap, dielectric constant, etc.)
-- **OpenPoly 2025**: Experimental/computational polymer properties
+- **Polymer Genome**: DFT-computed properties 
 - **PolyMetriX**: Glass transition temperature data
-- **Coley 2022**: Electron affinity and ionization potential (DFT)
+- **Coley 2022 (Vipea)**: Electron affinity and ionization potential (DFT)
 - **OPoly26**: MD simulation properties (density, Rg, Cp, refractive index)
 
 ### Properties Covered
@@ -215,7 +214,7 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 
 ## Data Restrictions
 
-**PolyInfo Dataset**: The PolyInfo database is NOT included in this repository and NOT approved for public distribution. Scripts exclude PolyInfo data by default. Users must obtain their own access to PolyInfo if needed.
+**PoLyInfo Dataset**: The PoLyInfo database is NOT included in this repository and NOT approved for public distribution. Scripts exclude PoLyInfo data by default. Users must obtain their own access to PolyInfo if needed.
 
 ## Citation
 

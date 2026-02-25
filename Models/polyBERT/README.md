@@ -241,9 +241,9 @@ config = {
 ## Performance Expectations
 
 **Training time** (approximate, CPU-only):
-- MD_300 datasets (~300 samples): ~5 minutes
-- MD_5000 datasets (~5000 samples): ~15-20 minutes
-- Large datasets (>10k samples): ~30-60 minutes
+- MD_300 datasets (~300 samples): ~2 minutes
+- MD_5000 datasets (~5000 samples): ~5-10 minutes
+- Large datasets (>10k samples): ~15 minutes
 
 **With GPU**: 2-5x faster
 
@@ -251,16 +251,6 @@ config = {
 - Small datasets: ~2GB RAM
 - Large datasets: ~8-16GB RAM
 
-## Comparison with Other Models
-
-| Aspect | polyBERT | polymer_chemprop | RDKit_RF |
-|--------|----------|------------------|----------|
-| **Input** | polyBERT embeddings | wPSMILES | RDKit descriptors |
-| **Training time** | ~5-15 min | ~10-30 min | ~1-5 min |
-| **Requires precomputation** | Yes (embeddings) | No | Yes (descriptors) |
-| **Transfer learning** | Yes | No | No |
-| **Interpretability** | Low | Low | High (feature importance) |
-| **GPU benefit** | Yes | Yes | No |
 
 ## Citation
 

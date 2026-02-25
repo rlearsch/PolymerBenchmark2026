@@ -182,14 +182,6 @@ python Polymer_Model/train.py \
 - **Memory usage**: 2-4 GB RAM during training
 - **Disk usage**: 10-50 MB per model checkpoint
 
-## Comparison with Other Models
-
-| Model | Unique Features | Input Format | Strengths | Limitations |
-|-------|----------------|--------------|-----------|-------------|
-| polymer_periodic_graph | Periodic graph representation | PSMILES | Better captures polymer repetition | More complex model |
-| polymer_chemprop | Standard graph with polymer adaptation | wPSMILES | Simpler implementation | Less accurate for some properties |
-| RDKit_RF | Molecular descriptors | RDKit descriptors | Faster training | Less structural insight |
-| polyBERT | Natural language model for polymers | polyBERT | Better for diverse structures | Needs more training data |
 
 ## Citation
 
