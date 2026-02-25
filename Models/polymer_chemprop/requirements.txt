@@ -12,3 +12,4 @@ numpy>=1.18.1
 torch>=1.5.1
 scikit-learn>=0.22.2
 rdkit>=2020.03.1
+setuptools~=69.5.1
