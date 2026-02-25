@@ -15,7 +15,7 @@ smiles,EA
 *c1cc(F)c(c2c(O)cc(O)c(*)c2O)cc1F,1.878
 ```
 
-### 2. wPSMILES (~206MB, generated)
+### 2. wPSMILES (~200MB, generated)
 Weighted PSMILES with connectivity information for copolymers.
 
 **Example:**
@@ -60,7 +60,7 @@ Pre-computed polyBERT embeddings (600-dimensional vectors) from PSMILES.
 - **RDKit_descriptors/**: Molecular descriptors (optional)
 - **polyBERT/**: All polyBERT datasets (~7.3GB, optional)
 - **PolyInfo/**: Restricted dataset, excluded in all formats
-- **pSMILES_pBERT_dict.pkl**: 224MB embedding dictionary (auto-generated)
+- **PSMILES_pBERT_dict.pkl**: 224MB embedding dictionary (auto-generated)
 
 ## Quick Start: Generate Datasets
 
@@ -102,9 +102,9 @@ Datasets/
 
 | Property | Source | Format | Description |
 |----------|--------|--------|-------------|
-| Electron Affinity (EA) | Coley 2022 | PSMILES, wPSMILES | DFT computed |
-| Ionization Potential (IP) | Coley 2022 | PSMILES, wPSMILES | DFT computed |
-| Glass Transition (Tg) | Multiple | All formats | Experimental & computed |
+| Electron Affinity (EA) | Coley 2022 | All formats | DFT computed |
+| Ionization Potential (IP) | Coley 2022 | All formats | DFT computed |
+| Glass Transition (Tg) | PolyMetriX | All formats | Experimental |
 | Density | MD, PolyInfo | All formats | MD simulations & experimental |
 | Refractive Index | MD | All formats | MD simulations |
 | Radius of Gyration (Rg) | MD | All formats | MD simulations |
@@ -142,7 +142,7 @@ Datasets/
 - **Properties**: Band gap, dielectric constant, electron affinity, etc.
 - **Method**: DFT calculations
 
-### PolyInfo
+### PoLyInfo
 - **Source**: Experimental polymer database
 - **Properties**: Tg, density
 - **Method**: Experimental measurements
@@ -161,26 +161,18 @@ Datasets/
 - **RDKit descriptors**: Best for traditional ML models (e.g., Random Forest, SVM, XGBoost) - faster than polyBERT
 - **polyBERT**: Best for deep learning models that benefit from pre-trained embeddings
 
-### Memory Requirements
-
-- **PSMILES/wPSMILES**: Minimal (<1GB RAM to load)
-- **RDKit descriptors**: Low (~2GB RAM for largest datasets)
-- **polyBERT**: Moderate (~8GB RAM for largest datasets)
 
 ### polyBERT Model Requirements
 
 To generate polyBERT datasets, you need:
 1. polyBERT model at `../Models/polyBERT/`
 2. Python environment with sentence-transformers
-3. ~16GB RAM for embedding generation
 
 Download polyBERT from: https://huggingface.co/kuelumbus/polyBERT
 
 See [Dataset_construction_scripts/README.md](Dataset_construction_scripts/README.md) for detailed setup.
 
-## License
 
-[License information to be added]
 
 ## Questions?
 
