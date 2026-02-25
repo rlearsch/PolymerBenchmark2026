@@ -35,7 +35,7 @@ bash generate_basic_datasets.sh
 
 Generates:
 - `../PSMILES/` (~90MB)
-- `../wPSMILES/` (~206MB)
+- `../wPSMILES/` (~200MB)
 
 Time: ~5-15 minutes depending on system
 
@@ -94,7 +94,7 @@ Generates:
 ```
 Datasets/
 ├── PSMILES/
-│   ├── Coley_2022/
+│   ├── Vipea/
 │   │   ├── EA/
 │   │   └── IP/
 │   ├── MD_300/        # ~300 atom simulations (n_chains < 10)
@@ -119,15 +119,15 @@ source .venv/bin/activate
 
 #### Process Coley 2022 Data
 ```bash
-python process_Coley_data.py
+python process_Vipea_data.py
 ```
-Generates: `Coley_2022/EA` and `Coley_2022/IP` datasets
+Generates: `Vipea/EA` and `Vipea/IP` datasets
 
 #### Convert OMersBench Data
 ```bash
 python OMers_convert_jsonl.py
 ```
-Generates: `MD_300`, `MD_5000`, `MD_DP` datasets
+Generates: `MD_300`, `MD_5000` datasets
 
 **Note**: Creates intermediate CSV files (`OMersBench_*.csv`) that can be deleted after completion.
 
@@ -170,13 +170,13 @@ deactivate
 source polyBERT_env/bin/activate
 
 # Update dictionary (uses existing dict as starting point)
-python create_pSMILES_pBERT_dictionary.py
+python create_PSMILES_pBERT_dictionary.py
 
 # Convert PSMILES to polyBERT format
-python pSMILES_to_pBERT.py
+python PSMILES_to_pBERT.py
 ```
 
-**Important**: `create_pSMILES_pBERT_dictionary.py` requires polyBERT model at:
+**Important**: `create_PSMILES_pBERT_dictionary.py` requires polyBERT model at:
 ```
 ../../Models/polyBERT/
 ```
@@ -187,7 +187,7 @@ Edit line 24 of the script if your model is in a different location.
 
 ## Script Descriptions
 
-### `process_Coley_data.py`
+### `process_Vipea_data.py`
 - **Input**: `files/polymer-chemprop-data/*.csv`
 - **Output**: Coley 2022 EA/IP datasets in PSMILES and wPSMILES formats
 - **Dependencies**: pandas, rdkit
@@ -238,15 +238,15 @@ Edit line 24 of the script if your model is in a different location.
 - **Descriptors**: 200+ molecular descriptors (MW, LogP, TPSA, etc.)
 - **Note**: Recursively processes all PSMILES datasets, skips already-processed files
 
-### `create_pSMILES_pBERT_dictionary.py`
+### `create_PSMILES_pBERT_dictionary.py`
 - **Input**: All CSV files in `../PSMILES/`, existing `pSMILES_pBERT_dict.pkl`
-- **Output**: Updated `files/pSMILES_pBERT_dict.pkl`
+- **Output**: Updated `files/PSMILES_pBERT_dict.pkl`
 - **Dependencies**: sentence-transformers, torch
 - **Requires**: polyBERT model at `../../Models/polyBERT/`
 - **Note**: Incremental - only processes new SMILES not in dictionary
 
-### `pSMILES_to_pBERT.py`
-- **Input**: PSMILES datasets, `pSMILES_pBERT_dict.pkl`
+### `PSMILES_to_pBERT.py`
+- **Input**: PSMILES datasets, `PSMILES_pBERT_dict.pkl`
 - **Output**: polyBERT datasets (600-dim embeddings)
 - **Dependencies**: pandas
 - **Note**: Fast - just looks up embeddings in dictionary
