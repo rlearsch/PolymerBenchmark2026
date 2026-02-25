@@ -9,6 +9,8 @@ This model uses a modified version of Chemprop that handles polymer ensemble rep
 - Weighted connectivity patterns
 - Degree of polymerization effects
 
+We depend on a fork of polymer-chemprop with two small forward-compatability patches (see fork diff [here](https://github.com/rlearsch/polymer-chemprop)). 
+
 ## Reference
 
 **Paper**: ["A graph representation of molecular ensembles for polymer property prediction"](https://pubs.rsc.org/en/content/articlelanding/2022/SC/D2SC02839E)  
