@@ -10,6 +10,7 @@ This directory contains implementations of various machine learning models for p
 | **polyBERT** | polyBERT embeddings | Feed-forward NN | ✅ Ready | Transfer learning with polyBERT |
 | **RDKit_RF** | RDKit descriptors | Random Forest | ✅ Ready | Traditional ML baseline |
 | **polymer_periodic_graph** | PSMILES | Periodic GNN | ✅ Ready | Periodic graph neural network |
+| **OpenAI** | PSMILES | LLM | ✅ Ready | Zero-shot LLM property prediction |
 
 ## Quick Start
 
@@ -67,6 +68,14 @@ bash predict_pcp.sh ./MD_300/density/homopolymer_density/random_split test_data.
 - **Training time**: ~10-30 minutes per property
 - **Dependency**: Uses a customized local version of chemprop
 
+### OpenAI
+- **Input**: PSMILES (Polymer SMILES)
+- **Architecture**: Large language model with specialized prompts
+- **Best for**: Zero-shot prediction with explanation and reasoning
+- **Prediction time**: ~30-60 seconds per polymer
+- **Advantage**: No training required, provides detailed chemical reasoning
+- **Note**: Requires OpenAI API key
+
 ## Dataset Compatibility
 
 | Model | PSMILES | wPSMILES | RDKit Descriptors | polyBERT Embeddings |
@@ -75,6 +84,7 @@ bash predict_pcp.sh ./MD_300/density/homopolymer_density/random_split test_data.
 | polyBERT | ❌ | ❌ | ❌ | ✅ |
 | RDKit_RF | ❌ | ❌ | ✅ | ❌ |
 | polymer_periodic_graph | ✅ | ❌ | ❌ | ❌ |
+| OpenAI | ✅ | ❌ | ❌ | ❌ |
 
 ## Cross-Validation and Random Seeds
 
@@ -91,7 +101,6 @@ For reproducibility, models use a base seed of **42**:
 **Important Notes:**
 - ✅ Each model's results are fully reproducible (same seed → same splits within that model)
 - ⚠️ Splits differ between models due to different RNG libraries (sklearn vs torch vs chemprop)
-- ✅ This is acceptable for benchmarking as all models use the same split proportions and number of folds
 - ✅ Multiple folds average out random variations in splitting
 
 ### Customizing Seeds
@@ -113,8 +122,9 @@ python train_pBERT.py --data_path data.csv --save_dir output/ --seed 123
 | **RDKit_RF** | Fastest (1-5 min) | Low (2-4GB) | No | High (feature importance) |
 | **polyBERT** | Fast (5-15 min) | Medium (4-16GB) | Yes (2-5x) | Low |
 | **polymer_chemprop** | Moderate (10-30 min) | Medium (4-16GB) | Yes (2-5x) | Low |
+| **polymer_periodic_graph** | Moderate (10-30 min) | Medium (4-16GB) | Yes (2-5x) | Low |
+| **OpenAI** | N/A (zero-shot) | Low (API-based) | N/A | High (text explanations) |
 
-Results will be added after running all models. See paper for full benchmark results.
 
 ## Common Setup Pattern
 
@@ -205,15 +215,28 @@ Random Forest (100 trees)
 Output: Property Prediction
 ```
 
+### OpenAI (Large Language Model)
+```
+Input: PSMILES + Prompt Template
+  ↓
+API Request to OpenAI LLM
+  ↓
+Model Response with Reasoning
+  ↓
+Regex Extraction of Predicted Value
+  ↓
+Output: Property Prediction + Explanation
+```
+
 ## Citation
 
-If you use these models, please cite the OPoly26Benchmark paper:
+If you use these models, please cite the OPoly26Benchmark paper (TBD):
 
 ```bibtex
-@article{yourname2026opolybench,
+@article{opoly26bench,
   title={OPoly26Benchmark: A Comprehensive Benchmark for Polymer Property Prediction},
-  author={Your Name and Collaborators},
-  journal={Journal Name},
+  author={},
+  journal={},
   year={2026}
 }
 ```

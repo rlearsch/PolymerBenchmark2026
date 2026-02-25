@@ -20,7 +20,8 @@ OPoly26Benchmark/
 │   ├── polymer_chemprop/              # ✅ GNN for weighted polymer graphs
 │   ├── RDKit_RF/                      # ✅ Random Forest baseline
 │   ├── polyBERT/                      # ✅ Transfer learning with polyBERT
-│   └── polymer_periodic_graph/        # ✅ Periodic graph neural network
+│   ├── polymer_periodic_graph/        # ✅ Periodic graph neural network
+│   └── OpenAI/                        # ✅ Large language model predictions
 └── README.md                          # This file
 ```
 
@@ -31,7 +32,6 @@ OPoly26Benchmark/
 - Python 3.10 or higher
 - Git
 - ~15 GB free disk space (for generated datasets)
-- Optional: ~16GB RAM for polyBERT generation
 
 ### 1. Clone the Repository
 
@@ -85,24 +85,34 @@ Each model has its own environment and training workflow:
 
 ```bash
 # Example: Train Random Forest on RDKit descriptors
-cd Models/RDKit_RF
+cd ./Models/RDKit_RF
 bash setup_environment.sh  # one-time setup
+source .venv/bin/activate
 bash train_rf.sh ../../Datasets/RDKit_descriptors/MD_300/density/homopolymer_density.csv
 
 # Example: Train polymer-chemprop on wPSMILES
-cd ../polymer_chemprop
+cd ./Models/polymer_chemprop
 bash setup_environment.sh  # one-time setup
+source .venv/bin/activate
 bash train_pcp.sh ../../Datasets/wPSMILES/MD_300/density/homopolymer_density.csv
 
 # Example: Train polyBERT on embeddings
-cd ../polyBERT
+cd ./Models/polyBERT
 bash setup_environment.sh  # one-time setup
+source .venv/bin/activate
 bash train_pBERT.sh ../../Datasets/polyBERT/MD_300/density/homopolymer_density.csv
 
 # Example: Train polymer_periodic_graph on PSMILES
-cd ../polymer_periodic_graph
+cd ./Models/polymer_periodic_graph
 bash setup_environment.sh  # one-time setup
+source .venv/bin/activate
 bash train_ppg.sh ../../Datasets/PSMILES/MD_300/density/homopolymer_density.csv
+
+# Example: Run LLM predictions on PSMILES
+cd ./Models/OpenAI
+bash setup_environment.sh  # one-time setup
+source .venv/bin/activate
+python EA_predictions/homopolymer_EA_4o_neg.py
 ```
 
 See [Models/README.md](Models/README.md) for detailed model documentation.
@@ -167,6 +177,12 @@ We provide polymer datasets in four complementary formats:
 - **Training time**: ~10-30 minutes per property
 - **Best for**: Capturing repeating structure of polymers
 
+### ✅ OpenAI (Large Language Model)
+- **Type**: Large language model with specialized prompts
+- **Input**: PSMILES
+- **Prediction time**: ~30-60 seconds per polymer
+- **Best for**: Zero-shot property prediction with reasoning
+
 See [Models/README.md](Models/README.md) for detailed documentation on each model.
 
 ## Datasets Included
@@ -176,19 +192,16 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 - **OpenPoly 2025**: Experimental/computational polymer properties
 - **PolyMetriX**: Glass transition temperature data
 - **Coley 2022**: Electron affinity and ionization potential (DFT)
-- **OMersBench**: MD simulation properties (density, Rg, Cp, refractive index)
+- **OPoly26**: MD simulation properties (density, Rg, Cp, refractive index)
 
 ### Properties Covered
 - Glass transition temperature (Tg)
 - Density
-- Electron affinity / Ionization potential
-- Band gap (bulk, chain)
-- Dielectric constant
+- Electron affinity 
+- Ionization potential
 - Refractive index
 - Radius of gyration (Rg)
 - Heat capacity (Cp)
-- Crystallization tendency
-- And more...
 
 ## Documentation
 
@@ -206,12 +219,11 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 
 ## Citation
 
-If you use this benchmark in your research, please cite:
+If you use this benchmark in your research, please cite (TBD):
 
 ```bibtex
-@article{yourname2026opolybench,
-  title={OPoly26Benchmark: A Comprehensive Benchmark for Polymer Property Prediction},
-  author={Your Name and Collaborators},
+@article{opoly26bench,
+  title={OPoly26 Benchmark: Evaluating Polymer Representations for Machine Learning Property Prediction },
   journal={Journal Name},
   year={2026}
 }
@@ -228,7 +240,7 @@ This repository is provided to reproduce research results. For questions or issu
 ## Acknowledgments
 
 - polyBERT model: https://huggingface.co/kuelumbus/polyBERT
-- Data sources: Polymer Genome, Coley et al., OMersBench, OpenPoly, PolyMetriX
+- Data sources: Polymer Genome, Coley et al., OpenPoly, PolyMetriX
 - RDKit: Open-source cheminformatics toolkit
 
 ## System Requirements
