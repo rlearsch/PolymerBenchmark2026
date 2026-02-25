@@ -327,3 +327,6 @@ For questions about the benchmark or datasets, please open an issue on GitHub.
 ---
 
 **Note**: This is a research repository accompanying a peer-reviewed publication. Generated datasets are excluded from git to keep the repository size manageable (~85MB). All datasets can be regenerated from source data using the provided scripts.
+
+## Release
+LLNL-CODE-850796
