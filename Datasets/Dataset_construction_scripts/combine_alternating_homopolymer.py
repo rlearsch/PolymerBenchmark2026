@@ -5,14 +5,6 @@ from pathlib import Path
 import re
 import glob
 
-def save_datasets(datasets, path):
-    train_dataset, valid_dataset, ood_dataset = datasets 
-
-    #train_dataset.to_csv(f'{path}/train.csv', index=False)
-    #valid_dataset.to_csv(f'{path}/valid.csv', index=False)
-    #ood_dataset.to_csv(f'{path}/test.csv',index=False)
-    pass
-
 def main():
     ap = argparse.ArgumentParser()#description="Recursively transform CSVs with pandas.")
     ap.add_argument("input_dir", type=Path, help="Directory to crawl for CSVs")

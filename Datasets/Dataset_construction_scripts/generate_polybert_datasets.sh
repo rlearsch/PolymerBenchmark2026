@@ -60,12 +60,12 @@ START_TIME=$(date +%s)
 
 echo "[1/2] Creating/updating polyBERT dictionary..."
 echo "  (This may take a long time for the first run)"
-python create_pSMILES_pBERT_dictionary.py
+python create_PSMILES_pBERT_dictionary.py
 echo "✓ Dictionary updated"
 echo ""
 
 echo "[2/2] Converting PSMILES to polyBERT format..."
-python pSMILES_to_pBERT.py
+python PSMILES_to_pBERT.py
 echo "✓ Conversion complete"
 echo ""
 

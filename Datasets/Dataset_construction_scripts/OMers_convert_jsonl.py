@@ -64,8 +64,6 @@ for index, dictionaries in enumerate([[alternating_copolymer_inputs, alternating
     architecture = copolymer_architectures[index]
     dfs = [pd.DataFrame(dictionaries[0]), pd.DataFrame(dictionaries[1])]
     df = pd.concat(dfs, axis=1)
-    # Save intermediate CSV in script directory
-    df.to_csv(script_dir / f'OMersBench_{architecture}.csv', index=False)
     ## split into 300 atom and 5000 atom simulations
     ## if n_chains < 10: 300 atom
     ## if n_chains ==10: 5000 atom
