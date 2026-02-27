@@ -129,8 +129,6 @@ python OMers_convert_jsonl.py
 ```
 Generates: `MD_300`, `MD_5000` datasets
 
-**Note**: Creates intermediate CSV files (`OMersBench_*.csv`) that can be deleted after completion.
-
 #### Convert Web-Sourced Datasets
 ```bash
 python convert_web_datasets.py
