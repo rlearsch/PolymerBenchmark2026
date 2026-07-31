@@ -35,11 +35,11 @@ source .venv/bin/activate
 # Create output directories
 echo "Creating output directories..."
 mkdir -p ../../Datasets/PSMILES/Vipea/{EA,IP}
-mkdir -p ../../Datasets/PSMILES/MD_300/{Cp,density,refractive_index,Rg}
-mkdir -p ../../Datasets/PSMILES/MD_5000/{Cp,density,refractive_index,Rg}
+mkdir -p ../../Datasets/PSMILES/MD_300/{Cp,Cv,density,refractive_index,Rg}
+mkdir -p ../../Datasets/PSMILES/MD_5000/{Cp,Cv,density,refractive_index,Rg}
 mkdir -p ../../Datasets/wPSMILES/Vipea/{EA,IP}
-mkdir -p ../../Datasets/wPSMILES/MD_300/{Cp,density,refractive_index,Rg}
-mkdir -p ../../Datasets/wPSMILES/MD_5000/{Cp,density,refractive_index,Rg}
+mkdir -p ../../Datasets/wPSMILES/MD_300/{Cp,Cv,density,refractive_index,Rg}
+mkdir -p ../../Datasets/wPSMILES/MD_5000/{Cp,Cv,density,refractive_index,Rg}
 echo "✓ Directories created"
 echo ""
 

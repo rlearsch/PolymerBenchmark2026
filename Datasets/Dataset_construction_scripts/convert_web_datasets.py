@@ -65,7 +65,7 @@ def convert_web_datasets():
             )
             print(result.stdout)
             if result.stderr:
-                print("Warnings/Errors:", result.stderr)
+                print("Warnings/Errors:\n", result.stderr)
         except subprocess.CalledProcessError as e:
             print(f"✗ Error converting {dataset_name}:")
             print(e.stdout)
