@@ -270,6 +270,8 @@ def run_repeated_experiments_from_arrays(X: np.ndarray, y: np.ndarray, cfg: dict
 
         test_metrics = evaluate(model, test_loader, criterion, device, is_classification=False)
         test_mse, test_rmse = test_metrics["loss"], test_metrics["rmse"]
+
+        all_test_metrics.append(test_metrics)
         print(f"[Fold {fold+1}/{config['num_folds']}] best_epoch={best_epoch:03d} "
             f"| val_rmse={best_val_rmse:.6f} | test_rmse={test_rmse:.6f}")
         
@@ -324,21 +326,36 @@ def run_repeated_experiments_from_arrays(X: np.ndarray, y: np.ndarray, cfg: dict
         print(f"[Fold {fold+1}/{cfg['num_folds']}] best_epoch={best_epoch:03d} "
               f"| val_RMSE={best_val_rmse:.6f} | test_RMSE={test_rmse:.6f}")
 
-    mses = [m[0] for m in all_test_metrics]
-    rmses = [m[1] for m in all_test_metrics if m[1] is not None]
+    # ---- Aggregate metrics across repeated random splits
+    mses = [
+        m["loss"]
+        for m in all_test_metrics
+        if m["loss"] is not None
+    ]
+
+    rmses = [
+        m["rmse"]
+        for m in all_test_metrics
+        if m["rmse"] is not None
+    ]
+
     summary = {
-        'test_mse_mean': float(stats.mean(mses))  if mses else None,
-        'test_mse_std':  float(stats.pstdev(mses)) if len(mses) > 1 else 0.0,
+        "test_mse_mean": float(stats.mean(mses)) if mses else None,
+        "test_mse_std": float(stats.pstdev(mses)) if len(mses) > 1 else 0.0,
+        "test_rmse_mean": float(stats.mean(rmses)) if rmses else None,
+        "test_rmse_std": float(stats.pstdev(rmses)) if len(rmses) > 1 else 0.0,
     }
 
-    # RMSE is for regression; include it when we actually computed it
-    if (not is_classification) and rmses:
-        summary['test_rmse_mean'] = float(stats.mean(rmses))
-        summary['test_rmse_std']  = float(stats.pstdev(rmses)) if len(rmses) > 1 else 0.0
-        summary = {
-            'test_rmse_mean': float(stats.mean(rmses))  if mses else None,
-            'test_rmse_std':  float(stats.pstdev(rmses)) if len(mses) > 1 else 0.0,
-        }
+    print("\n" + "=" * 60)
+    print("Test performance across folds")
+    print("=" * 60)
+    print(f"Mean test RMSE: {summary['test_rmse_mean']:.6f}")
+    print(f"Std test RMSE:  {summary['test_rmse_std']:.6f}")
+    print(
+        f"Overall test RMSE = "
+        f"{summary['test_rmse_mean']:.6f} +/- "
+        f"{summary['test_rmse_std']:.6f}"
+    )
     return {
         # 'history': all_hist,
         # 'test_metrics': all_test_metrics,
