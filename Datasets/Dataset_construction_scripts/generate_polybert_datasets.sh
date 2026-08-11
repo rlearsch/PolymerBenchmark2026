@@ -12,7 +12,7 @@ echo "WARNING: This process:"
 echo "  - Requires ~16GB RAM"
 echo "  - Takes several hours depending on system"
 echo "  - Generates ~7.3GB of data"
-echo "  - Requires polyBERT model at ../../Models/polyBERT/"
+echo "  - Requires polyBERT model at ../../../polyBERT/"
 echo ""
 read -p "Continue? (y/n) " -n 1 -r
 echo
@@ -29,15 +29,15 @@ if [ ! -d "polyBERT_env" ]; then
 fi
 
 # Check if PSMILES datasets exist
-if [ ! -d "../../Datasets/PSMILES" ]; then
+if [ ! -d "./../../Datasets/PSMILES" ]; then
     echo "ERROR: PSMILES datasets not found."
     echo "Please run: bash generate_basic_datasets.sh first"
     exit 1
 fi
 
 # Check if polyBERT model exists
-if [ ! -d "../../Models/polyBERT" ]; then
-    echo "ERROR: polyBERT model not found at ../../Models/polyBERT/"
+if [ ! -d "./../../../polyBERT" ]; then
+    echo "ERROR: polyBERT model not found at ../../../polyBERT/"
     echo "Please download the polyBERT model first:"
     echo "  https://huggingface.co/kuelumbus/polyBERT"
     exit 1
