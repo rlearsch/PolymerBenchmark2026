@@ -72,20 +72,28 @@ for index, dictionaries in enumerate([[alternating_copolymer_inputs, alternating
     ## Drop duplicates: preference for 600K anneal (keep='last')
 
     if architecture=='homopolymer':
-        df['smiles'] = df['smiles_list']
-        for measurement in ['Cp','Cv','Rg','density','refractive_index']: # save PSMILES
-            df[df['n_chains'].astype(int) < 10][['smiles', measurement]].dropna().drop_duplicates(subset='smiles',keep='last').to_csv(script_dir / f'../../Datasets/PSMILES/MD_300/{measurement}/{architecture}_{measurement}.csv', index=False)
-            df[df['n_chains'].astype(int) == 10][['smiles', measurement]].dropna().drop_duplicates(subset='smiles',keep='last').to_csv(script_dir / f'../../Datasets/PSMILES/MD_5000/{measurement}/{architecture}_{measurement}.csv', index=False)
-            df[df['n_chains'].astype(int) == 10][['smiles', measurement]].dropna().drop_duplicates(subset='smiles',keep='last').sample(n=300,random_state=0).to_csv(script_dir / f'../../Datasets/PSMILES/MD_5000/{measurement}/{architecture}_300_{measurement}.csv', index=False)
-            df[df['n_chains'].astype(int) == 10][['smiles', measurement]].dropna().drop_duplicates(subset='smiles',keep='last').sample(n=1000,random_state=0).to_csv(script_dir / f'../../Datasets/PSMILES/MD_5000/{measurement}/{architecture}_1000_{measurement}.csv', index=False)
-        df['smiles'] = df['smiles'].apply(PSMILES_to_wPSMILES)
+        df['psmiles_temp'] = df['smiles_list']
+        df['smiles'] = df['psmiles_temp'].apply(PSMILES_to_wPSMILES)
+        df=df.drop_duplicates(subset='psmiles_temp',keep='last')
+        df=df.drop_duplicates(subset='smiles',keep='last')
         for measurement in ['Cp','Cv','Rg','density','refractive_index']: #save wPSMILES
             df[df['n_chains'].astype(int) < 10][['smiles', measurement]].dropna().drop_duplicates(subset='smiles',keep='last').to_csv(script_dir / f'../../Datasets/wPSMILES/MD_300/{measurement}/{architecture}_{measurement}.csv', index=False)
             df[df['n_chains'].astype(int) == 10][['smiles', measurement]].dropna().drop_duplicates(subset='smiles',keep='last').to_csv(script_dir / f'../../Datasets/wPSMILES/MD_5000/{measurement}/{architecture}_{measurement}.csv', index=False)
             df[df['n_chains'].astype(int) == 10][['smiles', measurement]].dropna().drop_duplicates(subset='smiles',keep='last').sample(n=300,random_state=0).to_csv(script_dir / f'../../Datasets/wPSMILES/MD_5000/{measurement}/{architecture}_300_{measurement}.csv', index=False)
             df[df['n_chains'].astype(int) == 10][['smiles', measurement]].dropna().drop_duplicates(subset='smiles',keep='last').sample(n=1000,random_state=0).to_csv(script_dir / f'../../Datasets/wPSMILES/MD_5000/{measurement}/{architecture}_1000_{measurement}.csv', index=False)
+        df['smiles'] = df['psmiles_temp']
+        for measurement in ['Cp','Cv','Rg','density','refractive_index']: # save PSMILES
+            df[df['n_chains'].astype(int) < 10][['smiles', measurement]].dropna().drop_duplicates(subset='smiles',keep='last').to_csv(script_dir / f'../../Datasets/PSMILES/MD_300/{measurement}/{architecture}_{measurement}.csv', index=False)
+            df[df['n_chains'].astype(int) == 10][['smiles', measurement]].dropna().drop_duplicates(subset='smiles',keep='last').to_csv(script_dir / f'../../Datasets/PSMILES/MD_5000/{measurement}/{architecture}_{measurement}.csv', index=False)
+            df[df['n_chains'].astype(int) == 10][['smiles', measurement]].dropna().drop_duplicates(subset='smiles',keep='last').sample(n=300,random_state=0).to_csv(script_dir / f'../../Datasets/PSMILES/MD_5000/{measurement}/{architecture}_300_{measurement}.csv', index=False)
+            df[df['n_chains'].astype(int) == 10][['smiles', measurement]].dropna().drop_duplicates(subset='smiles',keep='last').sample(n=1000,random_state=0).to_csv(script_dir / f'../../Datasets/PSMILES/MD_5000/{measurement}/{architecture}_1000_{measurement}.csv', index=False)
+#        df = df.drop_duplicates(subset='smiles',keep='last')
+#        df['smiles'] = df['smiles'].apply(PSMILES_to_wPSMILES)
+
     if architecture=='alternating':
         df['smiles'] = df.apply(construct_alternating_wPSMILES_from_row, axis=1)
+        df['psmiles_temp']=df.smiles.apply(wPSMILES_to_PSMILES_alternating)
+        df=df.drop_duplicates(subset='psmiles_temp',keep='last')
         for measurement in ['Cp', 'Rg','density','refractive_index']: # save wPSMILES
             df[df['n_chains'].astype(int) < 10][['smiles', measurement]].dropna().drop_duplicates(subset='smiles',keep='last').to_csv(script_dir / f'../../Datasets/wPSMILES/MD_300/{measurement}/{architecture}_{measurement}.csv', index=False)
             df[df['n_chains'].astype(int) == 10][['smiles', measurement]].dropna().drop_duplicates(subset='smiles',keep='last').to_csv(script_dir / f'../../Datasets/wPSMILES/MD_5000/{measurement}/{architecture}_{measurement}.csv', index=False)

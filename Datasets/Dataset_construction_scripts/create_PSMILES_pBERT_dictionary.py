@@ -24,9 +24,12 @@ else:
 
 in_root = script_dir / '../../Datasets/PSMILES/'
 
-# NOTE: Requires local polyBERT model at ../../Models/polyBERT/
+# NOTE: Requires local polyBERT model at ../../../polyBERT/
 # Download from: https://huggingface.co/kuelumbus/polyBERT
-polyBERT = SentenceTransformer(script_dir / '../../Models/polyBERT')
+polyBERT_path = (script_dir / "../../../polyBERT").resolve()
+print(polyBERT_path)
+
+polyBERT = SentenceTransformer(str(polyBERT_path))
 
 def PSMILES_to_FP(smiles):
     #ps = PS(smiles)
@@ -65,7 +68,7 @@ for dataset in dataset_list:
                     PSMILES_pBERT_dict[smiles] = PSMILES_to_FP(smiles)
                 except Exception as e:
                     print(f'Error processing {smiles}: {e}')
-                if count%100==0:
+                if count%1000==0:
                     save_dictionary(PSMILES_pBERT_dict)
                     keys_length = len(PSMILES_pBERT_dict.keys())
                     print(f'Dictionary saved with {keys_length} entries')
