@@ -69,12 +69,33 @@ bash generate_polybert_datasets.sh
 Generates:
 - `../polyBERT/` (~7.3GB)
 
+### 5. Generate Scaling Experiment Datasets (Optional)
+
+**Prerequisites:**
+- PSMILES and wPSMILES datasets from `generate_basic_datasets.sh`
+- polyBERT datasets from `generate_polybert_datasets.sh`
+- RDKit in the basic dataset environment
+
+```bash
+bash generate_scaling_datasets.sh
+```
+
+This creates the exact five-fold, nested training subsets used by the
+PolyBench26 scaling experiments. Use `--dry-run` to inspect the complete
+experiment matrix and `--overwrite` to replace existing outputs.
+
+Generated files are written to `../scaling_splits/` and excluded from Git. The
+generator validates target alignment across PSMILES, wPSMILES, and polyBERT and
+regenerates RDKit descriptors from canonical PSMILES rows. See
+[`../../SCALING_EXPERIMENTS_METHODS.md`](../../SCALING_EXPERIMENTS_METHODS.md).
+
 ## Source Data Files
 
 ### Included in Repository (`./files/`)
-- `Cleaned_OMersBench.jsonl` (63MB) - OMersBench dataset with **additional molecular dynamics parameters**
+- `Cleaned_OMersBench_v3_final.jsonl` (64MB) - Current OMersBench source, including Cv and **additional molecular dynamics parameters**
   - Includes: Degree of polymerization (DP), molecular weight (Mn, MW), number of chains, atom counts, and more
   - Users needing these parameters should parse this source file directly
+- `Cleaned_OMersBench.jsonl` (63MB) - Original archival OMersBench source without Cv
 - `polymer-chemprop-data/` (17MB) - Coley 2022 dataset files
 
 ### Included in PSMILES Directory (Small web-sourced datasets, ~5MB total)
@@ -103,7 +124,7 @@ Datasets/
 └── polyBERT/          # Same structure, but with 600-dim embeddings
 ```
 
-**Note**: MD datasets (MD_300, MD_5000) contain SMILES and properties only. For additional molecular dynamics parameters like degree of polymerization (DP), molecular weight (Mn, MW), and simulation details, see the source file `files/Cleaned_OMersBench.jsonl`.
+**Note**: MD datasets (MD_300, MD_5000) contain SMILES and properties only. For additional molecular dynamics parameters like degree of polymerization (DP), molecular weight (Mn, MW), and simulation details, see the source file `files/Cleaned_OMersBench_v3_final.jsonl`.
 
 ## Manual Script Execution
 
@@ -192,11 +213,16 @@ Edit line 24 of the script if your model is in a different location.
 - **Converts**: wPSMILES → PSMILES for alternating copolymers
 
 ### `OMers_convert_jsonl.py`
-- **Input**: `files/Cleaned_OMersBench.jsonl`
+- **Input**: `files/Cleaned_OMersBench_v3_final.jsonl`
 - **Output**: MD simulations (300 atom, 5000 atom, various DP)
 - **Dependencies**: pandas, numpy, rdkit
 - **Handles**: Homopolymers, alternating, and random copolymers
 - **Converts**: Both PSMILES and wPSMILES formats
+
+### `add_Cv_to_OMersBench.py`
+- **Input**: An OMersBench JSONL file and an external directory of Cv calculation files
+- **Output**: JSONL records augmented with matched `Cv` values
+- **Note**: The large raw heat-capacity calculation directory is intentionally excluded from Git; the repository includes the compact augmented JSONL used for generation
 
 ### `combine_alternating_homopolymer.py`
 - **Input**: Directory containing `alternating_*.csv` and `homopolymer_*.csv`
@@ -249,6 +275,17 @@ Edit line 24 of the script if your model is in a different location.
 - **Dependencies**: pandas
 - **Note**: Fast - just looks up embeddings in dictionary
 
+### `create_scaling_splits.py`
+- **Input**: One aligned PSMILES, wPSMILES, and polyBERT dataset
+- **Output**: Nested train subsets plus fixed validation/test data and row indices
+- **Dependencies**: pandas, numpy, rdkit
+- **Note**: RDKit descriptors are calculated from canonical PSMILES rows
+
+### `generate_scaling_datasets.sh`
+- **Purpose**: Reproduce the complete PolyBench26 scaling experiment matrix
+- **Output**: `../scaling_splits/` (generated and excluded from Git)
+- **Note**: Uses five folds, base seed 42, and the documented train sizes
+
 ## Troubleshooting
 
 ### "ModuleNotFoundError: No module named 'rdkit'"
@@ -268,7 +305,7 @@ git clone https://huggingface.co/kuelumbus/polyBERT
 
 The model should be a valid SentenceTransformer model directory.
 
-### "FileNotFoundError: Cleaned_OMersBench.jsonl"
+### "FileNotFoundError: Cleaned_OMersBench_v3_final.jsonl"
 Ensure source data files are in the `./files/` directory. These should be included in the repository.
 
 ### Intermediate CSV files cluttering directory

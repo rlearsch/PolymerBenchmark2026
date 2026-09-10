@@ -1,4 +1,4 @@
-# OPoly26Benchmark
+# Polymer Bench 2026 (PolyBench26)
 
 A comprehensive benchmark for machine learning models on polymer property prediction, accompanying our peer-reviewed journal article.
 
@@ -9,7 +9,7 @@ This repository provides datasets and code to reproduce ML benchmarking results 
 ## Repository Structure
 
 ```
-OPoly26Benchmark/
+PolyBench26/
 ├── Datasets/                          # Polymer property datasets
 │   ├── Dataset_construction_scripts/  # Scripts to generate datasets
 │   ├── PSMILES/                       # Polymer SMILES notation (source + generated)
@@ -36,13 +36,13 @@ OPoly26Benchmark/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/OPoly26Benchmark.git
-cd OPoly26Benchmark
+git clone https://github.com/yourusername/PolyBench26.git
+cd PolyBench26
 ```
 
 ### 2. Generate Datasets
 
-The repository includes source data (~85MB) but requires generation of full datasets:
+The repository includes compact source data (~150MB) but requires generation of full datasets:
 
 ```bash
 cd Datasets/Dataset_construction_scripts
@@ -116,6 +116,21 @@ python EA_predictions/homopolymer_EA_4o_neg.py
 ```
 
 See [Models/README.md](Models/README.md) for detailed model documentation.
+
+### 5. Reproduce Dataset-Size Scaling Experiments (Optional)
+
+After generating the basic and polyBERT datasets, create the fixed five-fold
+scaling datasets used by every model:
+
+```bash
+cd Datasets/Dataset_construction_scripts
+bash generate_scaling_datasets.sh
+```
+
+The generated files are written to `Datasets/scaling_splits/` and excluded from
+Git. See [SCALING_EXPERIMENTS_METHODS.md](SCALING_EXPERIMENTS_METHODS.md) for the
+protocol and [SCALING_EXPERIMENTS_AGENT_GUIDE.md](SCALING_EXPERIMENTS_AGENT_GUIDE.md)
+for complete training and result-collection commands.
 
 ## Dataset Formats
 
@@ -191,7 +206,7 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 - **Polymer Genome**: DFT-computed properties 
 - **PolyMetriX**: Glass transition temperature data
 - **Coley 2022 (Vipea)**: Electron affinity and ionization potential (DFT)
-- **OPoly26**: MD simulation properties (density, Rg, Cp, refractive index)
+- **PolyBench26**: MD simulation properties (density, Rg, Cp, Cv, refractive index)
 
 ### Properties Covered
 - Glass transition temperature (Tg)
@@ -206,6 +221,8 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 
 - **[Datasets/README.md](Datasets/README.md)**: Overview of dataset formats and sources
 - **[Datasets/Dataset_construction_scripts/README.md](Datasets/Dataset_construction_scripts/README.md)**: Detailed dataset generation instructions
+- **[SCALING_EXPERIMENTS_METHODS.md](SCALING_EXPERIMENTS_METHODS.md)**: Scaling experiment methodology
+- **[SCALING_EXPERIMENTS_AGENT_GUIDE.md](SCALING_EXPERIMENTS_AGENT_GUIDE.md)**: Scaling dataset, training, and result-collection commands
 - **[Models/README.md](Models/README.md)**: Overview of all models and usage instructions
 - **[Models/polymer_chemprop/README.md](Models/polymer_chemprop/README.md)**: polymer_chemprop model details
 - **[Models/RDKit_RF/README.md](Models/RDKit_RF/README.md)**: RDKit_RF model details
@@ -221,8 +238,8 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 If you use this benchmark in your research, please cite (TBD):
 
 ```bibtex
-@article{opoly26bench,
-  title={OPoly26 Benchmark: Evaluating Polymer Representations for Machine Learning Property Prediction },
+@article{polybench26,
+  title={Polymer Bench 2026 (PolyBench26): Evaluating Polymer Representations for Machine Learning Property Prediction},
   journal={Journal Name},
   year={2026}
 }
@@ -317,7 +334,7 @@ bash setup_environment.sh
 
 **Different results across models**
 
-This is expected! While all models use consistent seeding (base seed 42 for RDKit_RF and polyBERT, pytorch_seed=0 for polymer_chemprop and polymer_periodic_graph), the actual train/test splits differ due to different RNG libraries (sklearn vs PyTorch vs chemprop). This is normal and acceptable for benchmarking. See [Models/README.md](Models/README.md) for details on random seed strategy.
+The standard model workflows use model-specific seeded splits; see [Models/README.md](Models/README.md) for details. The scaling experiments instead use explicit, shared split files so every representation sees the same chemicals; see [SCALING_EXPERIMENTS_METHODS.md](SCALING_EXPERIMENTS_METHODS.md).
 
 ## Contact
 
@@ -325,7 +342,7 @@ For questions about the benchmark or datasets, please open an issue on GitHub.
 
 ---
 
-**Note**: This is a research repository accompanying a peer-reviewed publication. Generated datasets are excluded from git to keep the repository size manageable (~85MB). All datasets can be regenerated from source data using the provided scripts.
+**Note**: This is a research repository accompanying a peer-reviewed publication. Generated datasets are excluded from Git to keep the checkout manageable. All datasets can be regenerated from the included compact sources and scripts.
 
 ## Release
 LLNL-CODE-850796

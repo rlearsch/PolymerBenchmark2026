@@ -45,8 +45,9 @@ Pre-computed polyBERT embeddings (600-dimensional vectors) from PSMILES.
 ## Repository Contents
 
 ### Included in Git
-- **Dataset_construction_scripts/files/**: Source data files (~80MB)
-  - `Cleaned_OMersBench.jsonl` (63MB)
+- **Dataset_construction_scripts/files/**: Compact source data files (~145MB)
+  - `Cleaned_OMersBench_v3_final.jsonl` (64MB; current MD source with Cv)
+  - `Cleaned_OMersBench.jsonl` (63MB; original archival source)
   - `polymer-chemprop-data/` (17MB)
 - **PSMILES/**: Small web-sourced datasets (~5MB)
   - `Polymer_Genome/` - DFT computed properties
@@ -61,6 +62,7 @@ Pre-computed polyBERT embeddings (600-dimensional vectors) from PSMILES.
 - **polyBERT/**: All polyBERT datasets (~7.3GB, optional)
 - **PolyInfo/**: Restricted dataset, excluded in all formats
 - **PSMILES_pBERT_dict.pkl**: 224MB embedding dictionary (auto-generated)
+- **scaling_splits/**: Fixed, representation-aligned folds for scaling experiments
 
 ## Quick Start: Generate Datasets
 
@@ -78,9 +80,14 @@ bash generate_rdkit_datasets.sh
 
 # 4. (Optional) Generate polyBERT (~1-3 hours, requires polyBERT model)
 bash generate_polybert_datasets.sh
+
+# 5. (Optional) Generate all dataset-size scaling splits
+bash generate_scaling_datasets.sh
 ```
 
 See [Dataset_construction_scripts/README.md](Dataset_construction_scripts/README.md) for detailed instructions.
+The exact scaling protocol and experiment matrix are documented in
+[../SCALING_EXPERIMENTS_METHODS.md](../SCALING_EXPERIMENTS_METHODS.md).
 
 ## Dataset Structure
 
@@ -95,7 +102,8 @@ Datasets/
 │   ├── MD_5000/              # ~5000 atom MD simulations
 │   ├── PolyMetriX/           # Additional Tg data
 ├── wPSMILES/                 # Same structure as PSMILES
-└── polyBERT/                 # Same structure with embeddings
+├── polyBERT/                 # Same structure with embeddings
+└── scaling_splits/           # Generated fixed folds (excluded from Git)
 ```
 
 ## Properties Covered

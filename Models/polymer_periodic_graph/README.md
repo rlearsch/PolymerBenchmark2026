@@ -31,8 +31,8 @@ The polymer_periodic_graph model is a customized version of chemprop that repres
 
 ```bash
 # Clone the repository (if not already done)
-git clone https://github.com/[username]/OPoly26Benchmark.git
-cd OPoly26Benchmark/Models/polymer_periodic_graph
+git clone https://github.com/[username]/PolyBench26.git
+cd PolyBench26/Models/polymer_periodic_graph
 
 # Set up the virtual environment
 bash setup_environment.sh

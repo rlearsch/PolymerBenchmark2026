@@ -224,4 +224,4 @@ This is a baseline Random Forest model using standard RDKit descriptors. If you 
 }
 ```
 
-For the benchmark, cite the OPoly26Benchmark paper (see main README).
+For the benchmark, cite the Polymer Bench 2026 (PolyBench26) paper (see the main README).
