@@ -1,4 +1,4 @@
-# Polymer Bench 2026 (PolyBench26)
+# Polymer Benchmark 2026 (PolyBench26)
 
 A comprehensive benchmark for machine learning models on polymer property prediction, accompanying our peer-reviewed journal article.
 
@@ -239,7 +239,7 @@ If you use this benchmark in your research, please cite (TBD):
 
 ```bibtex
 @article{polybench26,
-  title={Polymer Bench 2026 (PolyBench26): Evaluating Polymer Representations for Machine Learning Property Prediction},
+  title={Polymer Benchmark 2026 (PolyBench26): Evaluating Polymer Representations for Machine Learning Property Prediction},
   journal={Journal Name},
   year={2026}
 }

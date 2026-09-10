@@ -1,6 +1,6 @@
 # Models
 
-This directory contains implementations of various machine learning models for polymer property prediction, evaluated in Polymer Bench 2026 (PolyBench26).
+This directory contains implementations of various machine learning models for polymer property prediction, evaluated in Polymer Benchmark 2026 (PolyBench26).
 
 ## Available Models
 
@@ -230,11 +230,11 @@ Output: Property Prediction + Explanation
 
 ## Citation
 
-If you use these models, please cite the Polymer Bench 2026 (PolyBench26) paper (TBD):
+If you use these models, please cite the Polymer Benchmark 2026 (PolyBench26) paper (TBD):
 
 ```bibtex
 @article{polybench26,
-  title={Polymer Bench 2026 (PolyBench26): A Comprehensive Benchmark for Polymer Property Prediction},
+  title={Polymer Benchmark 2026 (PolyBench26): A Comprehensive Benchmark for Polymer Property Prediction},
   author={},
   journal={},
   year={2026}

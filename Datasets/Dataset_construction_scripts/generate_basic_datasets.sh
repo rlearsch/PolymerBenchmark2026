@@ -18,8 +18,8 @@ fi
 
 # Check source files
 echo "Checking source files..."
-if [ ! -f "files/Cleaned_OMersBench.jsonl" ]; then
-    echo "ERROR: files/Cleaned_OMersBench.jsonl not found"
+if [ ! -f "files/Cleaned_OMersBench_v3_final.jsonl" ]; then
+    echo "ERROR: files/Cleaned_OMersBench_v3_final.jsonl not found"
     exit 1
 fi
 if [ ! -d "files/polymer-chemprop-data" ]; then
