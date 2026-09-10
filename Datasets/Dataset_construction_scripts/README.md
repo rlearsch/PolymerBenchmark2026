@@ -99,7 +99,7 @@ regenerates RDKit descriptors from canonical PSMILES rows. See
 - `polymer-chemprop-data/` (17MB) - Coley 2022 dataset files
 
 ### Included in PSMILES Directory (Small web-sourced datasets, ~5MB total)
-- `../PSMILES/Polymer_Genome/` - DFT computed properties from Polymer Genome
+- `../PSMILES/polyVERSE/` - DFT computed properties from polyVERSE
 - `../PSMILES/OpenPoly_2025/` - Experimental/computed properties from OpenPoly
 - `../PSMILES/PolyMetriX/` - Glass transition temperature data
 
@@ -155,7 +155,7 @@ Generates: `MD_300`, `MD_5000` datasets
 python convert_web_datasets.py
 ```
 Converts small web-sourced PSMILES datasets to wPSMILES format:
-- Polymer_Genome
+- polyVERSE
 - OpenPoly_2025
 - PolyMetriX
 
@@ -230,7 +230,7 @@ Edit line 24 of the script if your model is in a different location.
 - **Usage**: Manual, run per directory as needed
 
 ### `convert_web_datasets.py`
-- **Input**: Web-sourced PSMILES datasets (Polymer_Genome, OpenPoly_2025, PolyMetriX)
+- **Input**: Web-sourced PSMILES datasets (polyVERSE, OpenPoly_2025, PolyMetriX)
 - **Output**: Corresponding wPSMILES datasets
 - **Dependencies**: pandas (via PSMILES_to_wPSMILES.py)
 - **Note**: Wrapper script that calls PSMILES_to_wPSMILES.py for each dataset

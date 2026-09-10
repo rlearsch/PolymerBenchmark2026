@@ -50,7 +50,7 @@ Pre-computed polyBERT embeddings (600-dimensional vectors) from PSMILES.
   - `Cleaned_OMersBench.jsonl` (63MB; original archival source)
   - `polymer-chemprop-data/` (17MB)
 - **PSMILES/**: Small web-sourced datasets (~5MB)
-  - `Polymer_Genome/` - DFT computed properties
+  - `polyVERSE/` - DFT computed properties
   - `OpenPoly_2025/` - Experimental/computed properties
   - `PolyMetriX/` - Glass transition temperature data
 
@@ -97,7 +97,7 @@ Datasets/
 │   ├── Vipea/           # Electron affinity & ionization potential
 │   │   ├── EA/
 │   │   └── IP/
-│   ├── Polymer_Genome/       # DFT computed properties
+│   ├── polyVERSE/            # DFT computed properties
 │   ├── MD_300/               # ~300 atom MD simulations
 │   ├── MD_5000/              # ~5000 atom MD simulations
 │   ├── PolyMetriX/           # Additional Tg data
@@ -117,8 +117,8 @@ Datasets/
 | Refractive Index | MD | All formats | MD simulations |
 | Radius of Gyration (Rg) | MD | All formats | MD simulations |
 | Heat Capacity (Cp) | MD | All formats | MD simulations |
-| Band Gap | Polymer Genome | All formats | DFT computed |
-| Dielectric Constant | Polymer Genome | All formats | DFT computed |
+| Band Gap | polyVERSE | All formats | DFT computed |
+| Dielectric Constant | polyVERSE | All formats | DFT computed |
 
 ## Dataset Sizes
 
@@ -127,7 +127,7 @@ Datasets/
 | Vipea | All | Large | ~90,000 |
 | MD_300 | All | Medium | ~20,000 |
 | MD_5000 | All | Large | ~100,000 |
-| Polymer_Genome | All | Small | ~700 |
+| polyVERSE | All | Small | ~700 |
 | PolyMetriX | All | Medium | ~8,000 |
 | PoLyInfo | None | Medium | ~15,000 |
 
@@ -145,7 +145,7 @@ Datasets/
 - **Method**: Molecular dynamics simulations
 - **Chain lengths**: 300 atoms (~30 monomers), 5000 atoms (~500 monomers)
 
-### Polymer Genome
+### polyVERSE
 - **Source**: High-throughput DFT calculations for polymer properties
 - **Properties**: Band gap, dielectric constant, electron affinity, etc.
 - **Method**: DFT calculations

@@ -203,7 +203,7 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 ## Datasets Included
 
 ### From Published Sources
-- **Polymer Genome**: DFT-computed properties 
+- **polyVERSE**: DFT-computed properties
 - **PolyMetriX**: Glass transition temperature data
 - **Coley 2022 (Vipea)**: Electron affinity and ionization potential (DFT)
 - **PolyBench26**: MD simulation properties (density, Rg, Cp, Cv, refractive index)
@@ -259,7 +259,7 @@ This repository is provided to reproduce research results. For questions or issu
 ## Acknowledgments
 
 - polyBERT model: https://huggingface.co/kuelumbus/polyBERT
-- Data sources: Polymer Genome, Coley et al., OpenPoly, PolyMetriX
+- Data sources: polyVERSE, Coley et al., OpenPoly, PolyMetriX
 - RDKit: Open-source cheminformatics toolkit
 
 ## System Requirements

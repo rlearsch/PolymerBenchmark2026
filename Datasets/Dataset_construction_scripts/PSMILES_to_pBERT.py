@@ -38,5 +38,5 @@ for dataset in dataset_list:
         pBERT_data.to_csv(out_path,index=False)
     except Exception as e:
         print(f'Error processing {dataset}: {e}')
-        #os.mkdir('./../../Datasets/polyBERT/Polymer_Genome/ionization_energy')
+        #os.mkdir('./../../Datasets/polyBERT/polyVERSE/ionization_energy')
         #pBERT_data.to_csv(out_path,index=False)

@@ -87,8 +87,8 @@ This allows for comparison of different prompt engineering strategies and model 
 ## Dataset Sources
 
 The scripts use datasets from:
-- `./../../Datasets/PSMILES/Polymer_Genome/electron_affinity/electron_affinity_data_polymers_v4.csv`
-- `./../../Datasets/PSMILES/Polymer_Genome/ionization_energy/ionization_energy_data_polymers_v4.csv`
+- `./../../Datasets/PSMILES/polyVERSE/electron_affinity/electron_affinity_data_polymers_v4.csv`
+- `./../../Datasets/PSMILES/polyVERSE/ionization_energy/ionization_energy_data_polymers_v4.csv`
 
 ## Requirements
 

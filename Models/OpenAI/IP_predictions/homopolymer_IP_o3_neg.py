@@ -26,7 +26,7 @@ def construct_prompt(PSMILES, phyiscal_property, units_requested, use_common_nam
 
 
 IP_psmiles = pd.read_csv(
-    './../../Datasets/PSMILES/Polymer_Genome/ionization_energy/ionization_energy_data_polymers_v4.csv', 
+    './../../Datasets/PSMILES/polyVERSE/ionization_energy/ionization_energy_data_polymers_v4.csv',
 )
 full_reply_homopolymer_IP = {}
 value_homopolymer_IP = {}
