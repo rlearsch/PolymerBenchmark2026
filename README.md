@@ -73,11 +73,11 @@ For polyBERT embedding generation:
 
 ```bash
 # From repository root
-mkdir -p Models
-cd Models
-git clone https://huggingface.co/kuelumbus/polyBERT
-cd ..
+git clone https://huggingface.co/kuelumbus/polyBERT ../polyBERT
 ```
+
+This external model checkout is separate from `Models/polyBERT/`, which contains
+the PolyBench26 feed-forward training code.
 
 ### 4. Train Models
 
@@ -219,6 +219,9 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 
 ## Documentation
 
+- **[AGENTS.md](AGENTS.md)**: Repository context, invariants, and safe operating rules for LLM agents
+- **[docs/REPRODUCING_RESULTS.md](docs/REPRODUCING_RESULTS.md)**: End-to-end paper-results reconstruction runbook
+- **[docs/ADDING_A_MODEL.md](docs/ADDING_A_MODEL.md)**: Shared-split contract for benchmarking a new model
 - **[Datasets/README.md](Datasets/README.md)**: Overview of dataset formats and sources
 - **[Datasets/Dataset_construction_scripts/README.md](Datasets/Dataset_construction_scripts/README.md)**: Detailed dataset generation instructions
 - **[SCALING_EXPERIMENTS_METHODS.md](SCALING_EXPERIMENTS_METHODS.md)**: Scaling experiment methodology
@@ -292,11 +295,9 @@ Run `generate_basic_datasets.sh` before optional generation steps.
 
 **polyBERT generation fails**
 
-Ensure you've downloaded the polyBERT model to `Models/polyBERT/`:
+Ensure you've downloaded the external polyBERT model beside the repository:
 ```bash
-mkdir -p Models
-cd Models
-git clone https://huggingface.co/kuelumbus/polyBERT
+git clone https://huggingface.co/kuelumbus/polyBERT ../polyBERT
 ```
 
 **Out of memory during generation**

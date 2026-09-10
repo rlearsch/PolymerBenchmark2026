@@ -13,7 +13,7 @@ These scripts convert source data into four dataset formats:
 ## Prerequisites
 
 - **Python 3.10+** (required)
-- **For polyBERT generation**: Local copy of polyBERT model at `../../Models/polyBERT/`
+- **For polyBERT generation**: External polyBERT checkout at `../../../polyBERT/` (a sibling of this repository)
 
 ## Quick Start
 
@@ -58,7 +58,7 @@ Generates:
 
 **Prerequisites:**
 - PSMILES datasets must be generated first
-- polyBERT model must be at `../../Models/polyBERT/`
+- External polyBERT model must be at `../../../polyBERT/`
 - Requires ~16GB RAM
 - Takes 1-3 hours depending on system
 
@@ -195,9 +195,9 @@ python create_PSMILES_pBERT_dictionary.py
 python PSMILES_to_pBERT.py
 ```
 
-**Important**: `create_PSMILES_pBERT_dictionary.py` requires polyBERT model at:
+**Important**: `create_PSMILES_pBERT_dictionary.py` requires the external polyBERT model at:
 ```
-../../Models/polyBERT/
+../../../polyBERT/
 ```
 
 Download from: https://huggingface.co/kuelumbus/polyBERT
@@ -266,7 +266,7 @@ Edit line 24 of the script if your model is in a different location.
 - **Input**: All CSV files in `../PSMILES/`, existing `pSMILES_pBERT_dict.pkl`
 - **Output**: Updated `files/PSMILES_pBERT_dict.pkl`
 - **Dependencies**: sentence-transformers, torch
-- **Requires**: polyBERT model at `../../Models/polyBERT/`
+- **Requires**: External polyBERT model at `../../../polyBERT/`
 - **Note**: Incremental - only processes new SMILES not in dictionary
 
 ### `PSMILES_to_pBERT.py`
@@ -295,15 +295,14 @@ source .venv/bin/activate
 ```
 
 ### "ERROR: polyBERT model not found"
-Download the polyBERT model and place it at `../../Models/polyBERT/`:
+Download the polyBERT model beside the PolyBench26 repository:
 ```bash
 # From the repository root
-mkdir -p Models
-cd Models
-git clone https://huggingface.co/kuelumbus/polyBERT
+git clone https://huggingface.co/kuelumbus/polyBERT ../polyBERT
 ```
 
-The model should be a valid SentenceTransformer model directory.
+The sibling `../polyBERT/` directory should be a valid SentenceTransformer
+model. It is separate from the repository's `Models/polyBERT/` trainer.
 
 ### "FileNotFoundError: Cleaned_OMersBench_v3_final.jsonl"
 Ensure source data files are in the `./files/` directory. These should be included in the repository.
