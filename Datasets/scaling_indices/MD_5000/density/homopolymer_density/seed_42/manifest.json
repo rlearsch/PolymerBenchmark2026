@@ -1,0 +1,60 @@
+{
+  "canonical_sha256": "b8a576b9fa2749cf943940367147b05baf01d8cd3e48cbaf9431b04d801b34b7",
+  "canonical_source": "PSMILES/MD_5000/density/homopolymer_density.csv",
+  "dataset": "MD_5000",
+  "file": "homopolymer_density.csv",
+  "folds": [
+    {
+      "fold": 0,
+      "indices_file": "fold_00.npz",
+      "n_test": 180,
+      "n_train_pool": 1440,
+      "n_val": 180,
+      "seed": 42
+    },
+    {
+      "fold": 1,
+      "indices_file": "fold_01.npz",
+      "n_test": 180,
+      "n_train_pool": 1440,
+      "n_val": 180,
+      "seed": 43
+    },
+    {
+      "fold": 2,
+      "indices_file": "fold_02.npz",
+      "n_test": 180,
+      "n_train_pool": 1440,
+      "n_val": 180,
+      "seed": 44
+    },
+    {
+      "fold": 3,
+      "indices_file": "fold_03.npz",
+      "n_test": 180,
+      "n_train_pool": 1440,
+      "n_val": 180,
+      "seed": 45
+    },
+    {
+      "fold": 4,
+      "indices_file": "fold_04.npz",
+      "n_test": 180,
+      "n_train_pool": 1440,
+      "n_val": 180,
+      "seed": 46
+    }
+  ],
+  "n_rows": 1800,
+  "num_folds": 5,
+  "property": "density",
+  "schema_version": 1,
+  "seed": 42,
+  "target_column": "density",
+  "test_frac": 0.1,
+  "train_sizes": [
+    300,
+    1000
+  ],
+  "val_frac": 0.1
+}

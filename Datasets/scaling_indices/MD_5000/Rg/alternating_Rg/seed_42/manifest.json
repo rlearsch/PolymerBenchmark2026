@@ -1,0 +1,62 @@
+{
+  "canonical_sha256": "9d7ae9952ac8aeba415dae27b6262ff6d4cfc52afa2ae7c60e4cb593e0d18849",
+  "canonical_source": "PSMILES/MD_5000/Rg/alternating_Rg.csv",
+  "dataset": "MD_5000",
+  "file": "alternating_Rg.csv",
+  "folds": [
+    {
+      "fold": 0,
+      "indices_file": "fold_00.npz",
+      "n_test": 2780,
+      "n_train_pool": 22242,
+      "n_val": 2780,
+      "seed": 42
+    },
+    {
+      "fold": 1,
+      "indices_file": "fold_01.npz",
+      "n_test": 2780,
+      "n_train_pool": 22242,
+      "n_val": 2780,
+      "seed": 43
+    },
+    {
+      "fold": 2,
+      "indices_file": "fold_02.npz",
+      "n_test": 2780,
+      "n_train_pool": 22242,
+      "n_val": 2780,
+      "seed": 44
+    },
+    {
+      "fold": 3,
+      "indices_file": "fold_03.npz",
+      "n_test": 2780,
+      "n_train_pool": 22242,
+      "n_val": 2780,
+      "seed": 45
+    },
+    {
+      "fold": 4,
+      "indices_file": "fold_04.npz",
+      "n_test": 2780,
+      "n_train_pool": 22242,
+      "n_val": 2780,
+      "seed": 46
+    }
+  ],
+  "n_rows": 27802,
+  "num_folds": 5,
+  "property": "Rg",
+  "schema_version": 1,
+  "seed": 42,
+  "target_column": "Rg",
+  "test_frac": 0.1,
+  "train_sizes": [
+    300,
+    1000,
+    3000,
+    10000
+  ],
+  "val_frac": 0.1
+}

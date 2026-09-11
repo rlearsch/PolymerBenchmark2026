@@ -1,0 +1,61 @@
+{
+  "canonical_sha256": "b6d2b9f83419c94c5b24200b0288d9a7b53256931d87ffc1533c8884119a09d3",
+  "canonical_source": "PSMILES/PolyMetriX/Tg/Tg.csv",
+  "dataset": "PolyMetriX",
+  "file": "Tg.csv",
+  "folds": [
+    {
+      "fold": 0,
+      "indices_file": "fold_00.npz",
+      "n_test": 737,
+      "n_train_pool": 5893,
+      "n_val": 737,
+      "seed": 42
+    },
+    {
+      "fold": 1,
+      "indices_file": "fold_01.npz",
+      "n_test": 737,
+      "n_train_pool": 5893,
+      "n_val": 737,
+      "seed": 43
+    },
+    {
+      "fold": 2,
+      "indices_file": "fold_02.npz",
+      "n_test": 737,
+      "n_train_pool": 5893,
+      "n_val": 737,
+      "seed": 44
+    },
+    {
+      "fold": 3,
+      "indices_file": "fold_03.npz",
+      "n_test": 737,
+      "n_train_pool": 5893,
+      "n_val": 737,
+      "seed": 45
+    },
+    {
+      "fold": 4,
+      "indices_file": "fold_04.npz",
+      "n_test": 737,
+      "n_train_pool": 5893,
+      "n_val": 737,
+      "seed": 46
+    }
+  ],
+  "n_rows": 7367,
+  "num_folds": 5,
+  "property": "Tg",
+  "schema_version": 1,
+  "seed": 42,
+  "target_column": "Tg_K",
+  "test_frac": 0.1,
+  "train_sizes": [
+    300,
+    1000,
+    3000
+  ],
+  "val_frac": 0.1
+}

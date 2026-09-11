@@ -1,0 +1,60 @@
+{
+  "canonical_sha256": "a4ab4e8767903ce93c2250b7c049a1217643dc92e6943609f4e0c706fae0430e",
+  "canonical_source": "PSMILES/MD_5000/Cv/homopolymer_Cv.csv",
+  "dataset": "MD_5000",
+  "file": "homopolymer_Cv.csv",
+  "folds": [
+    {
+      "fold": 0,
+      "indices_file": "fold_00.npz",
+      "n_test": 179,
+      "n_train_pool": 1430,
+      "n_val": 179,
+      "seed": 42
+    },
+    {
+      "fold": 1,
+      "indices_file": "fold_01.npz",
+      "n_test": 179,
+      "n_train_pool": 1430,
+      "n_val": 179,
+      "seed": 43
+    },
+    {
+      "fold": 2,
+      "indices_file": "fold_02.npz",
+      "n_test": 179,
+      "n_train_pool": 1430,
+      "n_val": 179,
+      "seed": 44
+    },
+    {
+      "fold": 3,
+      "indices_file": "fold_03.npz",
+      "n_test": 179,
+      "n_train_pool": 1430,
+      "n_val": 179,
+      "seed": 45
+    },
+    {
+      "fold": 4,
+      "indices_file": "fold_04.npz",
+      "n_test": 179,
+      "n_train_pool": 1430,
+      "n_val": 179,
+      "seed": 46
+    }
+  ],
+  "n_rows": 1788,
+  "num_folds": 5,
+  "property": "Cv",
+  "schema_version": 1,
+  "seed": 42,
+  "target_column": "Cv",
+  "test_frac": 0.1,
+  "train_sizes": [
+    300,
+    1000
+  ],
+  "val_frac": 0.1
+}

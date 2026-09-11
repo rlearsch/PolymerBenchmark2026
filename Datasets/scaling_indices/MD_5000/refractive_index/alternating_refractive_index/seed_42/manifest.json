@@ -1,0 +1,62 @@
+{
+  "canonical_sha256": "c2f63ecebb1edff22cb94aea8a8caeb61d7c526596870e83845574b4b4f95b38",
+  "canonical_source": "PSMILES/MD_5000/refractive_index/alternating_refractive_index.csv",
+  "dataset": "MD_5000",
+  "file": "alternating_refractive_index.csv",
+  "folds": [
+    {
+      "fold": 0,
+      "indices_file": "fold_00.npz",
+      "n_test": 2651,
+      "n_train_pool": 21207,
+      "n_val": 2651,
+      "seed": 42
+    },
+    {
+      "fold": 1,
+      "indices_file": "fold_01.npz",
+      "n_test": 2651,
+      "n_train_pool": 21207,
+      "n_val": 2651,
+      "seed": 43
+    },
+    {
+      "fold": 2,
+      "indices_file": "fold_02.npz",
+      "n_test": 2651,
+      "n_train_pool": 21207,
+      "n_val": 2651,
+      "seed": 44
+    },
+    {
+      "fold": 3,
+      "indices_file": "fold_03.npz",
+      "n_test": 2651,
+      "n_train_pool": 21207,
+      "n_val": 2651,
+      "seed": 45
+    },
+    {
+      "fold": 4,
+      "indices_file": "fold_04.npz",
+      "n_test": 2651,
+      "n_train_pool": 21207,
+      "n_val": 2651,
+      "seed": 46
+    }
+  ],
+  "n_rows": 26509,
+  "num_folds": 5,
+  "property": "refractive_index",
+  "schema_version": 1,
+  "seed": 42,
+  "target_column": "refractive_index",
+  "test_frac": 0.1,
+  "train_sizes": [
+    300,
+    1000,
+    3000,
+    10000
+  ],
+  "val_frac": 0.1
+}

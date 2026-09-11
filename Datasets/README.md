@@ -45,14 +45,14 @@ Pre-computed polyBERT embeddings (600-dimensional vectors) from PSMILES.
 ## Repository Contents
 
 ### Included in Git
-- **Dataset_construction_scripts/files/**: Compact source data files (~145MB)
+- **Dataset_construction_scripts/files/**: Compact source data files (~81MB)
   - `Cleaned_OMersBench_v3_final.jsonl` (64MB; current MD source with Cv)
-  - `Cleaned_OMersBench.jsonl` (63MB; original archival source)
   - `polymer-chemprop-data/` (17MB)
-- **PSMILES/**: Small web-sourced datasets (~5MB)
-  - `polyVERSE/` - DFT computed properties
+- **PSMILES/**: Small web-sourced datasets
+  - `polyVERSE/` - DFT-computed electron affinity and ionization energy
   - `OpenPoly_2025/` - Experimental/computed properties
   - `PolyMetriX/` - Glass transition temperature data
+- **scaling_indices/**: Published canonical folds for scaling experiments (~2MB)
 
 ### Generated via Scripts (Excluded from Git)
 - **PSMILES/**: Large generated datasets
@@ -63,6 +63,10 @@ Pre-computed polyBERT embeddings (600-dimensional vectors) from PSMILES.
 - **PolyInfo/**: Restricted dataset, excluded in all formats
 - **PSMILES_pBERT_dict.pkl**: 224MB embedding dictionary (auto-generated)
 - **scaling_splits/**: Fixed, representation-aligned folds for scaling experiments
+
+The compact `scaling_indices/` package is tracked; the fully materialized
+`scaling_splits/` tree is generated and excluded because it duplicates each
+representation at every fold and training size.
 
 ## Quick Start: Generate Datasets
 
@@ -88,6 +92,8 @@ bash generate_scaling_datasets.sh
 See [Dataset_construction_scripts/README.md](Dataset_construction_scripts/README.md) for detailed instructions.
 The exact scaling protocol and experiment matrix are documented in
 [../SCALING_EXPERIMENTS_METHODS.md](../SCALING_EXPERIMENTS_METHODS.md).
+Tracked source requirements and the scaling condition matrix are also recorded
+in [`dataset_manifest.json`](dataset_manifest.json) and validated on every commit.
 
 ## Dataset Structure
 
@@ -103,6 +109,7 @@ Datasets/
 │   ├── PolyMetriX/           # Additional Tg data
 ├── wPSMILES/                 # Same structure as PSMILES
 ├── polyBERT/                 # Same structure with embeddings
+├── scaling_indices/          # Published canonical row indices
 └── scaling_splits/           # Generated fixed folds (excluded from Git)
 ```
 
@@ -117,8 +124,6 @@ Datasets/
 | Refractive Index | MD | All formats | MD simulations |
 | Radius of Gyration (Rg) | MD | All formats | MD simulations |
 | Heat Capacity (Cp) | MD | All formats | MD simulations |
-| Band Gap | polyVERSE | All formats | DFT computed |
-| Dielectric Constant | polyVERSE | All formats | DFT computed |
 
 ## Dataset Sizes
 
@@ -147,7 +152,7 @@ Datasets/
 
 ### polyVERSE
 - **Source**: High-throughput DFT calculations for polymer properties
-- **Properties**: Band gap, dielectric constant, electron affinity, etc.
+- **Properties included here**: Electron affinity and ionization energy
 - **Method**: DFT calculations
 
 ### PoLyInfo

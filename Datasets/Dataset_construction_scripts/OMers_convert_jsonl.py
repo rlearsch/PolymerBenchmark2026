@@ -17,7 +17,6 @@ from polymer_conversions import (
 
 # Use path relative to this script's location
 script_dir = Path(__file__).parent
-#filename = str(script_dir / "files/Cleaned_OMersBench.jsonl")
 filename = str(script_dir / "files/Cleaned_OMersBench_v3_final.jsonl")
 
 

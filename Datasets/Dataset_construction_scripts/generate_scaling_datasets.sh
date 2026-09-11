@@ -48,7 +48,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ ! -x "$PYTHON" ]]; then
+if [[ "$DRY_RUN" -eq 0 && ! -x "$PYTHON" ]]; then
   echo "ERROR: dataset environment not found: $PYTHON" >&2
   echo "Run: bash $SCRIPT_DIR/setup_environments.sh" >&2
   exit 1

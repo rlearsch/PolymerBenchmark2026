@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "required_sources": [
+    {
+      "path": "Datasets/Dataset_construction_scripts/files/Cleaned_OMersBench_v3_final.jsonl",
+      "format": "jsonl",
+      "required_input_keys": ["copolymer_architecture", "n_chains", "smiles_list"],
+      "required_output_keys": ["Cp", "Rg", "density", "refractive_index"],
+      "required_output_keys_anywhere": ["Cv"]
+    },
+    {
+      "path": "Datasets/Dataset_construction_scripts/files/polymer-chemprop-data/dataset.csv",
+      "format": "csv",
+      "required_columns": ["poly_id", "poly_type", "EA (eV)", "IP (eV)"]
+    },
+    {
+      "path": "Datasets/Dataset_construction_scripts/files/polymer-chemprop-data/dataset-poly_chemprop.csv",
+      "format": "csv",
+      "required_columns": ["poly_chemprop_input", "EA vs SHE (eV)", "IP vs SHE (eV)"]
+    },
+    {
+      "path": "Datasets/PSMILES/polyVERSE/electron_affinity/electron_affinity_data_polymers_v4.csv",
+      "format": "csv",
+      "required_columns": ["smiles", "electron_aff"]
+    },
+    {
+      "path": "Datasets/PSMILES/polyVERSE/ionization_energy/ionization_energy_data_polymers_v4.csv",
+      "format": "csv",
+      "required_columns": ["smiles", "ionization_energy"]
+    },
+    {
+      "path": "Datasets/PSMILES/PolyMetriX/Tg/Tg.csv",
+      "format": "csv",
+      "required_columns": ["smiles", "Tg_K"]
+    }
+  ],
+  "generated_paths_that_must_be_ignored": [
+    "Datasets/wPSMILES/.polybench26-test",
+    "Datasets/RDKit_descriptors/.polybench26-test",
+    "Datasets/polyBERT/.polybench26-test",
+    "Datasets/scaling_splits/.polybench26-test",
+    "Models/RDKit_RF/scaling_results/.polybench26-test"
+  ],
+  "web_datasets": {
+    "required": ["polyVERSE", "PolyMetriX"],
+    "optional": ["OpenPoly_2025"]
+  },
+  "published_scaling_indices": {
+    "root": "Datasets/scaling_indices",
+    "schema_version": 1,
+    "seed": 42,
+    "num_folds": 5
+  },
+  "scaling_experiments": [
+    {"dataset": "MD_5000", "property": "Cp", "file": "alternating_Cp.csv", "train_sizes": [300, 1000, 3000, 10000]},
+    {"dataset": "MD_5000", "property": "density", "file": "alternating_density.csv", "train_sizes": [300, 1000, 3000, 10000]},
+    {"dataset": "MD_5000", "property": "refractive_index", "file": "alternating_refractive_index.csv", "train_sizes": [300, 1000, 3000, 10000]},
+    {"dataset": "MD_5000", "property": "Rg", "file": "alternating_Rg.csv", "train_sizes": [300, 1000, 3000, 10000]},
+    {"dataset": "MD_5000", "property": "Cp", "file": "homopolymer_Cp.csv", "train_sizes": [300, 1000]},
+    {"dataset": "MD_5000", "property": "Cv", "file": "homopolymer_Cv.csv", "train_sizes": [300, 1000]},
+    {"dataset": "MD_5000", "property": "density", "file": "homopolymer_density.csv", "train_sizes": [300, 1000]},
+    {"dataset": "MD_5000", "property": "refractive_index", "file": "homopolymer_refractive_index.csv", "train_sizes": [300, 1000]},
+    {"dataset": "MD_5000", "property": "Rg", "file": "homopolymer_Rg.csv", "train_sizes": [300, 1000]},
+    {"dataset": "PolyMetriX", "property": "Tg", "file": "Tg.csv", "train_sizes": [300, 1000, 3000]}
+  ]
+}

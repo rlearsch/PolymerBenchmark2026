@@ -14,24 +14,24 @@ Source datasets (in PSMILES/, tracked in git):
 
 import subprocess
 import sys
+import argparse
 from pathlib import Path
 
 # Use paths relative to this script's location
 script_dir = Path(__file__).parent
+DEFAULT_DATASETS = ("polyVERSE", "OpenPoly_2025", "PolyMetriX")
 
-def convert_web_datasets():
+def convert_web_datasets(
+    psmiles_root=None,
+    wpsmiles_root=None,
+    datasets=DEFAULT_DATASETS,
+    strict_missing=False,
+):
     """
     Convert web-sourced datasets from PSMILES to wPSMILES using PSMILES_to_wPSMILES.py
     """
-    psmiles_root = script_dir / '../../Datasets/PSMILES'
-    wpsmiles_root = script_dir / '../../Datasets/wPSMILES'
-    
-    # Directories to process
-    datasets_to_convert = [
-        'polyVERSE',
-        'OpenPoly_2025',
-        'PolyMetriX',
-    ]
+    psmiles_root = Path(psmiles_root or script_dir / '../../Datasets/PSMILES').resolve()
+    wpsmiles_root = Path(wpsmiles_root or script_dir / '../../Datasets/wPSMILES').resolve()
     
     print("=" * 60)
     print("Converting Web-Sourced Datasets to wPSMILES")
@@ -40,13 +40,18 @@ def convert_web_datasets():
     
     success = True
     
-    for dataset_name in datasets_to_convert:
+    for dataset_name in datasets:
         input_dir = psmiles_root / dataset_name
         output_dir = wpsmiles_root / dataset_name
         
         # Check if input exists
         if not input_dir.exists():
-            print(f"⚠ Skipping {dataset_name} (not found at {input_dir})")
+            message = f"Missing {dataset_name} source directory: {input_dir}"
+            if strict_missing:
+                print(f"✗ {message}", file=sys.stderr)
+                success = False
+            else:
+                print(f"⚠ Skipping {message}")
             continue
         
         print(f"Converting: {dataset_name}")
@@ -87,6 +92,25 @@ def convert_web_datasets():
     return success
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Convert web PSMILES datasets to wPSMILES.")
+    parser.add_argument("--psmiles-root", type=Path, default=None)
+    parser.add_argument("--wpsmiles-root", type=Path, default=None)
+    parser.add_argument("--datasets", nargs="+", default=list(DEFAULT_DATASETS))
+    parser.add_argument(
+        "--strict-missing",
+        action="store_true",
+        help="Fail when any requested dataset directory is missing.",
+    )
+    return parser.parse_args()
+
+
 if __name__ == '__main__':
-    success = convert_web_datasets()
+    args = parse_args()
+    success = convert_web_datasets(
+        psmiles_root=args.psmiles_root,
+        wpsmiles_root=args.wpsmiles_root,
+        datasets=args.datasets,
+        strict_missing=args.strict_missing,
+    )
     sys.exit(0 if success else 1)

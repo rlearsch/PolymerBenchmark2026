@@ -69,20 +69,19 @@ def process_file(
 
     # Read
     df = pd.read_csv(in_path, encoding=encoding, sep=_sep, low_memory=False)
-    df_in = df.drop_duplicates('smiles')
-    #df_in = df.copy()
-    #if this changed the df, save it 
-    if not df.equals(df_in):
-        df_in.to_csv(in_path, index=False)
+    if "smiles" not in df.columns:
+        raise ValueError(f"Missing required 'smiles' column: {in_path}")
+    # Source datasets are immutable inputs. Deduplicate only the generated copy.
+    df_in = df.drop_duplicates("smiles").copy()
     # Transform
     df_out = df_in
-    df_out.smiles = df_out.smiles.apply(PSMILES_to_wPSMILES)
+    df_out["smiles"] = df_out["smiles"].apply(PSMILES_to_wPSMILES)
     #df_out['polymer_psmiles_guess'] = df_out.polymer_psmiles_guess.apply(PSMILES_to_wPSMILES)
 
     # Write (compression inferred from extension)
     df_out.to_csv(out_path, index=False, encoding=encoding)
 
-def main():
+def main() -> int:
     ap = argparse.ArgumentParser(description="Recursively transform CSVs with pandas.")
     ap.add_argument("input_dir", type=Path, help="Directory to crawl for CSVs")
     ap.add_argument("output_dir", type=Path, help="Directory to write transformed CSVs")
@@ -97,7 +96,7 @@ def main():
 
     if not in_root.exists() or not in_root.is_dir():
         print(f"ERROR: Input directory not found: {in_root}", file=sys.stderr)
-        sys.exit(1)
+        return 1
 
     # Walk and filter CSV-like files
     files = [p for p in in_root.rglob("*") if p.is_file() and is_csv_like(p)]
@@ -106,7 +105,7 @@ def main():
 
     if not files:
         print("No matching CSV files found.")
-        return
+        return 0
 
     errors = 0
     for f in files:
@@ -127,9 +126,11 @@ def main():
 
     if errors:
         print(f"Completed with {errors} error(s).")
+        return 1
     else:
         print("All done.")
+        return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

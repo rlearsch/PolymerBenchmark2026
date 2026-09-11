@@ -95,11 +95,10 @@ regenerates RDKit descriptors from canonical PSMILES rows. See
 - `Cleaned_OMersBench_v3_final.jsonl` (64MB) - Current OMersBench source, including Cv and **additional molecular dynamics parameters**
   - Includes: Degree of polymerization (DP), molecular weight (Mn, MW), number of chains, atom counts, and more
   - Users needing these parameters should parse this source file directly
-- `Cleaned_OMersBench.jsonl` (63MB) - Original archival OMersBench source without Cv
 - `polymer-chemprop-data/` (17MB) - Coley 2022 dataset files
 
 ### Included in PSMILES Directory (Small web-sourced datasets, ~5MB total)
-- `../PSMILES/polyVERSE/` - DFT computed properties from polyVERSE
+- `../PSMILES/polyVERSE/` - DFT-computed electron affinity and ionization energy from polyVERSE
 - `../PSMILES/OpenPoly_2025/` - Experimental/computed properties from OpenPoly
 - `../PSMILES/PolyMetriX/` - Glass transition temperature data
 

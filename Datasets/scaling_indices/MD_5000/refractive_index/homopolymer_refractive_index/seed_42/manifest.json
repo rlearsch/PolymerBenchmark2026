@@ -1,0 +1,60 @@
+{
+  "canonical_sha256": "d2089e5519f07a451cd1eab05980b88f4007a4347d2a2c87c0a8e4b7700a814c",
+  "canonical_source": "PSMILES/MD_5000/refractive_index/homopolymer_refractive_index.csv",
+  "dataset": "MD_5000",
+  "file": "homopolymer_refractive_index.csv",
+  "folds": [
+    {
+      "fold": 0,
+      "indices_file": "fold_00.npz",
+      "n_test": 172,
+      "n_train_pool": 1371,
+      "n_val": 172,
+      "seed": 42
+    },
+    {
+      "fold": 1,
+      "indices_file": "fold_01.npz",
+      "n_test": 172,
+      "n_train_pool": 1371,
+      "n_val": 172,
+      "seed": 43
+    },
+    {
+      "fold": 2,
+      "indices_file": "fold_02.npz",
+      "n_test": 172,
+      "n_train_pool": 1371,
+      "n_val": 172,
+      "seed": 44
+    },
+    {
+      "fold": 3,
+      "indices_file": "fold_03.npz",
+      "n_test": 172,
+      "n_train_pool": 1371,
+      "n_val": 172,
+      "seed": 45
+    },
+    {
+      "fold": 4,
+      "indices_file": "fold_04.npz",
+      "n_test": 172,
+      "n_train_pool": 1371,
+      "n_val": 172,
+      "seed": 46
+    }
+  ],
+  "n_rows": 1715,
+  "num_folds": 5,
+  "property": "refractive_index",
+  "schema_version": 1,
+  "seed": 42,
+  "target_column": "refractive_index",
+  "test_frac": 0.1,
+  "train_sizes": [
+    300,
+    1000
+  ],
+  "val_frac": 0.1
+}

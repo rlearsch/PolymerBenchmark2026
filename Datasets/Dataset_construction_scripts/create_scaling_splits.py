@@ -16,6 +16,7 @@ from typing import Iterable
 
 import numpy as np
 import pandas as pd
+from manage_scaling_indices import sha256_file, validate_partition
 
 try:
     from rdkit import Chem
@@ -62,6 +63,15 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=repo_root() / "Datasets" / "scaling_splits",
         help="Directory where scaling split datasets are written.",
+    )
+    parser.add_argument(
+        "--indices-root",
+        type=Path,
+        default=repo_root() / "Datasets" / "scaling_indices",
+        help=(
+            "Root containing published compact indices. A matching package is used "
+            "automatically; otherwise indices are generated from --seed."
+        ),
     )
     parser.add_argument(
         "--representations",
@@ -169,7 +179,15 @@ def sanitize_descriptors(features: pd.DataFrame) -> pd.DataFrame:
 
 def build_rdkit_frame(psmiles: pd.DataFrame, target_col: str) -> pd.DataFrame:
     print(f"Generating RDKit descriptors from {len(psmiles)} canonical PSMILES rows...")
-    features = psmiles["smiles"].apply(calc_all_descriptors).apply(pd.Series)
+    descriptor_rows = psmiles["smiles"].apply(calc_all_descriptors)
+    invalid_rows = [int(index) for index, values in descriptor_rows.items() if not values]
+    if invalid_rows:
+        preview = invalid_rows[:10]
+        raise ValueError(
+            "RDKit could not parse canonical PSMILES rows "
+            f"{preview}{'...' if len(invalid_rows) > len(preview) else ''}."
+        )
+    features = descriptor_rows.apply(pd.Series)
     features = sanitize_descriptors(features)
     return pd.concat([features, psmiles[[target_col]].reset_index(drop=True)], axis=1)
 
@@ -217,10 +235,77 @@ def output_base(args: argparse.Namespace) -> Path:
     return args.output_root / args.dataset / args.property / Path(args.file).stem / f"seed_{args.seed}"
 
 
+def load_published_indices(
+    args: argparse.Namespace,
+    psmiles_path: Path,
+    n_rows: int,
+    target_col: str,
+) -> tuple[dict, list[tuple[np.ndarray, np.ndarray, np.ndarray]]] | None:
+    base = (
+        args.indices_root
+        / args.dataset
+        / args.property
+        / Path(args.file).stem
+        / f"seed_{args.seed}"
+    )
+    manifest_path = base / "manifest.json"
+    if not manifest_path.exists():
+        return None
+
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    expected = {
+        "dataset": args.dataset,
+        "property": args.property,
+        "file": args.file,
+        "target_column": target_col,
+        "n_rows": n_rows,
+        "seed": args.seed,
+        "num_folds": args.num_folds,
+    }
+    for key, value in expected.items():
+        if manifest.get(key) != value:
+            raise ValueError(
+                f"Published index manifest {manifest_path} has {key}={manifest.get(key)!r}; "
+                f"expected {value!r}."
+            )
+    if not np.isclose(manifest["val_frac"], args.val_frac) or not np.isclose(
+        manifest["test_frac"], args.test_frac
+    ):
+        raise ValueError(f"Published index fractions do not match requested fractions: {manifest_path}")
+    if not set(args.train_sizes) <= set(manifest["train_sizes"]):
+        raise ValueError(f"Requested train sizes are absent from {manifest_path}")
+    if sha256_file(psmiles_path) != manifest["canonical_sha256"]:
+        raise ValueError(f"Canonical PSMILES checksum does not match {manifest_path}")
+
+    folds = []
+    if len(manifest["folds"]) != args.num_folds:
+        raise ValueError(f"Published fold count does not match {args.num_folds}: {manifest_path}")
+    for expected_fold, fold_record in enumerate(manifest["folds"]):
+        if fold_record.get("fold") != expected_fold:
+            raise ValueError(
+                f"Published fold record {expected_fold} has fold="
+                f"{fold_record.get('fold')!r}: {manifest_path}"
+            )
+        if fold_record.get("seed") != args.seed + expected_fold:
+            raise ValueError(
+                f"Published fold {expected_fold} seed does not match "
+                f"{args.seed + expected_fold}: {manifest_path}"
+            )
+        archive_path = base / fold_record["indices_file"]
+        with np.load(archive_path, allow_pickle=False) as archive:
+            train_pool = archive["train_pool"].astype(np.int64, copy=True)
+            val = archive["val"].astype(np.int64, copy=True)
+            test = archive["test"].astype(np.int64, copy=True)
+        validate_partition(train_pool, val, test, n_rows, str(archive_path))
+        folds.append((train_pool, val, test))
+    return manifest, folds
+
+
 def main() -> None:
     args = parse_args()
     args.datasets_root = args.datasets_root.resolve()
     args.output_root = args.output_root.resolve()
+    args.indices_root = args.indices_root.resolve()
     args.train_sizes = sorted(set(args.train_sizes))
     if not args.train_sizes or any(size <= 0 for size in args.train_sizes):
         raise ValueError("Training sizes must be positive integers.")
@@ -231,6 +316,10 @@ def main() -> None:
     psmiles = frames["PSMILES"]
     n_rows = len(psmiles)
     max_train_size = max(args.train_sizes)
+    psmiles_path = dataset_path(
+        args.datasets_root, "PSMILES", args.dataset, args.property, args.file
+    )
+    published = load_published_indices(args, psmiles_path, n_rows, target_col)
 
     rdkit_frame = None
     if "RDKit_descriptors" in args.representations:
@@ -250,9 +339,10 @@ def main() -> None:
         "train_sizes": args.train_sizes,
         "representations": args.representations,
         "n_rows": n_rows,
+        "split_source": "published_indices" if published else "generated_from_seed",
         "splits": [],
         "source_paths": {
-            rep: str(dataset_path(args.datasets_root, rep, args.dataset, args.property, args.file))
+            rep: str(Path(rep) / args.dataset / args.property / args.file)
             for rep in args.representations
             if rep != "RDKit_descriptors"
         },
@@ -264,7 +354,12 @@ def main() -> None:
     }
 
     for fold in range(args.num_folds):
-        train_pool, val, test = split_indices(n_rows, fold, args.seed, args.val_frac, args.test_frac)
+        if published:
+            train_pool, val, test = published[1][fold]
+        else:
+            train_pool, val, test = split_indices(
+                n_rows, fold, args.seed, args.val_frac, args.test_frac
+            )
         if len(train_pool) < max_train_size:
             raise ValueError(
                 f"Fold {fold} train pool has {len(train_pool)} rows, smaller than requested "
@@ -306,7 +401,7 @@ def main() -> None:
                     "n_train": int(len(train)),
                     "n_val": int(len(val)),
                     "n_test": int(len(test)),
-                    "path": str(size_dir),
+                    "path": str(size_dir.relative_to(base)),
                 }
             )
 
