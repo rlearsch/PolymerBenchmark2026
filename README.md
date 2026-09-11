@@ -256,6 +256,14 @@ If you use this benchmark in your research, please cite (TBD):
 
 This repository is provided to reproduce research results. For questions or issues, please open a GitHub issue.
 
+Before submitting dataset-construction changes, run the fast every-commit suite:
+
+```bash
+bash scripts/test_every_commit.sh
+```
+
+See [tests/README.md](tests/README.md) for its coverage and environment details.
+
 ## Acknowledgments
 
 - polyBERT model: https://huggingface.co/kuelumbus/polyBERT
@@ -347,3 +355,4 @@ For questions about the benchmark or datasets, please open an issue on GitHub.
 
 ## Release
 LLNL-CODE-850796
+LLNL-DATA-2017526
