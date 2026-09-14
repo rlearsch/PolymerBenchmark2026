@@ -28,6 +28,7 @@ Datasets/
   wPSMILES/                       Generated weighted polymer strings
   RDKit_descriptors/              Generated descriptor matrices
   polyBERT/                       Generated 600-dimensional embeddings
+  scaling_indices/                Published compact canonical folds
   scaling_splits/                 Generated shared train/val/test datasets
 Models/
   RDKit_RF/                       Random forest on RDKit descriptors
@@ -45,6 +46,7 @@ scaling_results/                  Compact, Git-eligible scaling summaries
 included compact sources
   -> generate_basic_datasets.sh
   -> PSMILES + wPSMILES
+  -> apply tracked scaling_indices directly to a custom representation
   -> generate_polybert_datasets.sh
   -> polyBERT
   -> generate_scaling_datasets.sh
@@ -92,7 +94,8 @@ row back to the canonical full PSMILES dataset.
 ## Data and Git Policy
 
 The repository intentionally tracks only compact source datasets, generation
-code, documentation, and compact result summaries. `.gitignore` excludes:
+code, published scaling indices, documentation, and compact result summaries.
+`.gitignore` excludes:
 
 - generated wPSMILES, descriptor, polyBERT, and scaling-split datasets;
 - the large polyBERT dictionary;
@@ -143,10 +146,7 @@ dependency.
 ## Minimum Validation Before Handoff
 
 ```bash
-bash -n Datasets/Dataset_construction_scripts/*.sh scripts/*.sh Models/*/*.sh
-python3 -m compileall -q Datasets/Dataset_construction_scripts/*.py Models/RDKit_RF/*.py Models/polyBERT/*.py scripts/*.py
-bash Datasets/Dataset_construction_scripts/generate_scaling_datasets.sh --dry-run
-git diff --check
+bash scripts/test_every_commit.sh
 ```
 
 Use the project environments instead of system `python3` when dependencies are

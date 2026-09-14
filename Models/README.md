@@ -230,16 +230,9 @@ Output: Property Prediction + Explanation
 
 ## Citation
 
-If you use these models, please cite the Polymer Benchmark 2026 (PolyBench26) paper (TBD):
-
-```bibtex
-@article{polybench26,
-  title={Polymer Benchmark 2026 (PolyBench26): A Comprehensive Benchmark for Polymer Property Prediction},
-  author={},
-  journal={},
-  year={2026}
-}
-```
+For PolyBench26 citation guidance, use the repository-level instructions in
+[`../README.md`](../README.md). The first public release will include final
+machine-readable citation metadata.
 
 And cite the individual model papers as appropriate:
 

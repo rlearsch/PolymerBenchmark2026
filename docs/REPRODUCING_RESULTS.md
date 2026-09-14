@@ -62,12 +62,28 @@ parent/
   polyBERT/
 ```
 
-## 4. Build Dataset Environments and Representations
+## 4. Build the Basic Dataset Environment
 
 ```bash
 cd Datasets/Dataset_construction_scripts
 bash setup_environments.sh
 bash generate_basic_datasets.sh
+cd ../..
+```
+
+At this point a custom model can use the tracked `Datasets/scaling_indices/`
+packages directly. Verify that the generated canonical files match the
+published checksums:
+
+```bash
+Datasets/Dataset_construction_scripts/.venv/bin/python \
+  Datasets/Dataset_construction_scripts/manage_scaling_indices.py verify
+```
+
+To reproduce all built-in representations, also generate polyBERT:
+
+```bash
+cd Datasets/Dataset_construction_scripts
 bash generate_polybert_datasets.sh
 cd ../..
 ```
@@ -96,7 +112,9 @@ bash Datasets/Dataset_construction_scripts/generate_scaling_datasets.sh
 ```
 
 Use `--overwrite` only when intentionally replacing existing split files. The
-output root is `Datasets/scaling_splits/`. Each condition contains a manifest,
+generator automatically consumes matching published indices from
+`Datasets/scaling_indices/`; it does not choose new folds. The output root is
+`Datasets/scaling_splits/`. Each condition contains a manifest,
 five folds, nested training sizes, fixed validation/test data, four molecular
 representations, and canonical row-index files.
 

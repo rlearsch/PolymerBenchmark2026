@@ -36,13 +36,13 @@ PolyBench26/
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/PolyBench26.git
-cd PolyBench26
+git clone https://github.com/rlearsch/PolymerBenchmark2026.git
+cd PolymerBenchmark2026
 ```
 
 ### 2. Generate Datasets
 
-The repository includes compact source data (~150MB) but requires generation of full datasets:
+The repository includes compact source data (~85MB) but requires generation of full datasets:
 
 ```bash
 cd Datasets/Dataset_construction_scripts
@@ -203,7 +203,7 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 ## Datasets Included
 
 ### From Published Sources
-- **polyVERSE**: DFT-computed properties
+- **polyVERSE**: DFT-computed electron affinity and ionization energy
 - **PolyMetriX**: Glass transition temperature data
 - **Coley 2022 (Vipea)**: Electron affinity and ionization potential (DFT)
 - **PolyBench26**: MD simulation properties (density, Rg, Cp, Cv, refractive index)
@@ -220,6 +220,8 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 ## Documentation
 
 - **[AGENTS.md](AGENTS.md)**: Repository context, invariants, and safe operating rules for LLM agents
+- **[DATA_PROVENANCE.md](DATA_PROVENANCE.md)**: Source-data inventory and redistribution-status record
+- **[RELEASE_INFORMATION_NEEDED.md](RELEASE_INFORMATION_NEEDED.md)**: Information and approvals needed before public release
 - **[docs/REPRODUCING_RESULTS.md](docs/REPRODUCING_RESULTS.md)**: End-to-end paper-results reconstruction runbook
 - **[docs/ADDING_A_MODEL.md](docs/ADDING_A_MODEL.md)**: Shared-split contract for benchmarking a new model
 - **[Datasets/README.md](Datasets/README.md)**: Overview of dataset formats and sources
@@ -238,19 +240,16 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 
 ## Citation
 
-If you use this benchmark in your research, please cite (TBD):
-
-```bibtex
-@article{polybench26,
-  title={Polymer Benchmark 2026 (PolyBench26): Evaluating Polymer Representations for Machine Learning Property Prediction},
-  journal={Journal Name},
-  year={2026}
-}
-```
+Citation metadata is being finalized for the first public release. Until a
+`CITATION.cff` file is published, cite the repository URL and the exact release
+tag or commit used. See [RELEASE_INFORMATION_NEEDED.md](RELEASE_INFORMATION_NEEDED.md)
+for the remaining citation records needed before release.
 
 ## License
 
-[License to be specified]
+This repository is distributed under the [MIT License](LICENSE). The licence
+applies to repository software; individual source datasets remain subject to
+their own terms. See [DATA_PROVENANCE.md](DATA_PROVENANCE.md).
 
 ## Contributing
 
@@ -351,7 +350,10 @@ For questions about the benchmark or datasets, please open an issue on GitHub.
 
 ---
 
-**Note**: This is a research repository accompanying a peer-reviewed publication. Generated datasets are excluded from Git to keep the checkout manageable. All datasets can be regenerated from the included compact sources and scripts.
+**Note**: This is a research repository accompanying PolyBench26. Generated
+datasets are excluded from Git to keep the checkout manageable. All datasets
+that are permitted for redistribution can be regenerated from the included
+compact sources and scripts.
 
 ## Release
 LLNL-CODE-850796

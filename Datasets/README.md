@@ -178,10 +178,13 @@ Datasets/
 ### polyBERT Model Requirements
 
 To generate polyBERT datasets, you need:
-1. polyBERT model at `../Models/polyBERT/`
+1. an external polyBERT model checkout beside this repository at `../polyBERT/`
 2. Python environment with sentence-transformers
 
 Download polyBERT from: https://huggingface.co/kuelumbus/polyBERT
+
+`Models/polyBERT/` is the PolyBench26 feed-forward trainer, not the external
+SentenceTransformer model used for embedding generation.
 
 See [Dataset_construction_scripts/README.md](Dataset_construction_scripts/README.md) for detailed setup.
 
