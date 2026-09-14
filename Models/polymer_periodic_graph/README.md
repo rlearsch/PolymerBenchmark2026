@@ -31,8 +31,8 @@ The polymer_periodic_graph model is a customized version of chemprop that repres
 
 ```bash
 # Clone the repository (if not already done)
-git clone https://github.com/[username]/PolyBench26.git
-cd PolyBench26/Models/polymer_periodic_graph
+git clone https://github.com/rlearsch/PolymerBenchmark2026.git
+cd PolymerBenchmark2026/Models/polymer_periodic_graph
 
 # Set up the virtual environment
 bash setup_environment.sh
@@ -185,11 +185,9 @@ python Polymer_Model/train.py \
 
 ## Citation
 
-If you use this model in your research, please cite:
-
-```
-[Citation information to be filled in]
-```
+Use the repository-level citation instructions in
+[`../../README.md`](../../README.md). The final release will provide a
+`CITATION.cff` file.
 
 ## System Requirements
 
@@ -203,4 +201,5 @@ For questions about this model, please open an issue on the GitHub repository.
 
 ## License
 
-This project is licensed under the [License information].
+See the repository [MIT License](../../LICENSE). Third-party dependencies and
+vendored code may carry additional notices or terms.
