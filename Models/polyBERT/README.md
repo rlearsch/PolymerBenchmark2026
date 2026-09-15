@@ -14,7 +14,11 @@ This model trains a deep feed-forward neural network on 600-dimensional polyBERT
 
 ## Reference
 
-**polyBERT Model**: [Kuenneth et al., 2023](https://huggingface.co/kuelumbus/polyBERT)  
+**polyBERT Model**: Kuenneth, C., & Ramprasad, R. (2023). *polyBERT: a
+chemical language model to enable fully machine-driven ultrafast polymer
+informatics*. *Nature Communications*, 14, 4099.
+https://doi.org/10.1038/s41467-023-39868-6. The external checkout is obtained
+from https://huggingface.co/HAYDERphd/polyBERT.
 **Note**: Embeddings must be pre-computed using the dataset generation scripts in `Datasets/Dataset_construction_scripts/`
 
 ## Prerequisites

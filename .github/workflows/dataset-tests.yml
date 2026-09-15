@@ -1,0 +1,21 @@
+name: Dataset construction tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  every-commit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: Datasets/Dataset_construction_scripts/requirements.txt
+      - name: Install dataset dependencies
+        run: python -m pip install -r Datasets/Dataset_construction_scripts/requirements.txt
+      - name: Run every-commit tests
+        run: bash scripts/test_every_commit.sh

@@ -25,7 +25,7 @@ else:
 in_root = script_dir / '../../Datasets/PSMILES/'
 
 # NOTE: Requires local polyBERT model at ../../../polyBERT/
-# Download from: https://huggingface.co/kuelumbus/polyBERT
+# Download from: https://huggingface.co/HAYDERphd/polyBERT
 polyBERT_path = (script_dir / "../../../polyBERT").resolve()
 print(polyBERT_path)
 
@@ -77,8 +77,7 @@ for dataset in dataset_list:
 
     except Exception as e:
         print(f'Error processing {dataset}: {e}')
-    
+
     save_dictionary(PSMILES_pBERT_dict)
     keys_length = len(PSMILES_pBERT_dict.keys())
     print(f'Dictionary saved with {keys_length} entries')
-    
