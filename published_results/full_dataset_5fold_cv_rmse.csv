@@ -1,0 +1,65 @@
+protocol,n_folds,metric,dataset_size,rmse_mean,rmse_std,property,model,polymer_architecture,source_label,quantity_reported,model_reported,polymer_type_reported,source_reported
+legacy_full_dataset_5fold_cv,5,rmse,27802,91.32,0.875,Cp,RDKit_RF,alternating,MD,$C_p$,RDKit,Alternating Copolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1800,151.41,13.6,Cp,RDKit_RF,homopolymer,MD,$C_p$,RDKit,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,27802,120.33,1.83,Cp,polyBERT,alternating,MD,$C_p$,polyBERT,Alternating Copolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1800,205.8,15.0,Cp,polyBERT,homopolymer,MD,$C_p$,polyBERT,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,27802,67.59,1.67,Cp,polymer_chemprop,alternating,MD,$C_p$,PCP,Alternating Copolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1800,86.27,7.38,Cp,polymer_chemprop,homopolymer,MD,$C_p$,PCP,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,9331,96.0,2.63,Cp,polymer_chemprop,random,MD,$C_p$,PCP,Random copolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,27802,67.83,1.51,Cp,polymer_periodic_graph,alternating,MD,$C_p$,PPG,Alternating Copolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1800,85.24,10.2,Cp,polymer_periodic_graph,homopolymer,MD,$C_p$,PPG,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1788,0.0318,0.0021,Cv,RDKit_RF,homopolymer,MD,$C_v$,RDKit,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1788,0.0578,0.0036,Cv,polyBERT,homopolymer,MD,$C_v$,polyBERT,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1788,0.012,0.002,Cv,polymer_chemprop,homopolymer,MD,$C_v$,PCP,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1788,0.0125,0.0024,Cv,polymer_periodic_graph,homopolymer,MD,$C_v$,PPG,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,6138,0.155,0.006,EA,RDKit_RF,alternating,DFT,EA,RDKit,Alternating Copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,368,0.429,0.059,EA,RDKit_RF,homopolymer,DFT,EA,RDKit,Homopolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,6138,0.115,0.003,EA,polyBERT,alternating,DFT,EA,polyBERT,Alternating Copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,368,0.385,0.049,EA,polyBERT,homopolymer,DFT,EA,polyBERT,Homopolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,6138,0.048,0.002,EA,polymer_chemprop,alternating,DFT,EA,PCP,Alternating Copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,18414,0.033,0.002,EA,polymer_chemprop,block,DFT,EA,PCP,Block copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,368,0.285,0.045,EA,polymer_chemprop,homopolymer,DFT,EA,PCP,Homopolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,18414,0.027,0.001,EA,polymer_chemprop,random,DFT,EA,PCP,Random copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,6138,0.056,0.002,EA,polymer_periodic_graph,alternating,DFT,EA,PPG,Alternating Copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,368,0.291,0.055,EA,polymer_periodic_graph,homopolymer,DFT,EA,PPG,Homopolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,6138,0.142,0.002,IP,RDKit_RF,alternating,DFT,IP,RDKit,Alternating Copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,370,0.473,0.075,IP,RDKit_RF,homopolymer,DFT,IP,RDKit,Homopolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,6138,0.157,0.006,IP,polyBERT,alternating,DFT,IP,polyBERT,Alternating Copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,370,0.608,0.115,IP,polyBERT,homopolymer,DFT,IP,polyBERT,Homopolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,6138,0.04,0.001,IP,polymer_chemprop,alternating,DFT,IP,PCP,Alternating Copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,18414,0.024,0.001,IP,polymer_chemprop,block,DFT,IP,PCP,Block copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,370,0.426,0.067,IP,polymer_chemprop,homopolymer,DFT,IP,PCP,Homopolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,18414,0.021,0.001,IP,polymer_chemprop,random,DFT,IP,PCP,Random copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,6138,0.048,0.003,IP,polymer_periodic_graph,alternating,DFT,IP,PPG,Alternating Copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,370,0.425,0.069,IP,polymer_periodic_graph,homopolymer,DFT,IP,PPG,Homopolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,27802,3.52,0.07,Rg,RDKit_RF,alternating,MD,Radius of gyration,RDKit,Alternating Copolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1800,6.31,0.27,Rg,RDKit_RF,homopolymer,MD,Radius of gyration,RDKit,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,27802,1.86,0.098,Rg,polyBERT,alternating,MD,Radius of gyration,polyBERT,Alternating Copolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1800,3.7,0.39,Rg,polyBERT,homopolymer,MD,Radius of gyration,polyBERT,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,27802,1.23,0.037,Rg,polymer_chemprop,alternating,MD,Radius of gyration,PCP,Alternating Copolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1800,2.83,0.43,Rg,polymer_chemprop,homopolymer,MD,Radius of gyration,PCP,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,9331,2.05,0.065,Rg,polymer_chemprop,random,MD,Radius of gyration,PCP,Random copolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,27802,1.22,0.035,Rg,polymer_periodic_graph,alternating,MD,Radius of gyration,PPG,Alternating Copolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1800,3.35,0.58,Rg,polymer_periodic_graph,homopolymer,MD,Radius of gyration,PPG,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,7367,39.7,1.5,Tg,RDKit_RF,homopolymer,Experiment,$T_g$ (PolyMetriX),RDKit,Homopolymer,Experiment
+legacy_full_dataset_5fold_cv,5,rmse,7367,37.9,1.8,Tg,polyBERT,homopolymer,Experiment,$T_g$ (PolyMetriX),polyBERT,Homopolymer,Experiment
+legacy_full_dataset_5fold_cv,5,rmse,7367,34.7,0.6,Tg,polymer_chemprop,homopolymer,Experiment,$T_g$ (PolyMetriX),PCP,Homopolymer,Experiment
+legacy_full_dataset_5fold_cv,5,rmse,7367,36.7,0.8,Tg,polymer_periodic_graph,homopolymer,Experiment,$T_g$ (PolyMetriX),PPG,Homopolymer,Experiment
+legacy_full_dataset_5fold_cv,5,rmse,27802,0.0258,0.0005,density,RDKit_RF,alternating,MD,Density,RDKit,Alternating Copolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1800,0.0645,0.0123,density,RDKit_RF,homopolymer,MD,Density,RDKit,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,27802,0.0349,0.001,density,polyBERT,alternating,MD,Density,polyBERT,Alternating Copolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1800,0.0757,0.0045,density,polyBERT,homopolymer,MD,Density,polyBERT,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,27802,0.0106,0.0001,density,polymer_chemprop,alternating,MD,Density,PCP,Alternating Copolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1800,0.025,0.0023,density,polymer_chemprop,homopolymer,MD,Density,PCP,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,9331,0.0232,0.001,density,polymer_chemprop,random,MD,Density,PCP,Random copolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,27802,0.0106,0.0001,density,polymer_periodic_graph,alternating,MD,Density,PPG,Alternating Copolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,1800,0.0245,0.0016,density,polymer_periodic_graph,homopolymer,MD,Density,PPG,Homopolymer,MD
+legacy_full_dataset_5fold_cv,5,rmse,26509,0.102,0.003,refractive_index,RDKit_RF,alternating,DFT,Refractive Index,RDKit,Alternating Copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,1715,0.023,0.002,refractive_index,RDKit_RF,homopolymer,DFT,Refractive Index,RDKit,Homopolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,26509,0.115,0.002,refractive_index,polyBERT,alternating,DFT,Refractive Index,polyBERT,Alternating Copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,1715,0.073,0.005,refractive_index,polyBERT,homopolymer,DFT,Refractive Index,polyBERT,Homopolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,26509,0.063,0.006,refractive_index,polymer_chemprop,alternating,DFT,Refractive Index,PCP,Alternating Copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,1715,0.0186,0.001,refractive_index,polymer_chemprop,homopolymer,DFT,Refractive Index,PCP,Homopolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,9119,0.07,0.005,refractive_index,polymer_chemprop,random,DFT,Refractive index,PCP,Random copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,26509,0.0555,0.0016,refractive_index,polymer_periodic_graph,alternating,DFT,Refractive Index,PPG,Alternating Copolymer,DFT
+legacy_full_dataset_5fold_cv,5,rmse,1715,0.0154,0.001,refractive_index,polymer_periodic_graph,homopolymer,DFT,Refractive Index,PPG,Homopolymer,DFT
