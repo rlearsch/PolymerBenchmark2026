@@ -5,9 +5,31 @@ with the built-in PolyBench26 scaling results.
 
 ## 1. Use the Shared Splits
 
-Generate splits as described in
-[`REPRODUCING_RESULTS.md`](REPRODUCING_RESULTS.md). Select an existing
-representation beneath each training-size directory:
+The canonical fold assignments are already tracked under
+`Datasets/scaling_indices/`; a custom model does not need polyBERT or the fully
+materialized scaling tree. Generate the basic PSMILES datasets as described in
+[`REPRODUCING_RESULTS.md`](REPRODUCING_RESULTS.md), then load the relevant
+manifest and fold archive:
+
+```python
+import json
+from pathlib import Path
+
+import numpy as np
+import pandas as pd
+
+root = Path("Datasets/scaling_indices/MD_5000/Cp/alternating_Cp/seed_42")
+manifest = json.loads((root / "manifest.json").read_text())
+data = pd.read_csv(Path("Datasets") / manifest["canonical_source"])
+
+with np.load(root / "fold_00.npz") as indices:
+    train = data.iloc[indices["train_pool"][:300]]
+    validation = data.iloc[indices["val"]]
+    test = data.iloc[indices["test"]]
+```
+
+For built-in representations, `generate_scaling_datasets.sh` materializes the
+same assignments beneath each training-size directory:
 
 ```text
 Datasets/scaling_splits/<dataset>/<property>/<file_stem>/seed_42/
@@ -20,9 +42,9 @@ Datasets/scaling_splits/<dataset>/<property>/<file_stem>/seed_42/
       polyBERT/{train,val,test}.csv
 ```
 
-Do not resplit these files. For a custom representation, transform each row
-from the PSMILES files or canonical `row_index` values while preserving order.
-Keep the index CSVs beside predictions so chemical identity remains auditable.
+Do not resplit these files. For a custom representation, transform the canonical
+PSMILES rows while preserving `row_index`. Keep row indices beside predictions
+so chemical identity remains auditable.
 
 ## 2. Data Contracts
 

@@ -73,11 +73,16 @@ For polyBERT embedding generation:
 
 ```bash
 # From repository root
-git clone https://huggingface.co/kuelumbus/polyBERT ../polyBERT
+git clone https://huggingface.co/HAYDERphd/polyBERT ../polyBERT
 ```
 
 This external model checkout is separate from `Models/polyBERT/`, which contains
 the PolyBench26 feed-forward training code.
+
+For an exact reproduction of a public release, check out the immutable
+polyBERT revision recorded in
+[`docs/REPRODUCING_RESULTS.md`](docs/REPRODUCING_RESULTS.md), rather than using
+an unrecorded moving branch.
 
 ### 4. Train Models
 
@@ -265,7 +270,9 @@ See [tests/README.md](tests/README.md) for its coverage and environment details.
 
 ## Acknowledgments
 
-- polyBERT model: https://huggingface.co/kuelumbus/polyBERT
+- polyBERT model: Kuenneth, C., & Ramprasad, R. (2023). *polyBERT: a chemical
+  language model to enable fully machine-driven ultrafast polymer informatics*.
+  *Nature Communications*, 14, 4099. https://doi.org/10.1038/s41467-023-39868-6
 - Data sources: polyVERSE, Coley et al., OpenPoly, PolyMetriX
 - RDKit: Open-source cheminformatics toolkit
 
@@ -304,7 +311,7 @@ Run `generate_basic_datasets.sh` before optional generation steps.
 
 Ensure you've downloaded the external polyBERT model beside the repository:
 ```bash
-git clone https://huggingface.co/kuelumbus/polyBERT ../polyBERT
+git clone https://huggingface.co/HAYDERphd/polyBERT ../polyBERT
 ```
 
 **Out of memory during generation**

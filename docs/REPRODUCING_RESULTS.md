@@ -39,19 +39,29 @@ Record that mapping rather than guessing when the paper is unavailable.
 
 ## 3. Requirements
 
-- Python 3.10 or newer
-- Git and Bash
-- RDKit-compatible platform
-- Approximately 16 GB RAM for polyBERT generation
-- Approximately 15 GB free disk for generated datasets; allow more for model
-  checkpoints and concurrent runs
-- Optional CUDA GPU for neural models
+- **Supported baseline:** Python 3.10 or newer, Git, and a Bash-compatible
+  macOS or Linux environment. The setup scripts create one virtual environment
+  per dataset or model workflow.
+- **CPU execution:** supported for dataset construction and model training;
+  CUDA is optional. A CUDA GPU can accelerate the neural models, but no CUDA
+  version is required for the baseline workflow.
+- **Platform dependency:** use a platform on which the selected RDKit package
+  can be installed.
+- **Resources:** approximately 16 GB RAM for polyBERT generation and
+  approximately 15 GB free disk for generated datasets; allow more space for
+  model checkpoints and concurrent runs.
+
+The `requirements.txt` files specify the supported dependency floors for each
+workflow, not an immutable result environment. For an exact reproduction of a
+published run, record `pip freeze` separately for every environment, together
+with the Python version, operating-system details, CUDA details when used, and
+the repository commit as shown in Section 1.
 
 The external polyBERT SentenceTransformer model is not stored in this
 repository. Clone it as a sibling of the repository:
 
 ```bash
-git clone https://huggingface.co/kuelumbus/polyBERT ../polyBERT
+git clone https://huggingface.co/HAYDERphd/polyBERT ../polyBERT
 ```
 
 The expected layout is:
@@ -61,6 +71,19 @@ parent/
   PolyBench26/
   polyBERT/
 ```
+
+Before running the public release workflow, replace the placeholder below with
+the immutable polyBERT revision recorded for that release, then verify it:
+
+```bash
+# Public-release polyBERT revision: PENDING_RELEASE_METADATA
+git -C ../polyBERT checkout <recorded-commit-or-tag>
+git -C ../polyBERT rev-parse HEAD
+```
+
+Do not use an unrecorded moving branch for a published-result reproduction.
+The external model is described by Kuenneth and Ramprasad, *Nature
+Communications* 14, 4099 (2023), https://doi.org/10.1038/s41467-023-39868-6.
 
 ## 4. Build the Basic Dataset Environment
 
