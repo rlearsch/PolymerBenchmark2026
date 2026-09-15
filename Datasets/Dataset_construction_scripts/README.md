@@ -95,12 +95,17 @@ regenerates RDKit descriptors from canonical PSMILES rows. See
 - `Cleaned_OMersBench_v3_final.jsonl` (64MB) - Current OMersBench source, including Cv and **additional molecular dynamics parameters**
   - Includes: Degree of polymerization (DP), molecular weight (Mn, MW), number of chains, atom counts, and more
   - Users needing these parameters should parse this source file directly
+  - This is the bundled OPoly26-derived source used to reproduce the included
+    MD tasks; no separate OPoly26 download is required
 - `polymer-chemprop-data/` (17MB) - Coley 2022 dataset files
 
 ### Included in PSMILES Directory (Small web-sourced datasets, ~5MB total)
 - `../PSMILES/polyVERSE/` - DFT-computed electron affinity and ionization energy from polyVERSE
-- `../PSMILES/OpenPoly_2025/` - Experimental/computed properties from OpenPoly
 - `../PSMILES/PolyMetriX/` - Glass transition temperature data
+
+`../PSMILES/OpenPoly_2025/` is an optional local dataset directory, not a
+tracked public source input. Do not include it in a release archive without a
+separate provenance and redistribution review.
 
 ### Generated (Excluded from git)
 - `pSMILES_pBERT_dict.pkl` (224MB) - Pre-computed polyBERT embeddings dictionary
@@ -153,9 +158,9 @@ Generates: `MD_300`, `MD_5000` datasets
 ```bash
 python convert_web_datasets.py
 ```
-Converts small web-sourced PSMILES datasets to wPSMILES format:
+Converts available web-sourced PSMILES datasets to wPSMILES format:
 - polyVERSE
-- OpenPoly_2025
+- OpenPoly_2025 (optional local input; not tracked for release)
 - PolyMetriX
 
 Uses the `PSMILES_to_wPSMILES.py` script internally.
@@ -229,7 +234,8 @@ Edit line 24 of the script if your model is in a different location.
 - **Usage**: Manual, run per directory as needed
 
 ### `convert_web_datasets.py`
-- **Input**: Web-sourced PSMILES datasets (polyVERSE, OpenPoly_2025, PolyMetriX)
+- **Input**: Web-sourced PSMILES datasets (polyVERSE and PolyMetriX; optional
+  local OpenPoly_2025 when present)
 - **Output**: Corresponding wPSMILES datasets
 - **Dependencies**: pandas (via PSMILES_to_wPSMILES.py)
 - **Note**: Wrapper script that calls PSMILES_to_wPSMILES.py for each dataset

@@ -50,9 +50,12 @@ Pre-computed polyBERT embeddings (600-dimensional vectors) from PSMILES.
   - `polymer-chemprop-data/` (17MB)
 - **PSMILES/**: Small web-sourced datasets
   - `polyVERSE/` - DFT-computed electron affinity and ionization energy
-  - `OpenPoly_2025/` - Experimental/computed properties
   - `PolyMetriX/` - Glass transition temperature data
 - **scaling_indices/**: Published canonical folds for scaling experiments (~2MB)
+
+`OpenPoly_2025/` may exist in a local working tree for optional experiments,
+but it is not a tracked public source input and is not part of this release
+inventory.
 
 ### Generated via Scripts (Excluded from Git)
 - **PSMILES/**: Large generated datasets
@@ -143,17 +146,23 @@ Datasets/
 - **Properties**: Electron affinity, ionization potential
 - **Method**: DFT calculations
 - **Architectures**: Alternating, random, block copolymers
+- **Citation**: Aldeghi, M., & Coley, C. W. (2022). *Chemical Science*,
+  13(35), 10486–10498. https://doi.org/10.1039/D2SC02839E
 
-### OMersBench
+### OMersBench / OPoly26
 - **Source**: Molecular dynamics simulation benchmark for polymers
 - **Properties**: Density, Rg, Cp, refractive index
 - **Method**: Molecular dynamics simulations
 - **Chain lengths**: 300 atoms (~30 monomers), 5000 atoms (~500 monomers)
+- **Citation**: Levine et al. (2025). *The Open Polymers 2026 (OPoly26)
+  Dataset and Evaluations*. arXiv:2512.23117.
 
 ### polyVERSE
 - **Source**: High-throughput DFT calculations for polymer properties
 - **Properties included here**: Electron affinity and ionization energy
 - **Method**: DFT calculations
+- **Citation**: Ramprasad et al. (2024). *polyVERSE: Informatics-Ready Polymer
+  Datasets* (Version 1.0). https://doi.org/10.5281/zenodo.13352644
 
 ### PoLyInfo
 - **Source**: Experimental polymer database
@@ -164,6 +173,17 @@ Datasets/
 - **Source**: Polymer property database
 - **Properties**: Tg
 - **Method**: Experimental measurements
+- **Citation**: Kunchapu, S., & Jablonka, K. M. (2025). *Curated Glass
+  Transition Temperature for Polymers* (Version v1). Zenodo.
+  https://doi.org/10.5281/zenodo.14980914
+
+### Source terms
+
+The root [data-provenance record](../DATA_PROVENANCE.md) is authoritative for
+source URLs, pinned revisions, citations, and redistribution terms. The
+polyVERSE CSVs and covered derivatives are governed by the GTRC license in
+[`THIRD_PARTY_LICENSES/`](../THIRD_PARTY_LICENSES/), rather than the
+repository's MIT software license.
 
 ## Usage Notes
 

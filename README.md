@@ -211,7 +211,7 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 - **polyVERSE**: DFT-computed electron affinity and ionization energy
 - **PolyMetriX**: Glass transition temperature data
 - **Coley 2022 (Vipea)**: Electron affinity and ionization potential (DFT)
-- **PolyBench26**: MD simulation properties (density, Rg, Cp, Cv, refractive index)
+- **OPoly26 (OMersBench)**: MD simulation properties (density, Rg, Cp, Cv, refractive index)
 
 ### Properties Covered
 - Glass transition temperature (Tg)
@@ -254,7 +254,10 @@ for the remaining citation records needed before release.
 
 This repository is distributed under the [MIT License](LICENSE). The licence
 applies to repository software; individual source datasets remain subject to
-their own terms. See [DATA_PROVENANCE.md](DATA_PROVENANCE.md).
+their own terms. In particular, bundled polyVERSE data and covered derivatives
+are governed by the GTRC license included in
+[`THIRD_PARTY_LICENSES/`](THIRD_PARTY_LICENSES/), not by MIT. See
+[DATA_PROVENANCE.md](DATA_PROVENANCE.md) for all dataset citations and terms.
 
 ## Contributing
 
@@ -273,7 +276,7 @@ See [tests/README.md](tests/README.md) for its coverage and environment details.
 - polyBERT model: Kuenneth, C., & Ramprasad, R. (2023). *polyBERT: a chemical
   language model to enable fully machine-driven ultrafast polymer informatics*.
   *Nature Communications*, 14, 4099. https://doi.org/10.1038/s41467-023-39868-6
-- Data sources: polyVERSE, Coley et al., OpenPoly, PolyMetriX
+- Data sources: OPoly26, polyVERSE, Coley et al., and PolyMetriX
 - RDKit: Open-source cheminformatics toolkit
 
 ## System Requirements

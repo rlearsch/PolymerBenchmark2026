@@ -9,7 +9,7 @@ authoritative source record before a public release.
 
 | Source label | Tracked source files | Repository use | Redistribution status | Required release record |
 |---|---|---|---|---|
-| OMersBench / OPoly26 | `Datasets/Dataset_construction_scripts/files/Cleaned_OMersBench_v3_final.jsonl` | `OMers_convert_jsonl.py` creates the MD_300 and MD_5000 canonical PSMILES datasets, including the Cp, Cv, Rg, density, and refractive-index tasks. | **Redistributable under CC BY 4.0**, including derived representations, provided appropriate attribution is retained. The upstream code is MIT-licensed; that code licence does not replace the dataset licence. | Record the Hugging Face revision or download date and confirm that the tracked file corresponds to that release. |
+| OMersBench / OPoly26 | `Datasets/Dataset_construction_scripts/files/Cleaned_OMersBench_v3_final.jsonl` | `OMers_convert_jsonl.py` creates the MD_300 and MD_5000 canonical PSMILES datasets, including the Cp, Cv, Rg, density, and refractive-index tasks. | **Redistributable under CC BY 4.0**, including derived representations, provided appropriate attribution is retained. The upstream code is MIT-licensed; that code licence does not replace the dataset licence. | Confirm that the tracked file corresponds to the pinned Hugging Face revision. |
 | Coley 2022 / VIPEA (polymer-chemprop) data | `Datasets/Dataset_construction_scripts/files/polymer-chemprop-data/dataset.csv`; `dataset-poly_chemprop.csv` | `process_Vipea_data.py` derives PSMILES and wPSMILES EA/IP datasets. | **Redistributable under MIT**, as released in the upstream GitHub source. Derived representations are permitted under that licence. | Confirm that the tracked files match the pinned upstream commit. |
 | polyVERSE | `Datasets/PSMILES/polyVERSE/electron_affinity/electron_affinity_data_polymers_v4.csv`; `Datasets/PSMILES/polyVERSE/ionization_energy/ionization_energy_data_polymers_v4.csv` | `convert_web_datasets.py` converts the tracked PSMILES inputs to wPSMILES. | **Redistributable only under the GTRC General Public Use License Agreement.** Covered copies and derivatives must retain required notices and be made available at no charge under the same licence; the Program may not be sold for commercial gain without a separate GTRC agreement. | Confirm that the tracked files and any distributed derivative retain the required GTRC notice and accompanying licence, and that the tracked files correspond to the cited Zenodo release. |
 | PolyMetriX | `Datasets/PSMILES/PolyMetriX/Tg/Tg.csv` | Canonical PSMILES input for the Tg scaling condition; converted to wPSMILES by `convert_web_datasets.py`. The upstream code is released under MIT; the associated dataset is hosted on Zenodo. | **Redistributable under CC BY 4.0**, including derived representations, provided appropriate attribution is retained. The upstream MIT code licence applies to code, not the dataset. | Confirm that the tracked file corresponds to the cited Zenodo release and resolve the relationship of the additional DOI listed below. |
@@ -50,6 +50,10 @@ only when users generate polyBERT embeddings locally.
 - Dataset: Open Polymers 2026 (OPoly26) Dataset.
 - Dataset licence: Creative Commons Attribution 4.0 International (CC BY 4.0).
 - Dataset source: https://huggingface.co/facebook/OMol25
+- Pinned source revision: [`47146a3ac4a3451741993a1605ca1b1050c6b9bc`](https://huggingface.co/facebook/OMol25/commit/47146a3ac4a3451741993a1605ca1b1050c6b9bc).
+- Bundled release copy: `Datasets/Dataset_construction_scripts/files/Cleaned_OMersBench_v3_final.jsonl`.
+  Users reproduce the included OPoly26-derived MD tasks from this file; no
+  separate OPoly26 download is required.
 - Upstream code licence: MIT License. The CC BY 4.0 dataset licence governs
   the tracked data and its derivatives.
 - Citation: Levine, D. S., Liesen, N., Chua, L., Diffenderfer, J., Ingolfsson,
@@ -57,9 +61,8 @@ only when users generate polyBERT embeddings locally.
   M., Van Essen, B., Wood, B. M., Zitnick, C. L., Blau, S. M., & Antoniuk,
   E. R. (2025). *The Open Polymers 2026 (OPoly26) Dataset and Evaluations*.
   arXiv:2512.23117 [physics.chem-ph]. https://arxiv.org/abs/2512.23117
-- Before release, record the Hugging Face revision or download date, and
-  confirm that `Cleaned_OMersBench_v3_final.jsonl` corresponds to that
-  release.
+- Before release, confirm that `Cleaned_OMersBench_v3_final.jsonl`
+  corresponds to the pinned source revision.
 
 ### Coley / VIPEA source record
 

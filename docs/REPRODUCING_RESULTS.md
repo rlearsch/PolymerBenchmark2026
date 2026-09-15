@@ -4,6 +4,12 @@ This runbook takes a fresh clone from source data to the shared-split scaling
 results used for direct model comparisons. Run commands from the repository root
 unless a step explicitly changes directories.
 
+Before generating or redistributing data, consult
+[`DATA_PROVENANCE.md`](../DATA_PROVENANCE.md). Source datasets retain their
+own terms; notably, polyVERSE files and covered derivatives are governed by
+the accompanying GTRC license rather than this repository's MIT software
+license.
+
 ## 1. Record Provenance
 
 For a scientifically traceable run, record the exact revision and machine
