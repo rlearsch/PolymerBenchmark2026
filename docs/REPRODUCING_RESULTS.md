@@ -67,7 +67,7 @@ The external polyBERT SentenceTransformer model is not stored in this
 repository. Clone it as a sibling of the repository:
 
 ```bash
-git clone https://huggingface.co/HAYDERphd/polyBERT ../polyBERT
+git clone https://huggingface.co/kuelumbus/polyBERT ../polyBERT
 ```
 
 The expected layout is:
@@ -78,12 +78,12 @@ parent/
   polyBERT/
 ```
 
-Before running the public release workflow, replace the placeholder below with
-the immutable polyBERT revision recorded for that release, then verify it:
+Before running the public release workflow, check out the immutable polyBERT
+revision used for the release, then verify it:
 
 ```bash
-# Public-release polyBERT revision: PENDING_RELEASE_METADATA
-git -C ../polyBERT checkout <recorded-commit-or-tag>
+# Public-release polyBERT revision: deaa98fb65a7bdfb537457d42f43bd468963f695
+git -C ../polyBERT checkout deaa98fb65a7bdfb537457d42f43bd468963f695
 git -C ../polyBERT rev-parse HEAD
 ```
 

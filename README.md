@@ -73,7 +73,7 @@ For polyBERT embedding generation:
 
 ```bash
 # From repository root
-git clone https://huggingface.co/HAYDERphd/polyBERT ../polyBERT
+git clone https://huggingface.co/kuelumbus/polyBERT ../polyBERT
 ```
 
 This external model checkout is separate from `Models/polyBERT/`, which contains
@@ -318,7 +318,7 @@ Run `generate_basic_datasets.sh` before optional generation steps.
 
 Ensure you've downloaded the external polyBERT model beside the repository:
 ```bash
-git clone https://huggingface.co/HAYDERphd/polyBERT ../polyBERT
+git clone https://huggingface.co/kuelumbus/polyBERT ../polyBERT
 ```
 
 **Out of memory during generation**

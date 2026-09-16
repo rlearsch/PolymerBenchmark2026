@@ -25,7 +25,7 @@ else:
 in_root = script_dir / '../../Datasets/PSMILES/'
 
 # NOTE: Requires local polyBERT model at ../../../polyBERT/
-# Download from: https://huggingface.co/HAYDERphd/polyBERT
+# Download from: https://huggingface.co/kuelumbus/polyBERT
 polyBERT_path = (script_dir / "../../../polyBERT").resolve()
 print(polyBERT_path)
 

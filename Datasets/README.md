@@ -201,7 +201,7 @@ To generate polyBERT datasets, you need:
 1. an external polyBERT model checkout beside this repository at `../polyBERT/`
 2. Python environment with sentence-transformers
 
-Download polyBERT from: https://huggingface.co/HAYDERphd/polyBERT
+Download polyBERT from: https://huggingface.co/kuelumbus/polyBERT
 
 `Models/polyBERT/` is the PolyBench26 feed-forward trainer, not the external
 SentenceTransformer model used for embedding generation.

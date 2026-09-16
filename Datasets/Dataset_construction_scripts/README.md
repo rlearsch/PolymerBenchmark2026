@@ -204,7 +204,7 @@ python PSMILES_to_pBERT.py
 ../../../polyBERT/
 ```
 
-Download from: https://huggingface.co/HAYDERphd/polyBERT
+Download from: https://huggingface.co/kuelumbus/polyBERT
 
 Edit line 24 of the script if your model is in a different location.
 
@@ -303,7 +303,7 @@ source .venv/bin/activate
 Download the polyBERT model beside the PolyBench26 repository:
 ```bash
 # From the repository root
-git clone https://huggingface.co/HAYDERphd/polyBERT ../polyBERT
+git clone https://huggingface.co/kuelumbus/polyBERT ../polyBERT
 ```
 
 The sibling `../polyBERT/` directory should be a valid SentenceTransformer
@@ -349,7 +349,7 @@ torch>=2.0.0
   chemical language model to enable fully machine-driven ultrafast polymer
   informatics*. *Nature Communications*, 14, 4099.
   https://doi.org/10.1038/s41467-023-39868-6. External checkout:
-  https://huggingface.co/HAYDERphd/polyBERT
+  https://huggingface.co/kuelumbus/polyBERT
 
 ## Notes
 

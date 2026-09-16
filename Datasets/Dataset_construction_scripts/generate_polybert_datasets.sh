@@ -39,7 +39,7 @@ fi
 if [ ! -d "./../../../polyBERT" ]; then
     echo "ERROR: polyBERT model not found at ../../../polyBERT/"
     echo "Please download the polyBERT model first:"
-    echo "  https://huggingface.co/HAYDERphd/polyBERT"
+    echo "  https://huggingface.co/kuelumbus/polyBERT"
     exit 1
 fi
 

@@ -41,7 +41,7 @@ decisions when appropriate.
 
 ## Reporting
 
-Report unacceptable behavior privately to **PROJECT_PRIVATE_CONTACT_EMAIL**.
+Report unacceptable behavior privately to learsch1 at llnl dot gov.
 All reports will be reviewed and investigated promptly and fairly. Maintainers
 will respect the reporter's privacy and confidentiality to the extent possible.
 
