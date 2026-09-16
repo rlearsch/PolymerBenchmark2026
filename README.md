@@ -226,7 +226,6 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 
 - **[AGENTS.md](AGENTS.md)**: Repository context, invariants, and safe operating rules for LLM agents
 - **[DATA_PROVENANCE.md](DATA_PROVENANCE.md)**: Source-data inventory and redistribution-status record
-- **[RELEASE_INFORMATION_NEEDED.md](RELEASE_INFORMATION_NEEDED.md)**: Information and approvals needed before public release
 - **[docs/REPRODUCING_RESULTS.md](docs/REPRODUCING_RESULTS.md)**: End-to-end paper-results reconstruction runbook
 - **[docs/ADDING_A_MODEL.md](docs/ADDING_A_MODEL.md)**: Shared-split contract for benchmarking a new model
 - **[Datasets/README.md](Datasets/README.md)**: Overview of dataset formats and sources
@@ -238,6 +237,8 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 - **[Models/RDKit_RF/README.md](Models/RDKit_RF/README.md)**: RDKit_RF model details
 - **[Models/polyBERT/README.md](Models/polyBERT/README.md)**: polyBERT model details
 - **[Models/polymer_periodic_graph/README.md](Models/polymer_periodic_graph/README.md)**: polymer_periodic_graph model details
+- **[published_results/README.md](published_results/README.md)**: Public legacy
+  full-dataset aggregate RMSE summary and its limitations
 
 ## Data Restrictions
 
@@ -261,7 +262,10 @@ are governed by the GTRC license included in
 
 ## Contributing
 
-This repository is provided to reproduce research results. For questions or issues, please open a GitHub issue.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution expectations and
+[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) for community standards. For questions
+or non-security issues, please open a GitHub issue. To report a potential
+security vulnerability privately, follow [SECURITY.md](SECURITY.md).
 
 Before submitting dataset-construction changes, run the fast every-commit suite:
 
@@ -289,7 +293,6 @@ See [tests/README.md](tests/README.md) for its coverage and environment details.
 
 ### Recommended
 - Python 3.10+
-- 16GB RAM (for polyBERT generation and training)
 - 25GB disk space
 - SSD for faster dataset generation and model training
 - GPU with CUDA support (optional, 2-5x speedup for polyBERT, polymer_chemprop, and polymer_periodic_graph)
@@ -333,20 +336,6 @@ cd Models/<model_name>
 bash setup_environment.sh
 ```
 
-**Training is slow**
-
-- Use smaller datasets (MD_300 instead of MD_5000) for testing
-- For polyBERT/polymer_chemprop/polymer_periodic_graph: Ensure GPU is available (if you have one)
-- RDKit_RF is naturally the fastest model
-
-**Out of memory during training**
-
-- Reduce batch sizes in training scripts
-- Use smaller datasets
-- Close other applications
-- For polyBERT: Edit `train_pBERT.sh` and change `--batch_size 50` to `--batch_size 32`
-- For polymer_chemprop: Add `--batch_size 32` to train_pcp.sh
-- For polymer_periodic_graph: Add `--batch_size 32` to train_ppg.sh
 
 ### General Issues
 

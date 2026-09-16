@@ -179,6 +179,11 @@ class FreshCloneTests(unittest.TestCase):
         )
         package = json.loads((package_base / "manifest.json").read_text(encoding="utf-8"))
         canonical_path = REPO_ROOT / "Datasets" / package["canonical_source"]
+        if not canonical_path.is_file():
+            self.skipTest(
+                "requires generated canonical PSMILES; fresh-clone CI validates "
+                "the published index package without generated datasets"
+            )
         digest = hashlib.sha256(canonical_path.read_bytes()).hexdigest()
         self.assertEqual(digest, package["canonical_sha256"])
 

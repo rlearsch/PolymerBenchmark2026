@@ -15,13 +15,16 @@ fi
 
 cd "$REPO_ROOT"
 STATUS_BEFORE="$(git status --porcelain=v1 --untracked-files=all)"
+shopt -s nullglob
 bash -n Datasets/Dataset_construction_scripts/*.sh scripts/*.sh Models/*/*.sh
-"$PYTHON" -m compileall -q \
-  Datasets/Dataset_construction_scripts/*.py \
-  Models/RDKit_RF/*.py \
-  Models/polyBERT/*.py \
-  scripts/*.py \
+PYTHON_SOURCES=(
+  Datasets/Dataset_construction_scripts/*.py
+  Models/RDKit_RF/*.py
+  Models/polyBERT/*.py
+  scripts/*.py
   tests/*.py
+)
+"$PYTHON" -m compileall -q "${PYTHON_SOURCES[@]}"
 "$PYTHON" -m unittest discover -s tests -v
 git diff --check
 STATUS_AFTER="$(git status --porcelain=v1 --untracked-files=all)"
