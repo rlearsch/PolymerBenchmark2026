@@ -9,7 +9,7 @@ authoritative source record before a public release.
 
 | Source label | Tracked source files | Repository use | Redistribution status | Required release record |
 |---|---|---|---|---|
-| OMersBench / OPoly26 | `Datasets/Dataset_construction_scripts/files/Cleaned_OMersBench_v3_final.jsonl` | `OMers_convert_jsonl.py` creates the MD_300 and MD_5000 canonical PSMILES datasets, including the Cp, Cv, Rg, density, and refractive-index tasks. | **Redistributable under CC BY 4.0**, including derived representations, provided appropriate attribution is retained. The upstream code is MIT-licensed; that code licence does not replace the dataset licence. | Confirm that the tracked file corresponds to the pinned Hugging Face revision. |
+| OMersBench / OPoly26 and PolyBench26 curation | `Datasets/Dataset_construction_scripts/files/Cleaned_OMersBench_v3_final.jsonl` | `OMers_convert_jsonl.py` creates the MD_300 and MD_5000 canonical PSMILES datasets, including the Cp, Cv, Rg, density, and refractive-index tasks. The bundled file is a PolyBench26-curated source with a novel property contribution; it is not a byte-for-byte mirror of the upstream OPoly26 release. | The underlying OPoly26 data are **CC BY 4.0**; retain appropriate attribution for that source. The upstream code is MIT-licensed; that code licence does not replace the dataset licence. | Record the pinned upstream revision for the underlying OPoly26 inputs and describe the PolyBench26 curation and novel contribution. Do not use a file-checksum comparison to claim identity with the upstream release. |
 | Coley 2022 / VIPEA (polymer-chemprop) data | `Datasets/Dataset_construction_scripts/files/polymer-chemprop-data/dataset.csv`; `dataset-poly_chemprop.csv` | `process_Vipea_data.py` derives PSMILES and wPSMILES EA/IP datasets. | **Redistributable under MIT**, as released in the upstream GitHub source. Derived representations are permitted under that licence. | Confirm that the tracked files match the pinned upstream commit. |
 | polyVERSE | `Datasets/PSMILES/polyVERSE/electron_affinity/electron_affinity_data_polymers_v4.csv`; `Datasets/PSMILES/polyVERSE/ionization_energy/ionization_energy_data_polymers_v4.csv` | `convert_web_datasets.py` converts the tracked PSMILES inputs to wPSMILES. | **Redistributable only under the GTRC General Public Use License Agreement.** Covered copies and derivatives must retain required notices and be made available at no charge under the same licence; the Program may not be sold for commercial gain without a separate GTRC agreement. | Confirm that the tracked files and any distributed derivative retain the required GTRC notice and accompanying licence, and that the tracked files correspond to the cited Zenodo release. |
 | PolyMetriX | `Datasets/PSMILES/PolyMetriX/Tg/Tg.csv` | Canonical PSMILES input for the Tg scaling condition; converted to wPSMILES by `convert_web_datasets.py`. The upstream code is released under MIT; the associated dataset is hosted on Zenodo. | **Redistributable under CC BY 4.0**, including derived representations, provided appropriate attribution is retained. The upstream MIT code licence applies to code, not the dataset. | Confirm that the tracked file corresponds to the cited Zenodo release and resolve the relationship of the additional DOI listed below. |
@@ -52,8 +52,10 @@ only when users generate polyBERT embeddings locally.
 - Dataset source: https://huggingface.co/facebook/OMol25
 - Pinned source revision: [`47146a3ac4a3451741993a1605ca1b1050c6b9bc`](https://huggingface.co/facebook/OMol25/commit/47146a3ac4a3451741993a1605ca1b1050c6b9bc).
 - Bundled release copy: `Datasets/Dataset_construction_scripts/files/Cleaned_OMersBench_v3_final.jsonl`.
-  Users reproduce the included OPoly26-derived MD tasks from this file; no
-  separate OPoly26 download is required.
+  This is a PolyBench26-curated source containing a novel property
+  contribution, not a byte-for-byte upstream OPoly26 copy. Users reproduce
+  the included MD tasks from this file; no separate OPoly26 download is
+  required.
 - Upstream code licence: MIT License. The CC BY 4.0 dataset licence governs
   the tracked data and its derivatives.
 - Citation: Levine, D. S., Liesen, N., Chua, L., Diffenderfer, J., Ingolfsson,
@@ -61,8 +63,10 @@ only when users generate polyBERT embeddings locally.
   M., Van Essen, B., Wood, B. M., Zitnick, C. L., Blau, S. M., & Antoniuk,
   E. R. (2025). *The Open Polymers 2026 (OPoly26) Dataset and Evaluations*.
   arXiv:2512.23117 [physics.chem-ph]. https://arxiv.org/abs/2512.23117
-- Before release, confirm that `Cleaned_OMersBench_v3_final.jsonl`
-  corresponds to the pinned source revision.
+- Before release, retain the pinned source revision as provenance for the
+  underlying OPoly26 inputs and document the PolyBench26 curation and novel
+  property contribution. Do not present the bundled file as checksum-identical
+  to the upstream release.
 
 ### Coley / VIPEA source record
 
@@ -93,6 +97,29 @@ only when users generate polyBERT embeddings locally.
   the GTRC notice and full GTRC licence with them; distribute covered works at
   no charge and under the same GTRC terms. Do not sell them for commercial
   gain without a separate GTRC agreement.
+
+#### PolyBench26 verification record (2026-09-16)
+
+The two bundled compact inputs were verified against a clean clone of the
+official `https://github.com/Ramprasad-Group/polyVERSE.git` repository at
+commit `e6b3f32832d4bf27e67407f0a22fafd2a20284f2`. Both upstream files were
+last changed in commit `3b50f1d3980777e7f6005ec295d70a5321221b43`.
+
+| Property | Official source file SHA-256 | Bundled compact file SHA-256 |
+|---|---|---|
+| Electron affinity | `d4b83bbc1f2d84499d7dc82fd4ff513328ab3b0d971604e410a59da536436d59` | `2013c4a07d87aae846a20869082f97e83ba63330dd81c84aac820d14a38c1ba1` |
+| Ionization energy | `cbf732641124d839e8595ddbc982d488479d86487dd3ea6f07a9b44f424159b3` | `e74172105c244eba2ce5fe0ff4f5945d3a4d11b1288bde7e57f9f48f6455c12f` |
+
+The bundled files intentionally differ in bytes from the upstream tables:
+they retain only the PSMILES and target-value columns, use compact `*`
+attachment notation, and omit source metadata and original row ordering. RDKit
+canonicalization established a one-to-one match for every record (368 EA and
+370 IP), with every target value equal. The tracked GTRC licence matches the
+official repository's licence text, differing only by its final newline.
+
+The cited Zenodo record remains the release citation. Its file-download
+checksum has not yet been independently retrieved; the official-repository
+verification above records the provenance evidence available for this release.
 
 ## Derived artifacts
 

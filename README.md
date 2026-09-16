@@ -113,12 +113,13 @@ bash setup_environment.sh  # one-time setup
 source .venv/bin/activate
 bash train_ppg.sh ../../Datasets/PSMILES/MD_300/density/homopolymer_density.csv
 
-# Example: Run LLM predictions on PSMILES
+# Inspect archived LLM prompt/response examples on PSMILES
 cd ./Models/OpenAI
-bash setup_environment.sh  # one-time setup
-source .venv/bin/activate
-python EA_predictions/homopolymer_EA_4o_neg.py
+find EA_predictions IP_predictions -maxdepth 1 -name 'full_reply_*.json' -print
 ```
+
+These historical responses used an LLNL-specific endpoint and are not a
+publicly reproducible workflow; see `Models/OpenAI/README.md`.
 
 See [Models/README.md](Models/README.md) for detailed model documentation.
 

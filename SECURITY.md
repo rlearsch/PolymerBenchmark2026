@@ -3,7 +3,7 @@
 ## Reporting a vulnerability
 
 Please do not report suspected security vulnerabilities in a public GitHub
-issue. Instead, email **PROJECT_PRIVATE_CONTACT_EMAIL** with:
+issue. Instead, email learsch1 at llnl dot gov with:
 
 - a description of the issue and its potential impact;
 - the affected file, component, or workflow;
