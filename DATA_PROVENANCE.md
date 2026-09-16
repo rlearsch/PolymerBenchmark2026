@@ -46,9 +46,28 @@ only when users generate polyBERT embeddings locally.
   https://doi.org/10.5281/zenodo.14980914
 - Record: https://zenodo.org/records/14980914
 - Dataset licence: Creative Commons Attribution 4.0 International (CC BY 4.0).
-- Related DOI supplied during provenance review: `10.5281/zenodo.14980913`.
-  Its relationship to the versioned v1 record has not yet been independently
-  verified; retain both identifiers in the release record until confirmed.
+- Concept DOI for all versions: `10.5281/zenodo.14980913`. This persistent DOI
+  resolves to the latest PolyMetriX version. The version-specific DOI above
+  (`10.5281/zenodo.14980914`) identifies the fixed v1 record used here. Cite
+  the v1 DOI for an exact dataset reference and the concept DOI when referring
+  to the evolving collection.
+
+#### PolyBench26 verification record (2026-09-16)
+
+The bundled `Datasets/PSMILES/PolyMetriX/Tg/Tg.csv` was compared against the
+supplied `LAMALAB_CURATED_Tg_structured_polymerclass_with_embeddings.csv`
+source table. The bundled file is the exact ordered projection of the source
+table's `PSMILES` and `labels.Exp_Tg(K)` columns: all 7,367 PSMILES strings and
+all target values match, with no missing targets or duplicate PSMILES.
+
+| File | SHA-256 |
+|---|---|
+| Supplied source table | `e3064f5d55830a93b4d43d8a709a4fbada7742c19a311c69c0aada6793422a91` |
+| Bundled compact `Tg.csv` | `b6d2b9f83419c94c5b24200b0288d9a7b53256931d87ffc1533c8884119a09d3` |
+
+The source table has 115 columns; the 113 non-benchmark metadata, feature,
+and embedding columns are intentionally not distributed in the compact
+PolyBench26 input.
 
 ### OMersBench / OPoly26 source record
 
