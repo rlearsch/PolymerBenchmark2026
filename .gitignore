@@ -1,57 +1,46 @@
-**.DS_Store
+# Operating-system and editor artifacts
+.DS_Store
 *.steady10
-model.pt
 
-# Generated datasets (exclude from git, will be generated via scripts)
-Datasets/polyBERT/
-Datasets/wPSMILES/
-Datasets/RDKit_descriptors/
-
-# PSMILES: Exclude large/generated datasets, include small source datasets
-Datasets/PSMILES/Coley_2022/
-Datasets/PSMILES/MD_300/
-Datasets/PSMILES/MD_5000/
-Datasets/PSMILES/MD_DP/
-Datasets/PSMILES/Tg_combined/
-Datasets/PSMILES/PolyInfo/
-Datasets/PSMILES/OpenPoly_2025/experiment_polymer_data.csv
-Datasets/PSMILES/OpenPoly_2025/final_polymer_properties_fromliterature.csv
-Datasets/PSMILES/OpenPoly_2025/Tg/OpenPoly_Tg.csv
-
-# Exclude PolyInfo and Tg_combined in all formats (restricted/generated)
-Datasets/**/Tg_combined/
-Datasets/**/PolyInfo/
-
-# Keep source data files
-!Datasets/Dataset_construction_scripts/files/
-
-# Exclude large embedding dictionary (224MB, will be generated or downloaded separately)
-Datasets/Dataset_construction_scripts/files/PSMILES_pBERT_dict.pkl
-
-# Intermediate files from dataset construction scripts
-Datasets/Dataset_construction_scripts/OMersBench_*.csv
-
-# Virtual environments for dataset construction
-Datasets/Dataset_construction_scripts/.venv/
-Datasets/Dataset_construction_scripts/polyBERT_env/
-
-# Model outputs and checkpoints
-Models/polyBERT/pSMILES_pBERT_dict.pkl
-Models/polymer_chemprop/**/fold*/**
-Models/polymer_chemprop/.venv/
-Models/polymer_periodic_graph/**/fold*/**
-Models/polymer_periodic_graph/.venv/
-Models/RDKit_RF/**/fold*/**
-Models/RDKit_RF/.venv/
-Models/polyBERT/**/fold*/**
-Models/polyBERT/.venv/
-*.log
-/**/PolyInfo
-*scores.csv
-**args.json
-
-# Python cache
+# Python caches and local environments
 **/__pycache__/
 *.pyc
+/Datasets/Dataset_construction_scripts/.venv/
+/Datasets/Dataset_construction_scripts/polyBERT_env/
+/Models/polymer_chemprop/.venv/
+/Models/polymer_periodic_graph/.venv/
+/Models/RDKit_RF/.venv/
+/Models/polyBERT/.venv/
+
+# Training outputs, checkpoints, and transient logs
+model.pt
+*.log
+*scores.csv
+**args.json
+/Models/polymer_chemprop/**/fold*/**
+/Models/polymer_periodic_graph/**/fold*/**
+/Models/RDKit_RF/**/fold*/**
+/Models/polyBERT/**/fold*/**
+/Models/*/scaling_results/
+/Models/RDKit_RF/PolyMetriX/
+/Models/polyBERT/pSMILES_pBERT_dict.pkl
 /Models/polymer_periodic_graph/Polymer_Model/chemprop/web
 /Models/polymer_periodic_graph/Polymer_Model/chemprop.egg-info
+
+# Derived dataset representations. Recreate these with the documented scripts.
+/Datasets/polyBERT/
+/Datasets/wPSMILES/
+/Datasets/RDKit_descriptors/
+/Datasets/scaling_splits/
+
+# Large or derived PSMILES datasets. The compact public source inputs remain tracked.
+/Datasets/PSMILES/Coley_2022/
+/Datasets/PSMILES/MD_300/
+/Datasets/PSMILES/MD_5000/
+/Datasets/PSMILES/MD_DP/
+/Datasets/PSMILES/Tg_combined/
+/Datasets/PSMILES/PolyInfo/
+/Datasets/**/Tg_combined/
+/Datasets/**/PolyInfo/
+/Datasets/PSMILES/PolyMetriX/Tg_*/
+
