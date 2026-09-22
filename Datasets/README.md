@@ -120,8 +120,8 @@ Datasets/
 
 | Property | Source | Format | Description |
 |----------|--------|--------|-------------|
-| Electron Affinity (EA) | Coley 2022 | All formats | DFT computed |
-| Ionization Potential (IP) | Coley 2022 | All formats | DFT computed |
+| Electron Affinity (EA) | VIPEA | All formats | DFT computed |
+| Ionization Potential (IP) | VIPEA | All formats | DFT computed |
 | Glass Transition (Tg) | PolyMetriX | All formats | Experimental |
 | Density | MD, PolyInfo | All formats | MD simulations & experimental |
 | Refractive Index | MD | All formats | MD simulations |
@@ -141,7 +141,7 @@ Datasets/
 
 ## Data Sources & Citations
 
-### Coley 2022
+### VIPEA
 - **Source**: Computational prediction of copolymer properties
 - **Properties**: Electron affinity, ionization potential
 - **Method**: DFT calculations

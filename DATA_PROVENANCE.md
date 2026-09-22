@@ -10,7 +10,7 @@ authoritative source record before a public release.
 | Source label | Tracked source files | Repository use | Redistribution status | Required release record |
 |---|---|---|---|---|
 | OMersBench / OPoly26 and PolyBench26 curation | `Datasets/Dataset_construction_scripts/files/Cleaned_OMersBench_v3_final.jsonl` | `OMers_convert_jsonl.py` creates the MD_300 and MD_5000 canonical PSMILES datasets, including the Cp, Cv, Rg, density, and refractive-index tasks. The bundled file is a PolyBench26-curated source with a novel property contribution; it is not a byte-for-byte mirror of the upstream OPoly26 release. | The underlying OPoly26 data are **CC BY 4.0**; retain appropriate attribution for that source. The upstream code is MIT-licensed; that code licence does not replace the dataset licence. | **Verified:** the pinned upstream revision is recorded as provenance for underlying inputs, and the bundled curated source and its checksum are documented below. |
-| Coley 2022 / VIPEA (polymer-chemprop) data | `Datasets/Dataset_construction_scripts/files/polymer-chemprop-data/dataset.csv`; `dataset-poly_chemprop.csv` | `process_Vipea_data.py` derives PSMILES and wPSMILES EA/IP datasets. | **Redistributable under MIT**, as released in the upstream GitHub source. Derived representations are permitted under that licence. | **Verified:** both tracked files are byte-identical to the pinned upstream Git objects documented below. |
+| VIPEA (polymer-chemprop; Aldeghi & Coley, 2022) data | `Datasets/Dataset_construction_scripts/files/polymer-chemprop-data/dataset.csv`; `dataset-poly_chemprop.csv` | `process_Vipea_data.py` derives PSMILES and wPSMILES EA/IP datasets. | **Redistributable under MIT**, as released in the upstream GitHub source. Derived representations are permitted under that licence. | **Verified:** both tracked files are byte-identical to the pinned upstream Git objects documented below. |
 | polyVERSE | `Datasets/PSMILES/polyVERSE/electron_affinity/electron_affinity_data_polymers_v4.csv`; `Datasets/PSMILES/polyVERSE/ionization_energy/ionization_energy_data_polymers_v4.csv` | `convert_web_datasets.py` converts the tracked PSMILES inputs to wPSMILES. | **Redistributable only under the GTRC General Public Use License Agreement.** Covered copies and derivatives must retain required notices and be made available at no charge under the same licence; the Program may not be sold for commercial gain without a separate GTRC agreement. | **Verified:** bundled compact inputs match the official polyVERSE GitHub repository; the required GTRC licence is tracked with this repository. |
 | PolyMetriX | `Datasets/PSMILES/PolyMetriX/Tg/Tg.csv` | Canonical PSMILES input for the Tg scaling condition; converted to wPSMILES by `convert_web_datasets.py`. The upstream code is released under MIT; the associated dataset is hosted on Zenodo. | **Redistributable under CC BY 4.0**, including derived representations, provided appropriate attribution is retained. The upstream MIT code licence applies to code, not the dataset. | Confirm that the tracked file corresponds to the cited Zenodo release and resolve the relationship of the additional DOI listed below. |
 
@@ -105,7 +105,7 @@ records; and the PolyBench26 Cv contribution is present for 1,875 records.
   OPoly26 inputs. It must not be used to claim that the curated `v3_final`
   file is checksum-identical to upstream.
 
-### Coley / VIPEA source record
+### VIPEA source record
 
 - Citation: Aldeghi, M., & Coley, C. W. (2022). A graph representation of
   molecular ensembles for polymer property prediction. *Chemical Science*,
@@ -173,7 +173,7 @@ depends on the terms above and must be confirmed before publication.
 
 | Artifact | Generation path | Git policy |
 |---|---|---|
-| Canonical PSMILES (MD and Coley-derived datasets) | `generate_basic_datasets.sh` | Generated; only compact source inputs are tracked. |
+| Canonical PSMILES (MD and VIPEA datasets) | `generate_basic_datasets.sh` | Generated; only compact source inputs are tracked. |
 | wPSMILES | `generate_basic_datasets.sh` / `convert_web_datasets.py` | Generated and ignored. |
 | RDKit descriptors | `generate_rdkit_datasets.sh` or the scaling splitter | Generated and ignored. |
 | polyBERT embeddings | `generate_polybert_datasets.sh` using an external model | Generated and ignored. |

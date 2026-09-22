@@ -97,7 +97,7 @@ regenerates RDKit descriptors from canonical PSMILES rows. See
   - Users needing these parameters should parse this source file directly
   - This is the bundled OPoly26-derived source used to reproduce the included
     MD tasks; no separate OPoly26 download is required
-- `polymer-chemprop-data/` (17MB) - Coley 2022 dataset files
+- `polymer-chemprop-data/` (17MB) - VIPEA dataset source files
 
 ### Included in PSMILES Directory (Small web-sourced datasets, ~5MB total)
 - `../PSMILES/polyVERSE/` - DFT-computed electron affinity and ionization energy from polyVERSE
@@ -142,7 +142,7 @@ source .venv/bin/activate
 
 ### Step 2: Run Individual Scripts
 
-#### Process Coley 2022 Data
+#### Process VIPEA Data
 ```bash
 python process_Vipea_data.py
 ```
@@ -212,7 +212,7 @@ Edit line 24 of the script if your model is in a different location.
 
 ### `process_Vipea_data.py`
 - **Input**: `files/polymer-chemprop-data/*.csv`
-- **Output**: Coley 2022 EA/IP datasets in PSMILES and wPSMILES formats
+- **Output**: VIPEA EA/IP datasets in PSMILES and wPSMILES formats
 - **Dependencies**: pandas, rdkit
 - **Converts**: wPSMILES → PSMILES for alternating copolymers
 
@@ -343,7 +343,7 @@ torch>=2.0.0
 
 ## Dataset Sources & Citations
 
-- **Coley 2022**: Computational prediction of copolymer properties
+- **VIPEA**: Computational prediction of copolymer properties (Aldeghi & Coley, 2022)
 - **OMersBench**: Molecular dynamics simulation benchmark for polymers
 - **polyBERT Model**: Kuenneth, C., & Ramprasad, R. (2023). *polyBERT: a
   chemical language model to enable fully machine-driven ultrafast polymer

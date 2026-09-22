@@ -211,7 +211,7 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 ### From Published Sources
 - **polyVERSE**: DFT-computed electron affinity and ionization energy
 - **PolyMetriX**: Glass transition temperature data
-- **Coley 2022 (Vipea)**: Electron affinity and ionization potential (DFT)
+- **VIPEA**: Electron affinity and ionization potential (DFT; Aldeghi & Coley, 2022)
 - **OPoly26 (OMersBench)**: MD simulation properties (density, Rg, Cp, Cv, refractive index)
 
 ### Properties Covered
@@ -281,7 +281,7 @@ See [tests/README.md](tests/README.md) for its coverage and environment details.
 - polyBERT model: Kuenneth, C., & Ramprasad, R. (2023). *polyBERT: a chemical
   language model to enable fully machine-driven ultrafast polymer informatics*.
   *Nature Communications*, 14, 4099. https://doi.org/10.1038/s41467-023-39868-6
-- Data sources: OPoly26, polyVERSE, Coley et al., and PolyMetriX
+- Data sources: OPoly26, polyVERSE, VIPEA, and PolyMetriX
 - RDKit: Open-source cheminformatics toolkit
 
 ## System Requirements
