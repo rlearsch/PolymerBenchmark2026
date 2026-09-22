@@ -34,7 +34,7 @@ model.pt
 /Datasets/scaling_splits/
 
 # Large or derived PSMILES datasets. The compact public source inputs remain tracked.
-/Datasets/PSMILES/Coley_2022/
+/Datasets/PSMILES/Vipea/
 /Datasets/PSMILES/MD_300/
 /Datasets/PSMILES/MD_5000/
 /Datasets/PSMILES/MD_DP/
@@ -43,4 +43,3 @@ model.pt
 /Datasets/**/Tg_combined/
 /Datasets/**/PolyInfo/
 /Datasets/PSMILES/PolyMetriX/Tg_*/
-
