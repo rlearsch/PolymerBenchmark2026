@@ -8,6 +8,7 @@ import tempfile
 import unittest
 from contextlib import redirect_stdout
 from pathlib import Path
+from unittest.mock import patch
 
 import numpy as np
 import pandas as pd
@@ -26,6 +27,7 @@ from polymer_conversions import (  # noqa: E402
     wPSMILES_to_PSMILES_homopolymer_simple,
 )
 from create_scaling_splits import build_rdkit_frame, split_indices  # noqa: E402
+from process_Vipea_data import process_vipea_data  # noqa: E402
 
 
 def run_cli(script: str, *args: str, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -96,6 +98,56 @@ class ConversionUnitTests(unittest.TestCase):
 
 
 class ConstructionIntegrationTests(unittest.TestCase):
+    def test_vipea_processor_creates_vipea_output_directories(self) -> None:
+        weighted = pd.DataFrame(
+            {
+                "poly_chemprop_input": [
+                    "[*:1]CC[*:2].[*:3]O[*:4]|0.5|0.5|"
+                    "<1-3:0.5:0.5<1-4:0.5:0.5<2-3:0.5:0.5<2-4:0.5:0.5",
+                    "random-weighted",
+                    "block-weighted",
+                ]
+            }
+        )
+        information = pd.DataFrame(
+            {
+                "poly_type": ["alternating", "random", "block"],
+                "EA (eV)": [1.0, 2.0, 3.0],
+                "IP (eV)": [4.0, 5.0, 6.0],
+            }
+        )
+
+        with tempfile.TemporaryDirectory() as temp:
+            datasets_root = Path(temp) / "Datasets"
+            with patch(
+                "process_Vipea_data.pd.read_csv", side_effect=[weighted, information]
+            ):
+                process_vipea_data(CONSTRUCTION_DIR, datasets_root)
+
+            for architecture in ("alternating", "random", "block"):
+                for quantity in ("EA", "IP"):
+                    self.assertTrue(
+                        (
+                            datasets_root
+                            / "wPSMILES"
+                            / "Vipea"
+                            / quantity
+                            / f"{architecture}_{quantity}.csv"
+                        ).is_file()
+                    )
+            for quantity in ("EA", "IP"):
+                self.assertTrue(
+                    (
+                        datasets_root
+                        / "PSMILES"
+                        / "Vipea"
+                        / quantity
+                        / f"alternating_{quantity}.csv"
+                    ).is_file()
+                )
+            self.assertFalse((datasets_root / "PSMILES" / "Coley_2022").exists())
+            self.assertFalse((datasets_root / "wPSMILES" / "Coley_2022").exists())
+
     def test_converter_is_non_mutating_and_strict_missing_fails(self) -> None:
         with tempfile.TemporaryDirectory() as temp:
             temp_path = Path(temp)
