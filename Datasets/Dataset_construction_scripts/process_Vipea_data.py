@@ -24,10 +24,14 @@ for architecture in copolymer_architectures:
         df_temp = df[df.poly_type==architecture]
         df_temp = df_temp.reset_index(drop=True)
         df_temp['smiles'] = df_temp.poly_chemprop_input
-        df_temp[['smiles',quantity]].to_csv(script_dir / f'../../Datasets/wPSMILES/Coley_2022/{quantity}/{architecture}_{quantity}.csv', index=False)
+        wpsmiles_path = script_dir / f'../../Datasets/wPSMILES/Vipea/{quantity}/{architecture}_{quantity}.csv'
+        wpsmiles_path.parent.mkdir(parents=True, exist_ok=True)
+        df_temp[['smiles',quantity]].to_csv(wpsmiles_path, index=False)
         if architecture == 'alternating':
             df_temp['smiles']=df_temp.smiles.apply(wPSMILES_to_PSMILES_alternating)
-            df_temp[['smiles',quantity]].to_csv(script_dir / f'../../Datasets/PSMILES/Coley_2022/{quantity}/{architecture}_{quantity}.csv', index=False)
+            psmiles_path = script_dir / f'../../Datasets/PSMILES/Vipea/{quantity}/{architecture}_{quantity}.csv'
+            psmiles_path.parent.mkdir(parents=True, exist_ok=True)
+            df_temp[['smiles',quantity]].to_csv(psmiles_path, index=False)
 
 
 #random copolymers        
