@@ -47,7 +47,7 @@ The repository includes compact source data (~85MB) but requires generation of f
 ```bash
 cd Datasets/Dataset_construction_scripts
 
-# Setup virtual environments (one-time)
+# Setup the basic generation environment (one-time)
 bash setup_environments.sh
 
 # Generate PSMILES and wPSMILES datasets (~5-15 minutes)
@@ -57,8 +57,11 @@ bash generate_basic_datasets.sh
 bash generate_rdkit_datasets.sh
 
 # Optional: Generate polyBERT embeddings (~1-3 hours)
-# Requires polyBERT model - see instructions below
-bash generate_polybert_datasets.sh
+bash setup_environments.sh --with-polybert
+bash generate_polybert_datasets.sh --model-path ../../../polyBERT
+
+# Return to the repository root before running model commands below
+cd ../..
 ```
 
 **Output:**

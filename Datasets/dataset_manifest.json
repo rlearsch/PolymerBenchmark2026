@@ -39,7 +39,8 @@
     "Datasets/RDKit_descriptors/.polybench26-test",
     "Datasets/polyBERT/.polybench26-test",
     "Datasets/scaling_splits/.polybench26-test",
-    "Models/RDKit_RF/scaling_results/.polybench26-test"
+    "Models/RDKit_RF/scaling_results/.polybench26-test",
+    "Datasets/Dataset_construction_scripts/files/PSMILES_pBERT_dict.pkl"
   ],
   "web_datasets": {
     "required": ["polyVERSE", "PolyMetriX"],

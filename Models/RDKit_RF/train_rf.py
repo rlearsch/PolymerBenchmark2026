@@ -24,7 +24,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 
 
-def sanitize_features(X: pd.DataFrame) -> pd.DataFrame:
+def sanitize_features(X: pd.DataFrame) -> tuple[pd.DataFrame, list[str]]:
     """
     Remove problematic columns and handle inf/nan values.
     
@@ -41,7 +41,12 @@ def sanitize_features(X: pd.DataFrame) -> pd.DataFrame:
     X = pd.DataFrame(X).apply(pd.to_numeric, errors="coerce")
     X = X.replace([np.inf, -np.inf], np.nan)
     
-    return X
+    all_nan_columns = X.columns[X.isna().all()].tolist()
+    if all_nan_columns:
+        print(f"Dropping all-NaN descriptor columns: {', '.join(all_nan_columns)}")
+        X = X.drop(columns=all_nan_columns)
+
+    return X, all_nan_columns
 
 
 def load_and_prepare_data(data_path: Path):
@@ -84,9 +89,10 @@ def load_and_prepare_data(data_path: Path):
     y = df[target_cols].values
     
     # Sanitize features
-    X = sanitize_features(X)
+    X, all_nan_columns = sanitize_features(X)
+    feature_cols = X.columns.tolist()
     
-    return X, y, feature_cols, target_cols
+    return X, y, feature_cols, target_cols, all_nan_columns
 
 
 def train_random_forest(X_train: pd.DataFrame, y_train: np.ndarray, random_state: int = 42):
@@ -171,7 +177,7 @@ def main():
     if not args.quiet:
         print(f"Loading data from: {args.data_path}")
     
-    X, y, feature_cols, target_cols = load_and_prepare_data(args.data_path)
+    X, y, feature_cols, target_cols, all_nan_columns = load_and_prepare_data(args.data_path)
     
     if not args.quiet:
         print(f"Dataset: {len(X)} samples, {len(feature_cols)} features")
@@ -183,6 +189,8 @@ def main():
     # Save feature names for prediction
     with open(args.save_dir / "feature_names.json", "w") as f:
         json.dump(feature_cols, f, indent=2)
+    with open(args.save_dir / "preprocessing.json", "w") as f:
+        json.dump({"dropped_all_nan_columns": all_nan_columns}, f, indent=2)
     
     # Train models for each fold
     all_test_metrics = []

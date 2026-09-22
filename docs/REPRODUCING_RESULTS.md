@@ -51,15 +51,16 @@ Record that mapping rather than guessing when the paper is unavailable.
 - **CPU execution:** supported for dataset construction and model training;
   CUDA is optional. A CUDA GPU can accelerate the neural models, but no CUDA
   version is required for the baseline workflow.
-- **Platform dependency:** use a platform on which the selected RDKit package
-  can be installed.
+- **Platform dependency:** use a platform on which `rdkit==2025.9.6` can be
+  installed. This version is required to reproduce the published canonical
+  PSMILES checksums; newer RDKit releases change alternating-copolymer output.
 - **Resources:** approximately 16 GB RAM for polyBERT generation and
   approximately 15 GB free disk for generated datasets; allow more space for
   model checkpoints and concurrent runs.
 
-The `requirements.txt` files specify the supported dependency floors for each
-workflow, not an immutable result environment. For an exact reproduction of a
-published run, record `pip freeze` separately for every environment, together
+The dataset-construction requirements pin RDKit to the checksum-verified
+version. Other dependency requirements remain supported floors; for an exact
+model-training reproduction, record `pip freeze` separately for every environment, together
 with the Python version, operating-system details, CUDA details when used, and
 the repository commit as shown in Section 1.
 

@@ -13,7 +13,7 @@ These scripts convert source data into four dataset formats:
 ## Prerequisites
 
 - **Python 3.10+** (required)
-- **For polyBERT generation**: External polyBERT checkout at `../../../polyBERT/` (a sibling of this repository)
+- **For polyBERT generation**: External polyBERT checkout supplied with `--model-path` or `POLYBERT_MODEL_PATH` (defaults to `../../../polyBERT/`)
 
 ## Quick Start
 
@@ -23,9 +23,13 @@ These scripts convert source data into four dataset formats:
 bash setup_environments.sh
 ```
 
-This creates two virtual environments:
+This creates the basic virtual environment:
 - `.venv`: For PSMILES/wPSMILES generation (pandas, numpy, rdkit)
-- `polyBERT_env`: For polyBERT generation (+ sentence-transformers, torch)
+
+Install the optional polyBERT environment only when needed:
+```bash
+bash setup_environments.sh --with-polybert
+```
 
 ### 2. Generate Basic Datasets (Recommended)
 
@@ -58,7 +62,8 @@ Generates:
 
 **Prerequisites:**
 - PSMILES datasets must be generated first
-- External polyBERT model must be at `../../../polyBERT/`
+- Provide the external polyBERT model with `--model-path PATH` or
+  `POLYBERT_MODEL_PATH`; the default remains `../../../polyBERT/`
 - Requires ~16GB RAM
 - Takes 1-3 hours depending on system
 
@@ -193,20 +198,18 @@ deactivate
 source polyBERT_env/bin/activate
 
 # Update dictionary (uses existing dict as starting point)
-python create_PSMILES_pBERT_dictionary.py
+python create_PSMILES_pBERT_dictionary.py --model-path /path/to/polyBERT
 
 # Convert PSMILES to polyBERT format
 python PSMILES_to_pBERT.py
 ```
 
-**Important**: `create_PSMILES_pBERT_dictionary.py` requires the external polyBERT model at:
-```
-../../../polyBERT/
-```
+**Important**: `create_PSMILES_pBERT_dictionary.py` accepts `--model-path` or
+`POLYBERT_MODEL_PATH`. Without either, it uses `../../../polyBERT/`.
 
 Download from: https://huggingface.co/kuelumbus/polyBERT
 
-Edit line 24 of the script if your model is in a different location.
+Use `--model-path` rather than editing the script when your model is elsewhere.
 
 ## Script Descriptions
 
@@ -271,7 +274,8 @@ Edit line 24 of the script if your model is in a different location.
 - **Input**: All CSV files in `../PSMILES/`, existing `pSMILES_pBERT_dict.pkl`
 - **Output**: Updated `files/PSMILES_pBERT_dict.pkl`
 - **Dependencies**: sentence-transformers, torch
-- **Requires**: External polyBERT model at `../../../polyBERT/`
+- **Requires**: External polyBERT model supplied with `--model-path` or
+  `POLYBERT_MODEL_PATH` (default: `../../../polyBERT/`)
 - **Note**: Incremental - only processes new SMILES not in dictionary
 
 ### `PSMILES_to_pBERT.py`
@@ -330,7 +334,7 @@ All scripts use paths relative to their location. Ensure you run them from withi
 ```
 pandas>=2.0.0
 numpy>=1.24.0
-rdkit>=2023.9.1
+rdkit==2025.9.6  # checksum-verified for published canonical datasets
 ```
 
 ### polyBERT Environment (polyBERT_env)

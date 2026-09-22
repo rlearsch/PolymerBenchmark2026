@@ -18,31 +18,24 @@ if ! python3 -c "import sys; exit(0 if sys.version_info >= (3, 10) else 1)"; the
     exit 1
 fi
 
-# Create virtual environment
-if [ -d ".venv" ]; then
-    echo "Virtual environment already exists at .venv/"
-    read -p "Remove and recreate? (y/n): " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
+# Create or repair the virtual environment. Reinstalling requirements on every
+# run makes retries safe after an interrupted dependency installation.
+if [ ! -x ".venv/bin/python" ]; then
+    if [ -e ".venv" ]; then
+        echo "Removing incomplete virtual environment..."
         rm -rf .venv
-    else
-        echo "Keeping existing environment"
-        exit 0
     fi
+    echo "Creating virtual environment..."
+    python3 -m venv .venv
 fi
 
-echo "Creating virtual environment..."
-python3 -m venv .venv
-
-echo "Activating virtual environment..."
-source .venv/bin/activate
-
 echo "Upgrading pip..."
-pip install --upgrade pip
+.venv/bin/python -m pip install --upgrade pip
 
 echo "Installing RDKit_RF dependencies..."
 echo "This may take several minutes..."
-pip install -r requirements.txt
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -c "import joblib, numpy, pandas, rdkit, sklearn"
 
 echo ""
 echo "================================================"
@@ -56,5 +49,3 @@ echo ""
 echo "To train a model:"
 echo "  bash train_rf.sh ../../Datasets/RDKit_descriptors/MD_300/density/homopolymer_density.csv"
 echo ""
-
-deactivate

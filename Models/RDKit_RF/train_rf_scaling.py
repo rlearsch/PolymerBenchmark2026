@@ -106,9 +106,9 @@ def train_one_split(
     val_path = split_dir / "RDKit_descriptors" / "val.csv"
     test_path = split_dir / "RDKit_descriptors" / "test.csv"
 
-    x_train, y_train, feature_cols, target_cols = load_and_prepare_data(train_path)
-    x_val, y_val, _, _ = load_and_prepare_data(val_path)
-    x_test, y_test, _, _ = load_and_prepare_data(test_path)
+    x_train, y_train, feature_cols, target_cols, all_nan_columns = load_and_prepare_data(train_path)
+    x_val, y_val, _, _, _ = load_and_prepare_data(val_path)
+    x_test, y_test, _, _, _ = load_and_prepare_data(test_path)
     x_val = align_columns(x_val, feature_cols)
     x_test = align_columns(x_test, feature_cols)
 
@@ -140,6 +140,7 @@ def train_one_split(
         "seed": seed,
         "n_estimators": n_estimators,
         "target_columns": target_cols,
+        "dropped_all_nan_columns": all_nan_columns,
         "metrics": split_metrics,
     }
     with open(output_dir / "metrics.json", "w") as handle:

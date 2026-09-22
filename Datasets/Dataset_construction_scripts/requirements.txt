@@ -1,3 +1,5 @@
 pandas>=2.0.0
 numpy>=1.24.0
-rdkit>=2023.9.1
+# RDKit descriptor output is checksum-verified against the published scaling
+# packages. Newer releases changed alternating-copolymer canonicalization.
+rdkit==2025.9.6
