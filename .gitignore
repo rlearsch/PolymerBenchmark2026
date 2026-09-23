@@ -26,6 +26,7 @@ model.pt
 /Models/polyBERT/pSMILES_pBERT_dict.pkl
 /Models/polymer_periodic_graph/Polymer_Model/chemprop/web
 /Models/polymer_periodic_graph/Polymer_Model/chemprop.egg-info
+/Datasets/Dataset_construction_scripts/files/PSMILES_pBERT_dict.pkl
 
 # Derived dataset representations. Recreate these with the documented scripts.
 /Datasets/polyBERT/
