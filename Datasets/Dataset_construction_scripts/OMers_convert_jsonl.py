@@ -17,7 +17,16 @@ from polymer_conversions import (
 
 # Use path relative to this script's location
 script_dir = Path(__file__).parent
+datasets_dir = script_dir.parent
 filename = str(script_dir / "files/Cleaned_OMersBench_v3_final.jsonl")
+
+# pandas does not create parent directories when writing CSV files.
+for representation in ("PSMILES", "wPSMILES"):
+    for simulation in ("MD_300", "MD_5000"):
+        for measurement in ("Cp", "Cv", "Rg", "density", "refractive_index"):
+            (datasets_dir / representation / simulation / measurement).mkdir(
+                parents=True, exist_ok=True
+            )
 
 
 def construct_alternating_wPSMILES_from_row(OMers_row):
