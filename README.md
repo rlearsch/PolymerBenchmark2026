@@ -1,10 +1,17 @@
 # Polymer Benchmark 2026 (PolyBench26)
 
-A comprehensive benchmark for machine learning models on polymer property prediction, accompanying our peer-reviewed journal article.
+A comprehensive benchmark for machine learning models on polymer property prediction, accompanying our arXiv preprint.
 
 ## Overview
 
 This repository provides datasets and code to reproduce ML benchmarking results for polymer property prediction. We evaluate multiple model architectures across various polymer representations (PSMILES, wPSMILES, RDKit descriptors, polyBERT embeddings) on diverse property prediction tasks.
+
+## Paper and Authors
+
+[**An open benchmark for machine learning-based polymer property prediction**](https://arxiv.org/abs/2609.27036) (2026)
+
+Robert W. Learsch, Nicholas Liesen, Daniel S. Levine, Anna M. Hiszpanski, and
+Evan R. Antoniuk
 
 ## Repository Structure
 
@@ -250,10 +257,14 @@ See [Models/README.md](Models/README.md) for detailed documentation on each mode
 
 ## Citation
 
-Citation metadata is being finalized for the first public release. Until a
-`CITATION.cff` file is published, cite the repository URL and the exact release
-tag or commit used. See [RELEASE_INFORMATION_NEEDED.md](RELEASE_INFORMATION_NEEDED.md)
-for the remaining citation records needed before release.
+If you use PolyBench26, please cite:
+
+> Learsch, R. W., Liesen, N., Levine, D. S., Hiszpanski, A. M., & Antoniuk,
+> E. R. (2026). *An open benchmark for machine learning-based polymer property
+> prediction*. arXiv:2609.27036. https://arxiv.org/abs/2609.27036
+
+When citing a specific software or dataset version, also include the repository
+URL and the exact release tag or commit used.
 
 ## License
 
