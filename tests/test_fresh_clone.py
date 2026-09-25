@@ -112,7 +112,9 @@ class FreshCloneTests(unittest.TestCase):
         self.assertEqual(list(frame.columns), ["SMILES", "EA (eV)"])
         self.assertEqual(len(frame), 5855)
         self.assertFalse(frame.isna().any().any())
-        self.assertTrue(frame["SMILES"].is_unique)
+        # Preserve the legacy training rows verbatim: 21 PSMILES values occur
+        # more than once with distinct source observations.
+        self.assertEqual(int(frame["SMILES"].duplicated().sum()), 21)
 
     def test_tracked_construction_code_has_no_machine_specific_paths(self) -> None:
         tracked = run(
