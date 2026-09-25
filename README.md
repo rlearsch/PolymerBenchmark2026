@@ -60,7 +60,8 @@ bash setup_environments.sh
 # Generate PSMILES and wPSMILES datasets (~5-15 minutes)
 bash generate_basic_datasets.sh
 
-# Optional: Generate RDKit descriptors (~30 minutes)
+# Optional: Generate RDKit descriptors (initial cache fill may take ~30 minutes;
+# later runs reuse cached exact PSMILES)
 bash generate_rdkit_datasets.sh
 
 # Optional: Generate polyBERT embeddings (~1-3 hours)

@@ -17,13 +17,12 @@ from typing import Iterable
 import numpy as np
 import pandas as pd
 from manage_scaling_indices import sha256_file, validate_partition
+from rdkit_descriptor_cache import DescriptorCache, default_cache_path
 
 try:
     from rdkit import Chem
-    from rdkit.Chem.Descriptors import CalcMolDescriptors
 except ImportError:  # pragma: no cover - handled at runtime when RDKit is requested
     Chem = None
-    CalcMolDescriptors = None
 
 
 DEFAULT_TRAIN_SIZES = [300, 1000, 3000, 10000]
@@ -63,6 +62,14 @@ def parse_args() -> argparse.Namespace:
         type=Path,
         default=repo_root() / "Datasets" / "scaling_splits",
         help="Directory where scaling split datasets are written.",
+    )
+    parser.add_argument(
+        "--descriptor-cache",
+        type=Path,
+        help=(
+            "SQLite descriptor cache path (default: "
+            "Datasets/RDKit_descriptors/.descriptor_cache.sqlite3)."
+        ),
     )
     parser.add_argument(
         "--indices-root",
@@ -157,38 +164,27 @@ def load_and_validate_inputs(args: argparse.Namespace) -> tuple[dict[str, pd.Dat
     return frames, target_col
 
 
-def calc_all_descriptors(psmiles: str) -> dict[str, float]:
-    mol = Chem.MolFromSmiles(psmiles)
-    if mol is None:
-        return {}
-    return CalcMolDescriptors(mol, missingVal=np.nan, silent=True)
-
-
-def sanitize_descriptors(features: pd.DataFrame) -> pd.DataFrame:
-    drop_cols = [
-        "MaxPartialCharge",
-        "MinPartialCharge",
-        "MaxAbsPartialCharge",
-        "MinAbsPartialCharge",
-        "Ipc",
-    ]
-    features = features.drop(columns=[col for col in drop_cols if col in features.columns])
-    features = features.apply(pd.to_numeric, errors="coerce")
-    return features.replace([np.inf, -np.inf], np.nan)
-
-
-def build_rdkit_frame(psmiles: pd.DataFrame, target_col: str) -> pd.DataFrame:
+def build_rdkit_frame(
+    psmiles: pd.DataFrame, target_col: str, cache_path: Path | None = None
+) -> pd.DataFrame:
     print(f"Generating RDKit descriptors from {len(psmiles)} canonical PSMILES rows...")
-    descriptor_rows = psmiles["smiles"].apply(calc_all_descriptors)
-    invalid_rows = [int(index) for index, values in descriptor_rows.items() if not values]
+    if cache_path is None:
+        # Kept for direct library callers; production CLI paths always supply the
+        # shared persistent cache below.
+        from rdkit_descriptor_cache import calculate_descriptors, sanitize_descriptors
+
+        descriptor_rows = psmiles["smiles"].apply(calculate_descriptors)
+        features = sanitize_descriptors(pd.DataFrame(descriptor_rows))
+        invalid_rows = [int(index) for index, values in descriptor_rows.items() if not values]
+    else:
+        with DescriptorCache(cache_path) as cache:
+            features, invalid_rows = cache.descriptor_frame(psmiles["smiles"])
     if invalid_rows:
         preview = invalid_rows[:10]
         raise ValueError(
             "RDKit could not parse canonical PSMILES rows "
             f"{preview}{'...' if len(invalid_rows) > len(preview) else ''}."
         )
-    features = descriptor_rows.apply(pd.Series)
-    features = sanitize_descriptors(features)
     return pd.concat([features, psmiles[[target_col]].reset_index(drop=True)], axis=1)
 
 
@@ -306,6 +302,11 @@ def main() -> None:
     args.datasets_root = args.datasets_root.resolve()
     args.output_root = args.output_root.resolve()
     args.indices_root = args.indices_root.resolve()
+    args.descriptor_cache = (
+        args.descriptor_cache.resolve()
+        if args.descriptor_cache is not None
+        else default_cache_path(args.datasets_root)
+    )
     args.train_sizes = sorted(set(args.train_sizes))
     if not args.train_sizes or any(size <= 0 for size in args.train_sizes):
         raise ValueError("Training sizes must be positive integers.")
@@ -323,7 +324,7 @@ def main() -> None:
 
     rdkit_frame = None
     if "RDKit_descriptors" in args.representations:
-        rdkit_frame = build_rdkit_frame(psmiles, target_col)
+        rdkit_frame = build_rdkit_frame(psmiles, target_col, args.descriptor_cache)
         frames["RDKit_descriptors"] = rdkit_frame
 
     base = output_base(args)
@@ -346,6 +347,12 @@ def main() -> None:
             for rep in args.representations
             if rep != "RDKit_descriptors"
         },
+        "rdkit_descriptor_cache": (
+            str(args.descriptor_cache.relative_to(args.datasets_root))
+            if "RDKit_descriptors" in args.representations
+            and args.descriptor_cache.is_relative_to(args.datasets_root)
+            else None
+        ),
         "notes": [
             "PSMILES is the canonical chemical order.",
             "wPSMILES and polyBERT were validated against PSMILES targets row-by-row.",
