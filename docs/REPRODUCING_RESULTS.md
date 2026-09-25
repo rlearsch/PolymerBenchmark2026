@@ -120,7 +120,9 @@ cd ../..
 
 `generate_polybert_datasets.sh` asks for confirmation and may take hours. The
 full standalone RDKit representation is optional for scaling because the split
-generator calculates descriptors from canonical PSMILES. Generate it for legacy
+generator calculates descriptors from canonical PSMILES and reuses an ignored,
+provenance-validated SQLite cache at
+`Datasets/RDKit_descriptors/.descriptor_cache.sqlite3`. Generate it for legacy
 random-split RDKit runs with:
 
 ```bash

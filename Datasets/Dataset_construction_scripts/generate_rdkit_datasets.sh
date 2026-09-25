@@ -11,7 +11,7 @@ echo ""
 echo "WARNING: This process:"
 echo "  - Requires significant time for large datasets"
 echo "  - Calculates 200+ molecular descriptors per polymer"
-echo "  - May take 30+ minutes for full dataset"
+echo "  - Initial cache fill may take 30+ minutes; later runs reuse cached PSMILES"
 echo "  - Generates descriptor files in RDKit_descriptors/"
 echo ""
 read -p "Continue? (y/n) " -n 1 -r

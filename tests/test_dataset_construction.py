@@ -28,6 +28,8 @@ from polymer_conversions import (  # noqa: E402
 )
 from create_scaling_splits import build_rdkit_frame, split_indices  # noqa: E402
 from process_Vipea_data import process_vipea_data  # noqa: E402
+import rdkit_descriptor_cache  # noqa: E402
+from rdkit_descriptor_cache import DescriptorCache  # noqa: E402
 from task4_architecture_transfer import parse_wpsmiles, weighted_prediction  # noqa: E402
 
 
@@ -49,6 +51,23 @@ def tree_bytes(root: Path) -> dict[str, bytes]:
 
 
 class ConversionUnitTests(unittest.TestCase):
+    def test_rdkit_descriptor_cache_reuses_exact_psmiles(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            cache_path = Path(temp) / "descriptors.sqlite3"
+            with DescriptorCache(cache_path) as cache:
+                with patch(
+                    "rdkit_descriptor_cache.calculate_descriptors",
+                    wraps=rdkit_descriptor_cache.calculate_descriptors,
+                ) as calculate:
+                    first, invalid = cache.descriptor_frame(["*CC*", "*O*", "*CC*"])
+                    self.assertEqual(invalid, [])
+                    self.assertEqual(calculate.call_count, 2)
+                    second, invalid = cache.descriptor_frame(["*CC*", "*O*", "*CC*"])
+                    self.assertEqual(invalid, [])
+                    self.assertEqual(calculate.call_count, 2)
+            pd.testing.assert_frame_equal(first, second)
+            self.assertTrue(cache_path.is_file())
+
     def test_task4_component_parsing_and_weighted_prediction(self) -> None:
         wpsmiles = "[*:1]CC[*:2].[*:3]O[*:4]|0.25|0.75|<1-3:0.25:0.25"
         self.assertEqual(parse_wpsmiles(wpsmiles), ("*CC*", "*O*", 0.25, 0.75))

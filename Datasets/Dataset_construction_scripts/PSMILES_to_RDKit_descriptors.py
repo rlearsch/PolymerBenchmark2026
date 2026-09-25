@@ -8,59 +8,15 @@ This script recursively processes CSV files containing PSMILES, calculates all R
 descriptors, and saves them in the same directory structure under RDKit_descriptors/.
 """
 
+import argparse
 import pandas as pd
-import numpy as np
 from pathlib import Path
-from rdkit import Chem
-from rdkit.Chem.Descriptors import CalcMolDescriptors
 import sys
+from rdkit_descriptor_cache import DescriptorCache, default_cache_path
 
 
 # Use paths relative to this script's location
 script_dir = Path(__file__).parent
-
-
-def calc_all_descriptors(psmi: str, cap='[H]', missing=float('nan')):
-    """
-    Cap PSMILES, build RDKit Mol, and compute all RDKit descriptors.
-    
-    Args:
-        psmi: PSMILES string
-        cap: Capping group for attachment points (default '[H]')
-        missing: Value to use for missing descriptors
-    
-    Returns:
-        Dictionary of descriptor name -> value
-    """
-    m = Chem.MolFromSmiles(psmi)
-    mol = m 
-    if mol is None:
-        return {}
-    return CalcMolDescriptors(mol, missingVal=np.nan, silent=True)
-
-
-def sanitize(X):
-    """
-    Clean descriptor dataframe by removing problematic columns and handling inf/nan.
-    
-    Args:
-        X: DataFrame of descriptors
-    
-    Returns:
-        Cleaned DataFrame
-    """
-    # Drop columns known to cause issues
-    columns_to_drop = ['MaxPartialCharge', 'MinPartialCharge', 
-                       'MaxAbsPartialCharge', 'MinAbsPartialCharge', 'Ipc']
-    try:
-        X = X.drop(columns=[col for col in columns_to_drop if col in X.columns])
-    except Exception as e:
-        print(f'Warning: Failed to drop some columns in sanitize: {e}')
-    
-    # Convert to numeric and handle inf values
-    X = pd.DataFrame(X).apply(pd.to_numeric, errors="coerce")
-    X = X.replace([np.inf, -np.inf], np.nan)
-    return X
 
 
 def is_csv_like(path: Path) -> bool:
@@ -68,7 +24,7 @@ def is_csv_like(path: Path) -> bool:
     return path.name.lower().endswith(".csv")
 
 
-def process_file(input_path: Path, output_path: Path):
+def process_file(input_path: Path, output_path: Path, cache: DescriptorCache):
     """
     Process a single PSMILES CSV file and generate RDKit descriptors.
     
@@ -89,8 +45,7 @@ def process_file(input_path: Path, output_path: Path):
         
         # Calculate descriptors for each SMILES
         print(f"    Calculating descriptors for {len(df)} polymers...")
-        X = df["smiles"].apply(calc_all_descriptors).apply(pd.Series)
-        X = sanitize(X)
+        X, _ = cache.descriptor_frame(df["smiles"])
         
         # Get target column(s) - everything except 'smiles'
         target_cols = [col for col in df.columns if col != 'smiles']
@@ -112,12 +67,13 @@ def process_file(input_path: Path, output_path: Path):
         return False
 
 
-def generate_rdkit_descriptors():
+def generate_rdkit_descriptors(cache_path: Path | None = None):
     """
     Main function to recursively process all PSMILES datasets and generate RDKit descriptors.
     """
     psmiles_root = script_dir / '../../Datasets/PSMILES'
     rdkit_root = script_dir / '../../Datasets/RDKit_descriptors'
+    cache_path = cache_path or default_cache_path(rdkit_root.parent)
     
     print("=" * 70)
     print("Generating RDKit Molecular Descriptors from PSMILES Datasets")
@@ -143,23 +99,25 @@ def generate_rdkit_descriptors():
     success_count = 0
     fail_count = 0
     
-    for input_path in csv_files:
-        # Calculate relative path from PSMILES root
-        rel_path = input_path.relative_to(psmiles_root)
-        output_path = rdkit_root / rel_path
-        
-        # Check if output already exists
-        if output_path.exists():
-            print(f"  Skipping {rel_path} (already exists)")
-            success_count += 1
-            continue
-        
-        # Process the file
-        if process_file(input_path, output_path):
-            success_count += 1
-        else:
-            fail_count += 1
-        print()
+    print(f"Descriptor cache: {cache_path}")
+    with DescriptorCache(cache_path) as cache:
+        for input_path in csv_files:
+            # Calculate relative path from PSMILES root
+            rel_path = input_path.relative_to(psmiles_root)
+            output_path = rdkit_root / rel_path
+
+            # Check if output already exists
+            if output_path.exists():
+                print(f"  Skipping {rel_path} (already exists)")
+                success_count += 1
+                continue
+
+            # Process the file
+            if process_file(input_path, output_path, cache):
+                success_count += 1
+            else:
+                fail_count += 1
+            print()
     
     print("=" * 70)
     print("RDKit Descriptor Generation Complete")
@@ -175,5 +133,14 @@ def generate_rdkit_descriptors():
 
 
 if __name__ == '__main__':
-    success = generate_rdkit_descriptors()
+    parser = argparse.ArgumentParser(
+        description="Generate RDKit descriptor CSVs using a persistent PSMILES cache."
+    )
+    parser.add_argument(
+        "--cache-path",
+        type=Path,
+        help="SQLite cache path (default: Datasets/RDKit_descriptors/.descriptor_cache.sqlite3).",
+    )
+    args = parser.parse_args()
+    success = generate_rdkit_descriptors(args.cache_path)
     sys.exit(0 if success else 1)

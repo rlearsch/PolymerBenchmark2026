@@ -47,7 +47,8 @@ Time: ~5-15 minutes depending on system
 
 **Prerequisites:**
 - PSMILES datasets must be generated first
-- Takes 30+ minutes for full dataset
+- The initial cache fill can take time; later runs calculate only new exact
+  PSMILES strings and reuse `../RDKit_descriptors/.descriptor_cache.sqlite3`
 
 ```bash
 bash generate_rdkit_datasets.sh
@@ -57,6 +58,12 @@ Generates:
 - `../RDKit_descriptors/` - 200+ molecular descriptors per polymer
 - Same directory structure as PSMILES
 - Ready for use with Random Forest, SVM, etc.
+
+The SQLite cache is generated, ignored by Git, and provenance-validated against
+the RDKit version, descriptor column list, and sanitization policy. Supply
+`--cache-path PATH` to `PSMILES_to_RDKit_descriptors.py` when a shared cache
+should live elsewhere. If that metadata does not match after upgrading RDKit or
+changing the descriptor pipeline, remove the generated cache and rebuild it.
 
 ### 4. Generate polyBERT Datasets (Optional)
 
@@ -91,7 +98,8 @@ experiment matrix and `--overwrite` to replace existing outputs.
 
 Generated files are written to `../scaling_splits/` and excluded from Git. The
 generator validates target alignment across PSMILES, wPSMILES, and polyBERT and
-regenerates RDKit descriptors from canonical PSMILES rows. See
+builds RDKit descriptors from canonical PSMILES rows via the same persistent
+descriptor cache. See
 [`../../SCALING_EXPERIMENTS_METHODS.md`](../../SCALING_EXPERIMENTS_METHODS.md).
 
 ## Source Data Files
