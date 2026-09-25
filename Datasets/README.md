@@ -54,6 +54,8 @@ Pre-computed polyBERT embeddings (600-dimensional vectors) from PSMILES.
 - **scaling_indices/**: Published canonical folds for scaling experiments (~2MB)
 - **task3_complexity/**: Compact alternating-copolymer refractive-index metadata
   and legacy test-fold assignments for the repeat-unit complexity task (~3MB)
+- **task4_architecture_transfer/**: Legacy EA training source and reproducible
+  architecture-held-out materialization workflow (~0.4MB)
 
 `OpenPoly_2025/` may exist in a local working tree for optional experiments,
 but it is not a tracked public source input and is not part of this release
@@ -116,6 +118,7 @@ Datasets/
 ├── polyBERT/                 # Same structure with embeddings
 ├── scaling_indices/          # Published canonical row indices
 ├── task3_complexity/         # Tracked Task 3 complexity metadata
+├── task4_architecture_transfer/ # Tracked Task 4 transfer source
 └── scaling_splits/           # Generated fixed folds (excluded from Git)
 ```
 

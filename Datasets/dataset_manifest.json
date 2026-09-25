@@ -37,6 +37,11 @@
       "path": "Datasets/task3_complexity/alternating_refractive_index.csv",
       "format": "csv",
       "required_columns": ["psmiles", "wpsmiles", "original_index", "n_distinct_monomers", "refractive_index", "legacy_test_fold"]
+    },
+    {
+      "path": "Datasets/task4_architecture_transfer/legacy_train.csv",
+      "format": "csv",
+      "required_columns": ["SMILES", "EA (eV)"]
     }
   ],
   "generated_paths_that_must_be_ignored": [

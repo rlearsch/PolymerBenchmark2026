@@ -106,6 +106,14 @@ class FreshCloneTests(unittest.TestCase):
         self.assertEqual(len(task3), 2445)
         self.assertTrue(task3["n_distinct_monomers"].isin(range(5, 11)).all())
 
+    def test_task4_legacy_training_source_is_complete(self) -> None:
+        path = REPO_ROOT / "Datasets" / "task4_architecture_transfer" / "legacy_train.csv"
+        frame = pd.read_csv(path)
+        self.assertEqual(list(frame.columns), ["SMILES", "EA (eV)"])
+        self.assertEqual(len(frame), 5855)
+        self.assertFalse(frame.isna().any().any())
+        self.assertTrue(frame["SMILES"].is_unique)
+
     def test_tracked_construction_code_has_no_machine_specific_paths(self) -> None:
         tracked = run(
             "git",

@@ -28,6 +28,7 @@ from polymer_conversions import (  # noqa: E402
 )
 from create_scaling_splits import build_rdkit_frame, split_indices  # noqa: E402
 from process_Vipea_data import process_vipea_data  # noqa: E402
+from task4_architecture_transfer import parse_wpsmiles, weighted_prediction  # noqa: E402
 
 
 def run_cli(script: str, *args: str, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -48,6 +49,13 @@ def tree_bytes(root: Path) -> dict[str, bytes]:
 
 
 class ConversionUnitTests(unittest.TestCase):
+    def test_task4_component_parsing_and_weighted_prediction(self) -> None:
+        wpsmiles = "[*:1]CC[*:2].[*:3]O[*:4]|0.25|0.75|<1-3:0.25:0.25"
+        self.assertEqual(parse_wpsmiles(wpsmiles), ("*CC*", "*O*", 0.25, 0.75))
+        self.assertAlmostEqual(weighted_prediction(1.0, 3.0, 0.25, 0.75), 2.5)
+        with self.assertRaises(ValueError):
+            weighted_prediction(1.0, 3.0, 0.4, 0.5)
+
     def test_homopolymer_round_trip(self) -> None:
         psmiles = "*CC*"
         weighted = PSMILES_to_wPSMILES(psmiles)
