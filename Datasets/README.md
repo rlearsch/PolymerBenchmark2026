@@ -52,6 +52,8 @@ Pre-computed polyBERT embeddings (600-dimensional vectors) from PSMILES.
   - `polyVERSE/` - DFT-computed electron affinity and ionization energy
   - `PolyMetriX/` - Glass transition temperature data
 - **scaling_indices/**: Published canonical folds for scaling experiments (~2MB)
+- **task3_complexity/**: Compact alternating-copolymer refractive-index metadata
+  and legacy test-fold assignments for the repeat-unit complexity task (~3MB)
 
 `OpenPoly_2025/` may exist in a local working tree for optional experiments,
 but it is not a tracked public source input and is not part of this release
@@ -113,6 +115,7 @@ Datasets/
 ├── wPSMILES/                 # Same structure as PSMILES
 ├── polyBERT/                 # Same structure with embeddings
 ├── scaling_indices/          # Published canonical row indices
+├── task3_complexity/         # Tracked Task 3 complexity metadata
 └── scaling_splits/           # Generated fixed folds (excluded from Git)
 ```
 

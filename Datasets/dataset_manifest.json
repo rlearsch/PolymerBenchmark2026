@@ -32,6 +32,11 @@
       "path": "Datasets/PSMILES/PolyMetriX/Tg/Tg.csv",
       "format": "csv",
       "required_columns": ["smiles", "Tg_K"]
+    },
+    {
+      "path": "Datasets/task3_complexity/alternating_refractive_index.csv",
+      "format": "csv",
+      "required_columns": ["psmiles", "wpsmiles", "original_index", "n_distinct_monomers", "refractive_index", "legacy_test_fold"]
     }
   ],
   "generated_paths_that_must_be_ignored": [

@@ -86,6 +86,26 @@ class FreshCloneTests(unittest.TestCase):
                 result = run("git", "check-ignore", "--quiet", relative, check=False)
                 self.assertEqual(result.returncode, 0)
 
+    def test_task3_complexity_metadata_is_complete_and_consistent(self) -> None:
+        path = REPO_ROOT / "Datasets" / "task3_complexity" / "alternating_refractive_index.csv"
+        frame = pd.read_csv(path)
+
+        self.assertFalse(frame.isna().any().any())
+        self.assertTrue(frame["original_index"].is_unique)
+        self.assertTrue(frame["psmiles"].is_unique)
+        self.assertTrue(frame["legacy_test_fold"].isin(range(1, 6)).all())
+
+        fragments = frame["wpsmiles"].str.split("|").str[0].str.count(r"\.") + 1
+        pd.testing.assert_series_equal(
+            fragments.reset_index(drop=True),
+            frame["n_distinct_monomers"].reset_index(drop=True),
+            check_names=False,
+        )
+
+        task3 = frame[frame["n_distinct_monomers"].between(5, 10)]
+        self.assertEqual(len(task3), 2445)
+        self.assertTrue(task3["n_distinct_monomers"].isin(range(5, 11)).all())
+
     def test_tracked_construction_code_has_no_machine_specific_paths(self) -> None:
         tracked = run(
             "git",
