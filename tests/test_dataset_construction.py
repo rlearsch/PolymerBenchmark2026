@@ -31,6 +31,7 @@ from process_Vipea_data import process_vipea_data  # noqa: E402
 import rdkit_descriptor_cache  # noqa: E402
 from rdkit_descriptor_cache import DescriptorCache  # noqa: E402
 from task4_architecture_transfer import parse_wpsmiles, weighted_prediction  # noqa: E402
+from create_task4_shared_splits import assign_folds  # noqa: E402
 
 
 def run_cli(script: str, *args: str, cwd: Path) -> subprocess.CompletedProcess[str]:
@@ -74,6 +75,16 @@ class ConversionUnitTests(unittest.TestCase):
         self.assertAlmostEqual(weighted_prediction(1.0, 3.0, 0.25, 0.75), 2.5)
         with self.assertRaises(ValueError):
             weighted_prediction(1.0, 3.0, 0.4, 0.5)
+
+    def test_task4_shared_folds_are_deterministic_and_grouped(self) -> None:
+        frame = pd.DataFrame({
+            "psmiles": ["*A*"] * 2 + [f"*A{index}*" for index in range(1, 10)] + [f"*H{index}*" for index in range(10)],
+            "architecture": ["alternating"] * 11 + ["homopolymer"] * 10,
+        })
+        first = assign_folds(frame, num_folds=10, seed=42)
+        np.testing.assert_array_equal(first, assign_folds(frame, num_folds=10, seed=42))
+        self.assertEqual(first[0], first[1])
+        self.assertTrue(set(first) <= set(range(10)))
 
     def test_homopolymer_round_trip(self) -> None:
         psmiles = "*CC*"
