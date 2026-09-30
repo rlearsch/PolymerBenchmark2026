@@ -13,6 +13,7 @@ Models:
 
 Options:
   --split-root PATH        Scaling split root (default: Datasets/scaling_splits)
+  --result-dir NAME        Model subdirectory for outputs (default: scaling_results)
   --epochs N               Epochs per run (default: 50)
   --seed N                 Chemprop seed and PyTorch seed (default: 0)
   --only PATTERN           Only run split roots whose relative path contains PATTERN
@@ -47,6 +48,7 @@ SPLIT_ROOT="$REPO_ROOT/Datasets/scaling_splits"
 EPOCHS=50
 SEED=0
 ONLY_PATTERN=""
+RESULT_DIR="scaling_results"
 DRY_RUN=0
 QUIET=1
 
@@ -62,6 +64,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --seed)
       SEED="$2"
+      shift 2
+      ;;
+    --result-dir)
+      RESULT_DIR="$2"
       shift 2
       ;;
     --only)
@@ -88,10 +94,16 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+if [[ "$RESULT_DIR" == *"/"* || "$RESULT_DIR" == "." || "$RESULT_DIR" == ".." ]]; then
+  echo "ERROR: --result-dir must be one directory name" >&2
+  exit 1
+fi
+
 if [[ ! -d "$SPLIT_ROOT" ]]; then
   echo "ERROR: split root not found: $SPLIT_ROOT" >&2
   exit 1
 fi
+SPLIT_ROOT="$(cd "$SPLIT_ROOT" && pwd -P)"
 
 run_cmd() {
   if [[ "$DRY_RUN" -eq 1 ]]; then
@@ -108,11 +120,25 @@ if [[ "$QUIET" -eq 1 ]]; then
   quiet_args+=(--quiet)
 fi
 
+result_label() {
+  local split_root="$1"
+  local rel="${split_root#"$SPLIT_ROOT/"}"
+  if [[ "$rel" == "$split_root" || -z "$rel" ]]; then
+    # A Task 4 invocation points directly at its one split root. Keep its
+    # result name stable rather than incorporating an absolute filesystem path.
+    if [[ "$split_root" == */Datasets/task4_architecture_transfer/generated/shared_splits ]]; then
+      rel="task4-shared-splits"
+    else
+      rel="$(basename "$split_root")"
+    fi
+  fi
+  printf '%s\n' "$rel"
+}
+
 discover_split_roots() {
   local manifest rel
   while IFS= read -r -d '' manifest; do
-    rel="${manifest#"$SPLIT_ROOT/"}"
-    rel="${rel%/manifest.json}"
+    rel="$(result_label "$(dirname "$manifest")")"
     if [[ -n "$ONLY_PATTERN" && "$rel" != *"$ONLY_PATTERN"* ]]; then
       continue
     fi
@@ -132,7 +158,7 @@ train_polymer_chemprop() {
 
   local split_root rel fold_dir train_dir train_size fold train_csv val_csv test_csv save_dir log_path
   while IFS= read -r -d '' split_root; do
-    rel="${split_root#"$SPLIT_ROOT/"}"
+    rel="$(result_label "$split_root")"
     while IFS= read -r -d '' train_dir; do
       fold_dir="$(dirname "$train_dir")"
       fold="$(basename "$fold_dir")"
@@ -140,7 +166,7 @@ train_polymer_chemprop() {
       train_csv="$train_dir/wPSMILES/train.csv"
       val_csv="$train_dir/wPSMILES/val.csv"
       test_csv="$train_dir/wPSMILES/test.csv"
-      save_dir="$model_dir/scaling_results/$rel/$train_size/$fold"
+      save_dir="$model_dir/$RESULT_DIR/$rel/$train_size/$fold"
       log_path="$save_dir/train.log"
 
       if [[ ! -f "$train_csv" || ! -f "$val_csv" || ! -f "$test_csv" ]]; then
@@ -176,7 +202,7 @@ train_polymer_periodic_graph() {
 
   local split_root rel fold_dir train_dir train_size fold train_csv val_csv test_csv save_dir log_path
   while IFS= read -r -d '' split_root; do
-    rel="${split_root#"$SPLIT_ROOT/"}"
+    rel="$(result_label "$split_root")"
     while IFS= read -r -d '' train_dir; do
       fold_dir="$(dirname "$train_dir")"
       fold="$(basename "$fold_dir")"
@@ -184,7 +210,7 @@ train_polymer_periodic_graph() {
       train_csv="$train_dir/PSMILES/train.csv"
       val_csv="$train_dir/PSMILES/val.csv"
       test_csv="$train_dir/PSMILES/test.csv"
-      save_dir="$model_dir/scaling_results/$rel/$train_size/$fold"
+      save_dir="$model_dir/$RESULT_DIR/$rel/$train_size/$fold"
       log_path="$save_dir/train.log"
 
       if [[ ! -f "$train_csv" || ! -f "$val_csv" || ! -f "$test_csv" ]]; then
