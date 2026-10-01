@@ -16,6 +16,7 @@
 model.pt
 *.log
 *scores.csv
+!/Datasets/task4_architecture_transfer/task4_all_model_scores.csv
 **args.json
 /Models/polymer_chemprop/**/fold*/**
 /Models/polymer_periodic_graph/**/fold*/**
@@ -44,3 +45,4 @@ model.pt
 /Datasets/**/Tg_combined/
 /Datasets/**/PolyInfo/
 /Datasets/PSMILES/PolyMetriX/Tg_*/
+
