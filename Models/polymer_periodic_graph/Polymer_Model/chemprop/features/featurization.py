@@ -405,12 +405,17 @@ class MolGraph:
                     bond_length=np.linalg.norm(mol_coords[a1]-mol_coords[a2])
                     if bond is None:
                         if(a1 in nearest_neighbor and a2 in nearest_neighbor):
+                            # Periodic bond: a1 and a2 are each bonded to a [*] endpoint, so
+                            # join them to close the repeat unit. Featurize the new bond with
+                            # the features of the a1-[*] bond it stands in for.
+                            f_bond = None
                             for neighbor in mol.GetAtomWithIdx(a1).GetNeighbors():
                                 if(neighbor.GetAtomicNum()==0):
                                     bond_type=mol.GetBondBetweenAtoms(a1,neighbor.GetIdx())
-                                    #print('CHECK IF polymer_bond_made')
-                                    continue
                                     f_bond=bond_features(bond_type)
+                                    break
+                            if f_bond is None:
+                                continue
                         else:
                             continue
                     else:
